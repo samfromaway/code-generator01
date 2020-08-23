@@ -8,6 +8,7 @@ import ContextAPI from "./pages/context-API";
 import ValidationReactFirebase from "./pages/validation-react-firebase";
 import ReactStateHooks from "./pages/react-state-hooks";
 import About from "./pages/about";
+import DesignResources from "./pages/design-resources";
 
 const App = () => {
   const theme = createMuiTheme({
@@ -33,6 +34,11 @@ const App = () => {
                 exact
                 path="/react-state-hooks"
                 component={ReactStateHooks}
+              />
+              <Route
+                exact
+                path="/design-resources"
+                component={DesignResources}
               />
               <Route exact path="/about" component={About} />
             </Switch>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
@@ -19,6 +19,7 @@ import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponen
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import CallMissedIcon from "@material-ui/icons/CallMissed";
 import PeopleIcon from "@material-ui/icons/People";
+import PageviewIcon from "@material-ui/icons/Pageview";
 import { Link } from "../../util/router";
 
 const drawerWidth = 240;
@@ -91,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -183,6 +184,17 @@ export default function MiniDrawer(props) {
               <CallMissedIcon />
             </ListItemIcon>
             <ListItemText primary="React State Hooks" />
+          </ListItem>
+          <ListItem
+            button
+            component={Link}
+            to="/design-resources"
+            className={classes.listItem}
+          >
+            <ListItemIcon>
+              <PageviewIcon />
+            </ListItemIcon>
+            <ListItemText primary="Design Resources" />
           </ListItem>
           <ListItem
             button
