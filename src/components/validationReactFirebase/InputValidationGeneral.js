@@ -23,6 +23,8 @@ const InputValidationGeneral = (props) => {
     <Paper01 title="General Settings">
       <Grid container item xs={12}>
         <TextField
+          variant="outlined"
+          size="small"
           className={classes.formInput}
           label="Variable*"
           onChange={(e) => props.setVariable(e.target.value)}
@@ -53,6 +55,8 @@ const InputValidationGeneral = (props) => {
         </Grid>
         <Grid item>
           <TextField
+            variant="outlined"
+            size="small"
             className={classes.formInput}
             label="Owner Selector"
             onChange={(e) => props.setOwnerSelector(e.target.value)}

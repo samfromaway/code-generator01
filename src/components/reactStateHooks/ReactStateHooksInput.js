@@ -10,6 +10,8 @@ const ReactStateInput = (props) => {
     <Paper01 title="React State Hooks">
       <Grid container item xs={12}>
         <TextField
+          size="small"
+          variant="outlined"
           id="variable"
           label="Variable"
           onChange={(e) => props.setInput(e.target.value)}
@@ -23,7 +25,7 @@ const ReactStateInput = (props) => {
         />
 
         <Button
-          style={{ marginTop: 10, marginLeft: 20, height: 30 }}
+          style={{ marginTop: 5, marginLeft: 20, height: 30 }}
           variant="contained"
           size="small"
           color="primary"
@@ -32,7 +34,7 @@ const ReactStateInput = (props) => {
           Add
         </Button>
         <Button
-          style={{ marginTop: 10, marginLeft: 10, height: 30 }}
+          style={{ marginTop: 5, marginLeft: 10, height: 30 }}
           variant="outlined"
           size="small"
           onClick={props.handleClear}

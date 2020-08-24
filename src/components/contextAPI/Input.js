@@ -11,7 +11,8 @@ import Paper01 from "./../Paper01";
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
-    marginBottom: 10,
+    marginBottom: 15,
+    width: "100%",
   },
 }));
 
@@ -32,6 +33,8 @@ const Input = (props) => {
     <Paper01 title="Context API">
       <Grid item xs={12}>
         <TextField
+          variant="outlined"
+          size="small"
           id="namePlural"
           label="Name Plural"
           onChange={(e) => props.setNamePlural(e.target.value)}
@@ -42,6 +45,8 @@ const Input = (props) => {
       </Grid>
       <Grid item xs={12}>
         <TextField
+          variant="outlined"
+          size="small"
           id="nameSingular"
           label="Name Singular"
           onChange={(e) => props.setNameSingular(e.target.value)}
@@ -52,6 +57,8 @@ const Input = (props) => {
       </Grid>
       <Grid item xs={12}>
         <TextField
+          variant="outlined"
+          size="small"
           id="uniqueSelector"
           label="Unique Selector"
           onChange={(e) => props.setUniqueSelector(e.target.value)}

@@ -17,7 +17,7 @@ import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles((theme) => ({
   formInput: {
     width: "100%",
-    marginBottom: 10,
+    marginBottom: 15,
   },
 }));
 
@@ -37,13 +37,19 @@ const InputValidationKey = (props) => {
   return (
     <Paper01 title="Add Keys">
       <TextField
+        variant="outlined"
+        size="small"
         className={classes.formInput}
         label="Key*"
         onChange={(e) => props.setMyKey(e.target.value)}
         value={props.myKey}
         helperText="In camelCase 🐫"
       />
-      <FormControl className={classes.formInput}>
+      <FormControl
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+      >
         <InputLabel>Type*</InputLabel>
         <Select
           labelId="type"
@@ -58,7 +64,11 @@ const InputValidationKey = (props) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl className={classes.formInput}>
+      <FormControl
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+      >
         <FormControlLabel
           disabled={
             !props.type ||
@@ -81,8 +91,14 @@ const InputValidationKey = (props) => {
       <Divider style={{ marginBottom: 10 }} />
 
       <>
-        <Typography variant="subtitle1">Optional</Typography>
-        <FormControl className={classes.formInput}>
+        <Typography style={{ marginBottom: 10 }} variant="subtitle1">
+          Optional
+        </Typography>
+        <FormControl
+          variant="outlined"
+          size="small"
+          className={classes.formInput}
+        >
           <InputLabel disabled={!typesWithOptions()}>Condition</InputLabel>
           <Select
             label="Condition"
@@ -107,7 +123,11 @@ const InputValidationKey = (props) => {
           </Select>
         </FormControl>
         {props.type === "boolean" && (
-          <FormControl className={classes.formInput}>
+          <FormControl
+            variant="outlined"
+            size="small"
+            className={classes.formInput}
+          >
             <InputLabel>Input</InputLabel>
             <Select
               label="Condition"
@@ -124,6 +144,8 @@ const InputValidationKey = (props) => {
         {props.type !== "boolean" && (
           <>
             <TextField
+              variant="outlined"
+              size="small"
               className={classes.formInput}
               disabled={!props.rangeType || !typesWithOptions()}
               label={props.rangeType === "between" ? "From" : "Input"}
@@ -135,6 +157,8 @@ const InputValidationKey = (props) => {
 
         {props.rangeType === "between" && typesWithOptions() && (
           <TextField
+            variant="outlined"
+            size="small"
             className={classes.formInput}
             label={props.rangeType === "between" ? "To" : "Input"}
             onChange={(e) => props.setRange2(e.target.value)}

@@ -23,7 +23,7 @@ const CodeBlock = (props) => {
           backgroundColor: "black",
           paddingLeft: 15,
           paddingRight: 50,
-          paddingBottom: 5,
+          paddingBottom: 15,
           paddingTop: 15,
         }}
       >
