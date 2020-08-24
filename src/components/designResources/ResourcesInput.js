@@ -1,7 +1,6 @@
 import React from "react";
-import { Star, Search, Cancel, ArrowDropDown } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
-
+import { withStyles } from "@material-ui/core/styles";
+import { yellow } from "@material-ui/core/colors";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -11,15 +10,13 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import StarIcon from "@material-ui/icons/Star";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Paper01 from "./../Paper01";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import SearchIcon from "@material-ui/icons/Search";
+import YellowStarCheckbox from "./../YellowStarCheckbox";
 const ResourcesInput = ({
   resources,
   searchTextQuery,
@@ -35,58 +32,49 @@ const ResourcesInput = ({
     return ["All Categories", ...new Set(allCategories)];
   };
 
-  const handleTextChange = (e) => {
-    setSearchTextQuery(e.target.value);
-  };
-
-  const handleDropdownChange = (e) => {
-    setSearchDropdownQuery(e.target.value);
-  };
-
-  const toggleFavorites = (e) => {
-    setShowFavorites(e.target.checked);
-  };
-
-  const resetTextSearch = () => {
-    setSearchTextQuery("");
-  };
   return (
     <Paper01 title="Design Resources">
-      <div className="reference-title">
+      <Grid>
         <a
+          style={{ color: "white" }}
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/bradtraversy/design-resources-for-developers"
         >
-          <h3>Inspired By Brad Traversy's Repo</h3>
+          <p>Inspired By Brad Traversy's Repo</p>
         </a>
-      </div>
+      </Grid>
 
-      <div className="inputs">
-        <div className="text-input-wrapper">
+      <Grid container item xs={12} spacing={3}>
+        <Grid item xs={6}>
           <TextField
-            id="input-with-icon-textfield"
-            variant="filled"
-            onChange={handleTextChange}
+            id="search"
+            size="small"
+            variant="outlined"
+            onChange={(e) => setSearchTextQuery(e.target.value)}
+            style={{ width: "100%" }}
             value={searchTextQuery}
+            placeholder="Search"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search />
-                  <Cancel
-                    className="text-input-cancel"
-                    onClick={resetTextSearch}
-                  />
+                  <SearchIcon />
                 </InputAdornment>
               ),
             }}
           />
+        </Grid>
+        <Grid item xs={6}>
           <FormControl
-            value={searchDropdownQuery}
-            onChange={handleDropdownChange}
+            size="small"
+            variant="outlined"
+            style={{ width: "100%" }}
           >
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
-            <Select labelId="demo-simple-select-label" id="demo-simple-select">
+            <Select
+              id="category"
+              value={searchDropdownQuery}
+              onChange={(e) => setSearchDropdownQuery(e.target.value)}
+            >
               {resourceCategories().map((option) => (
                 <MenuItem key={option} value={option}>
                   {option}
@@ -94,27 +82,26 @@ const ResourcesInput = ({
               ))}
             </Select>
           </FormControl>
-
-          <h3 className="counter">
-            {`Found ${listedResources.length} of ${resources.length} `}
-          </h3>
-        </div>
-
-        <label className="show-favorites-label">
-          Show Favorites
-          <input
-            checked={showFavorites}
-            type="checkbox"
-            style={{ display: "none" }}
-            className="checkbox"
-            onChange={toggleFavorites}
-          />
-          <Star
-            className="star-icon"
-            style={showFavorites ? { color: "yellow" } : { color: "white" }}
-          />
-        </label>
-      </div>
+        </Grid>
+        <Grid item>
+          <h3>{`Found ${listedResources.length} of ${resources.length} `}</h3>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <FormControlLabel
+          control={
+            <YellowStarCheckbox
+              color="primary"
+              icon={<StarBorderIcon />}
+              checkedIcon={<StarIcon />}
+              name="favorites"
+              onChange={(e) => setShowFavorites(e.target.checked)}
+              checked={showFavorites}
+            />
+          }
+          label="Show Only Favorites"
+        />
+      </Grid>
     </Paper01>
   );
 };

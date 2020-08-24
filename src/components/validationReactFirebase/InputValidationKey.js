@@ -52,6 +52,7 @@ const InputValidationKey = (props) => {
       >
         <InputLabel>Type*</InputLabel>
         <Select
+          label="type*"
           labelId="type"
           value={props.type}
           onChange={(e) => props.setType(e.target.value)}
@@ -130,7 +131,7 @@ const InputValidationKey = (props) => {
           >
             <InputLabel>Input</InputLabel>
             <Select
-              label="Condition"
+              label="Input"
               labelId="range02"
               value={props.range}
               onChange={(e) => props.setRange(e.target.value)}

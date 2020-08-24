@@ -7,6 +7,7 @@ const ResourcesList = ({
   listedResources,
   favoriteResourcesId,
   setFavoriteResourcesId,
+  paginatedItems,
 }) => {
   if (listedResources.length === 0) {
     return (
@@ -20,7 +21,7 @@ const ResourcesList = ({
   } else {
     return (
       <List className="resources-list">
-        {listedResources.map((resource) => (
+        {paginatedItems.map((resource) => (
           <ResourcesListItem
             key={resource.id}
             resource={resource}

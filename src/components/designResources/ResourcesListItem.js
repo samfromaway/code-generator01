@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import { Star } from "@material-ui/icons";
+import YellowStarCheckbox from "./../YellowStarCheckbox";
 
 const ResourcesListItem = ({
   resource,
@@ -15,34 +16,34 @@ const ResourcesListItem = ({
   favoriteResourcesId,
 }) => {
   const handleFavoriteChange = (e) => {
-    const resource = resources.filter(
-      (resource) => resource.id === e.target.value
-    );
-    if (e.target.checked) {
-      resource[0].isFavorite = true;
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify([e.target.value, ...favoriteResourcesId])
-      );
-      setFavoriteResourcesId(
-        JSON.parse(localStorage.getItem("favorites") || [])
-      );
-    } else {
-      resource[0].isFavorite = false;
-      setFavoriteResourcesId(
-        localStorage.setItem(
-          "favorites",
-          JSON.stringify(
-            favoriteResourcesId.filter(
-              (existingResource) => existingResource !== e.target.value
-            )
-          )
-        )
-      );
-      setFavoriteResourcesId(
-        JSON.parse(localStorage.getItem("favorites") || [])
-      );
-    }
+    // const resource = resources.filter(
+    //   (resource) => resource.id === e.target.value
+    // );
+    // if (e.target.checked) {
+    //   resource[0].isFavorite = true;
+    //   localStorage.setItem(
+    //     "favorites",
+    //     JSON.stringify([e.target.value, ...favoriteResourcesId])
+    //   );
+    //   setFavoriteResourcesId(
+    //     JSON.parse(localStorage.getItem("favorites") || [])
+    //   );
+    // } else {
+    //   resource[0].isFavorite = false;
+    //   setFavoriteResourcesId(
+    //     localStorage.setItem(
+    //       "favorites",
+    //       JSON.stringify(
+    //         favoriteResourcesId.filter(
+    //           (existingResource) => existingResource !== e.target.value
+    //         )
+    //       )
+    //     )
+    //   );
+    //   setFavoriteResourcesId(
+    //     JSON.parse(localStorage.getItem("favorites") || [])
+    //   );
+    // }
   };
 
   return (
@@ -67,9 +68,8 @@ const ResourcesListItem = ({
         href={resource.link}
       ></a>
       <ListItemText primary={resource.title} secondary={resource.desc} />
-      <ListItemSecondaryAction>
-        <p>{resource.category}</p>
-      </ListItemSecondaryAction>
+
+      <p>{resource.category}</p>
     </ListItem>
   );
 };
