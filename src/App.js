@@ -9,6 +9,9 @@ import ValidationReactFirebase from "./pages/validation-react-firebase";
 import ReactStateHooks from "./pages/react-state-hooks";
 import About from "./pages/about";
 import DesignResources from "./pages/design-resources";
+import ContentContextProvider from "./context/ContentContext";
+import ContentFirebaseProvider from "./context/ContentFirebaseContext";
+import ContentHooksProvider from "./context/ContentHooksContext";
 
 const App = () => {
   const theme = createMuiTheme({
@@ -20,31 +23,37 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Header>
-          <Container>
-            <Switch>
-              <Route exact path="/context-api" component={ContextAPI} />
-              <Route
-                exact
-                path="/validation-react-firebase"
-                component={ValidationReactFirebase}
-              />
-              <Route
-                exact
-                path="/react-state-hooks"
-                component={ReactStateHooks}
-              />
-              <Route
-                exact
-                path="/design-resources"
-                component={DesignResources}
-              />
-              <Route exact path="/about" component={About} />
-            </Switch>
-          </Container>
-        </Header>
-      </Router>
+      <ContentContextProvider>
+        <ContentFirebaseProvider>
+          <ContentHooksProvider>
+            <Router>
+              <Header>
+                <Container>
+                  <Switch>
+                    <Route exact path="/context-api" component={ContextAPI} />
+                    <Route
+                      exact
+                      path="/validation-react-firebase"
+                      component={ValidationReactFirebase}
+                    />
+                    <Route
+                      exact
+                      path="/react-state-hooks"
+                      component={ReactStateHooks}
+                    />
+                    <Route
+                      exact
+                      path="/design-resources"
+                      component={DesignResources}
+                    />
+                    <Route exact path="/about" component={About} />
+                  </Switch>
+                </Container>
+              </Header>
+            </Router>
+          </ContentHooksProvider>
+        </ContentFirebaseProvider>
+      </ContentContextProvider>
     </ThemeProvider>
   );
 };

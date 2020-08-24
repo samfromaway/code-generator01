@@ -29,13 +29,12 @@ const State = ({
 import React, { useReducer } from 'react';
 import ${capitalizedNamePlural}Context from './${namePlural}Context';
 import ${capitalizedNamePlural}Reducer from './${namePlural}Reducer';
-import CodeBlock from './../CodeBlock';
 
 const ${capitalizedNamePlural}State = ({children}) => {
   const initialState = {
     ${namePlural}: [],
-    loading: false,
     error: null,
+    ${actions.loading.checked ? "loading: false," : ""} 
   };
 
   const [state, dispatch] = useReducer(${capitalizedNamePlural}Reducer, initialState);
@@ -48,7 +47,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //get
   const get = `
   async function get${capitalizedNamePlural} () {
-    setLoading();
+    ${actions.loading.checked ? "setLoading();" : ""} 
     try {
     const res = await fetch('YOUR_API')
     const data = await res.json();
@@ -69,7 +68,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //add
   const add = `
   async function add${capitalizedNameSingular} (${newItem}) {
-    setLoading();
+    ${actions.loading.checked ? "setLoading();" : ""} 
     try {
     const res = await fetch('YOUR_API')
 
@@ -89,11 +88,10 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //delete
   const del = `
   async function delete${capitalizedNameSingular} (${uniqueSelector}) {
-    setLoading();
+    ${actions.loading.checked ? "setLoading();" : ""} 
     try {
       fetch('YOUR_API')
 
-    
     dispatch({
       type: 'DELETE_${actionNameSingular}',
       payload: ${uniqueSelector},
@@ -110,9 +108,8 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //edit
   const edit = `
   async function edit${capitalizedNameSingular} (${uniqueSelector}, ${updatedItem}) {
-    setLoading();
+    ${actions.loading.checked ? "setLoading();" : ""} 
     try {
-  
     const res = await fetch('YOUR_API')
     
     dispatch({
@@ -135,11 +132,11 @@ const ${capitalizedNamePlural}State = ({children}) => {
   return (
     <${capitalizedNamePlural}Context.Provider value={{
       ${namePlural}: state.${namePlural},
-      ${namePlural}Loading: state.loading,
       ${getProviderValue}
       ${addProviderValue}
       ${deleteProviderValue}
-      ${editProviderValue}
+      ${editProviderValue}      
+      ${actions.loading.checked ? namePlural + "Loading: state.loading," : ""} 
     }}>
       {children}
     </${capitalizedNamePlural}Context.Provider>
@@ -152,7 +149,7 @@ export default ${capitalizedNamePlural}State;`;
   const addContent = actions.add.checked ? add : "";
   const deleteContent = actions.delete.checked ? del : "";
   const editContent = actions.edit.checked ? edit : "";
-  const setLoadingContent = actions.setLoading.checked ? setLoading : "";
+  const setLoadingContent = actions.loading.checked ? setLoading : "";
 
   const state =
     intro +

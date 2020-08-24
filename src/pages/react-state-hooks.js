@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
-import useLocalStorage from "../hooks/useLocalStorage";
 import Container from "@material-ui/core/Container";
 import ReactStateInput from "./../components/reactStateHooks/ReactStateHooksInput";
 import ReactStateHooksProps from "../components/reactStateHooks/ReactStateHooksProps";
 import ReactStateHooksResult from "./../components/reactStateHooks/ReactStateHooksResult";
 import Box from "@material-ui/core/Box";
+import { ContentHooks } from "../context/ContentHooksContext";
 
 const ReactStateHooks = () => {
-  const [items, setItems] = useLocalStorage("reactStateHooksCodeGenerator", []);
-  const [input, setInput] = useState("");
+  const { items, setItems, input, setInput } = useContext(ContentHooks);
 
   const handleAddItems = () => {
     if (input) {

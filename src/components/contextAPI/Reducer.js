@@ -19,8 +19,7 @@ const Reducer = ({
       return {
         ...state,
         ${namePlural}: action.payload,
-        loading: false,
-        isAddingTransaction: false,
+        ${actions.loading.checked ? "loading: false," : ""} 
       };`;
 
   //add
@@ -29,7 +28,7 @@ const Reducer = ({
       return {
         ...state,
         ${namePlural}: [action.payload, ...state.${namePlural}],
-        loading: false,
+        ${actions.loading.checked ? "loading: false," : ""} 
       }; `;
 
   // delete
@@ -40,7 +39,7 @@ const Reducer = ({
         ${namePlural}: state.${namePlural}.filter(
           (element) => element.${uniqueSelector} !== action.payload
         ),
-        loading: false,
+        ${actions.loading.checked ? "loading: false," : ""} 
       };`;
 
   //edit
@@ -56,7 +55,7 @@ const Reducer = ({
             ...action.payload.'YOUR_API_RESPONSE_UPDATED ITEM,',
           };
         }),
-        loading: false,
+        ${actions.loading.checked ? "loading: false," : ""} 
       };`;
 
   // error
@@ -65,7 +64,7 @@ const Reducer = ({
       return {
         ...state,
         error: action.payload,
-        loading: false,
+        ${actions.loading.checked ? "loading: false," : ""} 
       };`;
 
   // set-loading
@@ -88,7 +87,7 @@ const Reducer = ({
   const addContent = actions.add.checked ? reducerAdd : "";
   const deleteContent = actions.delete.checked ? reducerDel : "";
   const editContent = actions.edit.checked ? reducerEdit : "";
-  const setLoadingContent = actions.setLoading.checked ? reducerSetLoading : "";
+  const setLoadingContent = actions.loading.checked ? reducerSetLoading : "";
 
   const reducer =
     intro +

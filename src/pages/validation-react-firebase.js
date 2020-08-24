@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
-import useLocalStorage from "../hooks/useLocalStorage";
 import Container from "@material-ui/core/Container";
 import ValidationFirebase from "./../components/validationReactFirebase/ValidationFirebase";
 import ValidationReact from "./../components/validationReactFirebase/ValidationReact";
 import InputValidationGeneral from "../components/validationReactFirebase/InputValidationGeneral";
 import ValidationReactFirebaseInputList from "./../components/validationReactFirebase/ValidationReactFirebaseList";
 import InputValidationKey from "./../components/validationReactFirebase/InputValidationKey";
+import { ContentFirebase } from "../context/ContentFirebaseContext";
 
 const ValidationReactFirebase = () => {
-  const [items, setItems] = useLocalStorage("validationReactFirebaseItems", []);
-  const [variable, setVariable] = useState("");
-  const [myKey, setMyKey] = useState("");
-  const [type, setType] = useState("");
-  const [rangeType, setRangeType] = useState("");
-  const [range, setRange] = useState("");
-  const [range2, setRange2] = useState("");
-  const [isRequired, setIsRequired] = useState(false);
-
-  const [ownerSelector, setOwnerSelector] = useState("");
-  const [onlyOwnerGetAccess, setOnlyOwnerGetAccess] = useState(false);
+  const {
+    items,
+    setItems,
+    variable,
+    setVariable,
+    myKey,
+    setMyKey,
+    type,
+    setType,
+    rangeType,
+    setRangeType,
+    range,
+    setRange,
+    range2,
+    setRange2,
+    isRequired,
+    setIsRequired,
+    ownerSelector,
+    setOwnerSelector,
+    onlyOwnerGetAccess,
+    setOnlyOwnerGetAccess,
+  } = useContext(ContentFirebase);
 
   const handleAddItems = () => {
     const isKeyAlreadyExisting = items.some((e) => e.myKey === myKey);

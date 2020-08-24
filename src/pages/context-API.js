@@ -1,42 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
-import useLocalStorage from "../hooks/useLocalStorage";
 import Container from "@material-ui/core/Container";
 import Input from "../components/contextAPI/Input";
 import Result from "../components/contextAPI/Result";
 import Imports from "../components/contextAPI/Imports";
+import { ContentContext } from "../context/ContentContext";
 
 const ContextAPI = () => {
-  const [nameSingular, setNameSingular] = useLocalStorage(
-    "ContextAPINameSingular",
-    ""
-  );
-  const [namePlural, setNamePlural] = useLocalStorage(
-    "ContextAPINamePlural",
-    ""
-  );
-  const [uniqueSelector, setUniqueSelector] = useLocalStorage(
-    "ContextAPIUniqueSelector",
-    ""
-  );
+  const {
+    nameSingular,
+    setNameSingular,
+    namePlural,
+    setNamePlural,
+    uniqueSelector,
+    setUniqueSelector,
+    actions,
+    setActions,
+  } = useContext(ContentContext);
 
-  const [actions, setActions] = useLocalStorage("ContextAPIActions", {
-    get: {
-      checked: false,
-    },
-    add: {
-      checked: false,
-    },
-    delete: {
-      checked: false,
-    },
-    edit: {
-      checked: false,
-    },
-    setLoading: {
-      checked: false,
-    },
-  });
   return (
     <Container>
       <Grid container spacing={4}>
