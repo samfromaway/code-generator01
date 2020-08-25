@@ -1,71 +1,70 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import { Star } from "@material-ui/icons";
-//import YellowStarCheckbox from "./../YellowStarCheckbox";
+import StarIcon from "@material-ui/icons/Star";
+import YellowStarCheckbox from "./../YellowStarCheckbox";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+    marginBottom: theme.spacing(2),
+  },
+}));
 
 const ResourcesListItem = ({
   resource,
-  resources,
-  setFavoriteResourcesId,
   favoriteResourcesId,
+  setFavoriteResourcesId,
+  handleFavoritesChange,
 }) => {
-  const handleFavoriteChange = (e) => {
-    // const resource = resources.filter(
-    //   (resource) => resource.id === e.target.value
-    // );
-    // if (e.target.checked) {
-    //   resource[0].isFavorite = true;
-    //   localStorage.setItem(
-    //     "favorites",
-    //     JSON.stringify([e.target.value, ...favoriteResourcesId])
-    //   );
-    //   setFavoriteResourcesId(
-    //     JSON.parse(localStorage.getItem("favorites") || [])
-    //   );
-    // } else {
-    //   resource[0].isFavorite = false;
-    //   setFavoriteResourcesId(
-    //     localStorage.setItem(
-    //       "favorites",
-    //       JSON.stringify(
-    //         favoriteResourcesId.filter(
-    //           (existingResource) => existingResource !== e.target.value
-    //         )
-    //       )
-    //     )
-    //   );
-    //   setFavoriteResourcesId(
-    //     JSON.parse(localStorage.getItem("favorites") || [])
-    //   );
-    // }
+  const classes = useStyles();
+
+  const handleCheckedChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    if (checked) {
+      addIsFavorite(value);
+    } else {
+      deleteIsFavorite(value);
+    }
+  };
+
+  const addIsFavorite = (value) => {
+    const newFavorites = [value, ...favoriteResourcesId];
+    setFavoriteResourcesId(newFavorites);
+    handleFavoritesChange(value, true);
+  };
+
+  const deleteIsFavorite = (value) => {
+    const newFavorites = favoriteResourcesId.filter(
+      (existingResource) => existingResource !== value
+    );
+    setFavoriteResourcesId(newFavorites);
+    handleFavoritesChange(value, false);
   };
 
   return (
-    <ListItem button>
+    <ListItem button className={classes.root}>
       <ListItemIcon>
-        <IconButton
-          edge="end"
-          aria-label="favorite"
-          checked={resource.isFavorite ? true : false}
-          type="checkbox"
+        <YellowStarCheckbox
+          color="primary"
+          icon={<StarBorderIcon />}
+          checkedIcon={<StarIcon />}
+          name="favorites"
           value={resource.id}
-          className="list-item-checkbox"
-          onChange={handleFavoriteChange}
-        >
-          <Star />
-        </IconButton>
+          onChange={handleCheckedChange}
+          checked={favoriteResourcesId.some((e) => e === resource.id)}
+        />
       </ListItemIcon>
-      {/* <a
-        className="list-item-info"
-        target="_blank"
-        rel="noopener noreferrer"
-        href={resource.link}
-      ></a> */}
-      <ListItemText primary={resource.title} secondary={resource.desc} />
 
+      <ListItemText
+        primary={resource.title}
+        secondary={resource.desc}
+        onClick={() => window.open(resource.link, "_blank")}
+      />
       <p>{resource.category}</p>
     </ListItem>
   );

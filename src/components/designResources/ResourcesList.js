@@ -1,22 +1,23 @@
 import React from "react";
 import ResourcesListItem from "./ResourcesListItem";
 import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
 
 const ResourcesList = ({
-  resources,
   listedResources,
   favoriteResourcesId,
   setFavoriteResourcesId,
   paginatedItems,
+  handleFavoritesChange,
 }) => {
   if (listedResources.length === 0) {
     return (
-      <h3 className="nothing-found-msg">
+      <Typography align="center" className="nothing-found-msg">
         No resources found
-        <span role="img" aria-label="search">
+        <span role="img" aria-label="emoji confused">
           😯
         </span>
-      </h3>
+      </Typography>
     );
   } else {
     return (
@@ -25,9 +26,9 @@ const ResourcesList = ({
           <ResourcesListItem
             key={resource.id}
             resource={resource}
-            resources={resources}
             favoriteResourcesId={favoriteResourcesId}
             setFavoriteResourcesId={setFavoriteResourcesId}
+            handleFavoritesChange={handleFavoritesChange}
           />
         ))}
       </List>

@@ -29,9 +29,11 @@ import DesignInspiration from "../data/resources/DesignInspiration";
 import ImgCompression from "../data/resources/ImgCompression";
 import Others from "../data/resources/Others";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import useLocalStorage from "./../hooks/useLocalStorage";
 
 const DesignResources = () => {
-  const resources = [
+  let resources = [
     ...UIGraphics,
     ...Fonts,
     ...Colors,
@@ -64,108 +66,143 @@ const DesignResources = () => {
   const [searchDropdownQuery, setSearchDropdownQuery] = useState(
     "All Categories"
   );
+  const [items, setItems] = useState(resources);
   const [showFavorites, setShowFavorites] = useState(false);
-  const [favoriteResourcesId, setFavoriteResourcesId] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || []
-  );
   const [listedResources, setListedResources] = useState([]);
+  const [paginatedItems, setPaginatedItems] = useState([]);
+  const [favoriteResourcesId, setFavoriteResourcesId] = useLocalStorage(
+    "favoriteDesignResource",
+    []
+  );
   const [page, setPage] = useState(1);
   const itemsPerPage = 20;
-  const indexOfLastItem = page * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const paginatedItems = listedResources.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
   const totalPages = Math.ceil(listedResources.length / itemsPerPage);
-  //step one, filter the ones from favorites
-  // const selectedFavoriteResources = () => {
-  //   if (favoriteResourcesId.length > 0 && showFavorites) {
-  //     const favoriteResources = [];
-  //     favoriteResourcesId.forEach((favoriteResource) =>
-  //       resources.forEach((resource) => {
-  //         if (favoriteResource === resource.id) {
-  //           favoriteResources.push(resource);
-  //         }
-  //       })
-  //     );
-  //     return favoriteResources;
-  //   } else {
-  //     return resources;
-  //   }
-  // };
+  const resetPage = 1;
+  const localStorageIsFavorite =
+    JSON.parse(localStorage.getItem("favoriteDesignResource")) || [];
 
   const handlePageChange = (event, value) => {
     setPage(value);
+    updatePaginetedItems(listedResources, value);
+  };
+
+  const updatePaginetedItems = (items, page) => {
+    const indexOfLastItem = page * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const paginatedItemsFromItems = items.slice(
+      indexOfFirstItem,
+      indexOfLastItem
+    );
+
+    setPaginatedItems(paginatedItemsFromItems);
+  };
+
+  const favoritesFilter = (items) => {
+    if (favoriteResourcesId.length > 0 && showFavorites) {
+      return items.filter((item) => item.isFavorite);
+    } else {
+      return items;
+    }
+  };
+
+  const dropdownFilter = (items) => {
+    if (searchDropdownQuery === "All Categories") {
+      return items;
+    } else {
+      return items.filter(
+        (resource) => resource.category === searchDropdownQuery
+      );
+    }
+  };
+
+  const textFilter = (items) => {
+    return items.filter((resource) =>
+      resource.title.toLowerCase().includes(searchTextQuery.toLowerCase())
+    );
   };
 
   const filterQuery = () => {
-    //step two, filter the ones from dropdown
-    const selectedDropDownResources = () => {
-      if (searchDropdownQuery === "All Categories") {
-        return resources;
-      } else {
-        return resources.filter(
-          (resource) => resource.category === searchDropdownQuery
-        );
-      }
-    };
-    //step three, filter the ones from text input
-    const resultsTextInput = selectedDropDownResources().filter((resource) =>
-      resource.title.toLowerCase().includes(searchTextQuery.toLowerCase())
-    );
-
-    setListedResources(resultsTextInput);
+    const filter1 = favoritesFilter(items);
+    const filter2 = dropdownFilter(filter1);
+    const filter3 = textFilter(filter2);
+    setListedResources(filter3);
+    updatePaginetedItems(filter3, resetPage);
+    setPage(resetPage);
   };
 
-  // const findFavoritesId = (favoriteResources, resources) => {
-  //   favoriteResources.forEach((favoriteResource) =>
-  //     resources.forEach((resource) => {
-  //       if (favoriteResource === resource.id) {
-  //         resource.isFavorite = true;
-  //       }
-  //     })
-  //   );
-  // };
-  // findFavoritesId(favoriteResourcesId, resources);
+  const addIsFavoriteToResourceFromLocalStorage = (
+    favoriteResources,
+    resources
+  ) => {
+    favoriteResources.forEach((favoriteResource) =>
+      resources.forEach((resource) => {
+        if (favoriteResource === resource.id) {
+          resource.isFavorite = true;
+        }
+      })
+    );
+  };
+
+  const handleFavoritesChange = (value, change) => {
+    const newItems = items.map((element) => {
+      if (element.id !== value) {
+        return element;
+      }
+      return { ...element, isFavorite: change };
+    });
+
+    setItems(newItems);
+    // updatePaginetedItems(newItems, resetPage);
+  };
 
   useEffect(() => {
     filterQuery();
     // eslint-disable-next-line
-  }, [searchTextQuery, searchDropdownQuery]);
+  }, [searchTextQuery, searchDropdownQuery, showFavorites]);
+
+  useEffect(() => {
+    addIsFavoriteToResourceFromLocalStorage(localStorageIsFavorite, resources);
+    // eslint-disable-next-line
+  }, []);
 
   return (
-    <>
-      <ResourcesInput
-        resources={resources}
-        searchTextQuery={searchTextQuery}
-        searchDropdownQuery={searchDropdownQuery}
-        showFavorites={showFavorites}
-        listedResources={listedResources}
-        setSearchTextQuery={setSearchTextQuery}
-        setSearchDropdownQuery={setSearchDropdownQuery}
-        setShowFavorites={setShowFavorites}
-      />
-      <ResourcesList
-        resources={resources}
-        listedResources={listedResources}
-        favoriteResourcesId={favoriteResourcesId}
-        setFavoriteResourcesId={setFavoriteResourcesId}
-        setSearchDropdownQuery={setSearchDropdownQuery}
-        setShowFavorites={setShowFavorites}
-        paginatedItems={paginatedItems}
-      />
-      <Grid
-        item
-        style={{ display: "flex", justifyContent: "center", marginTop: 20 }}
-      >
-        <Pagination
-          count={totalPages}
-          page={page}
-          onChange={handlePageChange}
-        />
+    <Container>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <ResourcesInput
+            items={items}
+            searchTextQuery={searchTextQuery}
+            searchDropdownQuery={searchDropdownQuery}
+            showFavorites={showFavorites}
+            listedResources={listedResources}
+            setSearchTextQuery={setSearchTextQuery}
+            setSearchDropdownQuery={setSearchDropdownQuery}
+            setShowFavorites={setShowFavorites}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ResourcesList
+            listedResources={listedResources}
+            favoriteResourcesId={favoriteResourcesId}
+            setFavoriteResourcesId={setFavoriteResourcesId}
+            paginatedItems={paginatedItems}
+            handleFavoritesChange={handleFavoritesChange}
+          />
+        </Grid>
+        <Grid
+          container
+          item
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+          />
+        </Grid>
       </Grid>
-    </>
+    </Container>
   );
 };
 
