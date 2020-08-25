@@ -45,7 +45,7 @@ const ResourcesInput = ({
           <img src={OpenInNewTab} alt="new Tab" />
         </a>
       </Grid>
-      <Grid container item spacing={3}>
+      <Grid container item spacing={3} style={{ marginBottom: 0 }}>
         <Grid item xs={12} md={6}>
           <FormControl
             variant="outlined"
@@ -98,7 +98,7 @@ const ResourcesInput = ({
           </FormControl>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid item style={{ marginBottom: 10 }}>
         <FormControlLabel
           control={
             <YellowStarCheckbox

@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     marginBottom: theme.spacing(2),
+    "&:hover": { backgroundColor: "#606060" },
   },
 }));
 
