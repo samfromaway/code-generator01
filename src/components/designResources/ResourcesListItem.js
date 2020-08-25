@@ -1,13 +1,10 @@
 import React from "react";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import { Star } from "@material-ui/icons";
-import YellowStarCheckbox from "./../YellowStarCheckbox";
+//import YellowStarCheckbox from "./../YellowStarCheckbox";
 
 const ResourcesListItem = ({
   resource,
@@ -61,12 +58,12 @@ const ResourcesListItem = ({
           <Star />
         </IconButton>
       </ListItemIcon>
-      <a
+      {/* <a
         className="list-item-info"
         target="_blank"
         rel="noopener noreferrer"
         href={resource.link}
-      ></a>
+      ></a> */}
       <ListItemText primary={resource.title} secondary={resource.desc} />
 
       <p>{resource.category}</p>

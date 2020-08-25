@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import ValidationFirebase from "./../components/validationReactFirebase/ValidationFirebase";
-import ValidationReact from "./../components/validationReactFirebase/ValidationReact";
+import ValidationJsBasic from "./../components/validationReactFirebase/ValidationJsBasic";
+import ValidationJsAdvanced from "./../components/validationReactFirebase/ValidationJsAdvanced";
 import InputValidationGeneral from "../components/validationReactFirebase/InputValidationGeneral";
 import ValidationReactFirebaseInputList from "./../components/validationReactFirebase/ValidationReactFirebaseList";
 import InputValidationKey from "./../components/validationReactFirebase/InputValidationKey";
@@ -115,7 +116,10 @@ const ValidationReactFirebase = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <ValidationReact items={items} variable={variable} />
+          <ValidationJsBasic items={items} variable={variable} />
+        </Grid>
+        <Grid item xs={12}>
+          <ValidationJsAdvanced items={items} variable={variable} />
         </Grid>
       </Grid>
     </Container>

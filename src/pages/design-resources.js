@@ -115,8 +115,6 @@ const DesignResources = () => {
       resource.title.toLowerCase().includes(searchTextQuery.toLowerCase())
     );
 
-    const addPagination = resultsTextInput;
-
     setListedResources(resultsTextInput);
   };
 
@@ -133,6 +131,7 @@ const DesignResources = () => {
 
   useEffect(() => {
     filterQuery();
+    // eslint-disable-next-line
   }, [searchTextQuery, searchDropdownQuery]);
 
   return (

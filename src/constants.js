@@ -7,7 +7,7 @@ export const RANGE_TYPES = [
   { value: "lessThanOrEqualTo", label: "(<=) Less Than Or Equal To" },
   { value: "greaterThan", label: "(>) Greater Than" },
   { value: "greaterThanOrEqualTo", label: "(>=) Greater Than Or Equal To" },
-  { value: "between", label: "Between" },
+  { value: "between", label: "(=> <=)Between" },
 ];
 export const REDUCED_RANGE_TYPES = [
   { value: "equal", label: "(==) Equal" },
