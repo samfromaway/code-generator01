@@ -10,6 +10,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    borderRadius: 3,
     marginBottom: theme.spacing(2),
     "&:hover": { backgroundColor: "#606060" },
   },
