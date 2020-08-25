@@ -1,6 +1,5 @@
 import React from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -12,6 +11,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import SearchIcon from "@material-ui/icons/Search";
 import YellowStarCheckbox from "./../YellowStarCheckbox";
 import Typography from "@material-ui/core/Typography";
+import OpenInNewTab from "../../images/icons/open_in_new-24px.svg";
+import CancelIcon from "@material-ui/icons/Cancel";
+import IconButton from "@material-ui/core/IconButton";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 const ResourcesInput = ({
   items,
@@ -22,6 +25,7 @@ const ResourcesInput = ({
   setSearchTextQuery,
   setSearchDropdownQuery,
   setShowFavorites,
+  handleResetInput,
 }) => {
   const resourceCategories = () => {
     const allCategories = items.map((resource) => resource.category);
@@ -30,34 +34,49 @@ const ResourcesInput = ({
 
   return (
     <Paper01 title="Design Resources">
-      <Grid item>
+      <Grid item style={{ display: "flex", marginBottom: 10 }}>
         <a
-          style={{ color: "white" }}
+          style={{ color: "white", display: "flex" }}
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/bradtraversy/design-resources-for-developers"
         >
           <p>Inspired By Brad Traversy's Repo</p>
+          <img src={OpenInNewTab} alt="new Tab" />
         </a>
       </Grid>
       <Grid container item spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField
-            id="search"
-            size="small"
+          <FormControl
             variant="outlined"
-            onChange={(e) => setSearchTextQuery(e.target.value)}
+            size="small"
             style={{ width: "100%" }}
-            value={searchTextQuery}
-            placeholder="Search"
-            InputProps={{
-              startAdornment: (
+          >
+            <OutlinedInput
+              placeholder="Search"
+              OutlinedInput
+              id="outlined-adornment-password"
+              value={searchTextQuery}
+              onChange={(e) => setSearchTextQuery(e.target.value)}
+              startAdornment={
                 <InputAdornment position="start">
                   <SearchIcon />
                 </InputAdornment>
-              ),
-            }}
-          />
+              }
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleResetInput}
+                    onMouseDown={handleResetInput}
+                    edge="end"
+                  >
+                    <CancelIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
         </Grid>
         <Grid item xs={12} md={6}>
           <FormControl

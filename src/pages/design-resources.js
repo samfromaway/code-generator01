@@ -156,6 +156,10 @@ const DesignResources = () => {
     // updatePaginetedItems(newItems, resetPage);
   };
 
+  const handleResetInput = () => {
+    setSearchTextQuery("");
+  };
+
   useEffect(() => {
     filterQuery();
     // eslint-disable-next-line
@@ -172,6 +176,7 @@ const DesignResources = () => {
         <Grid item xs={12}>
           <ResourcesInput
             items={items}
+            handleResetInput={handleResetInput}
             searchTextQuery={searchTextQuery}
             searchDropdownQuery={searchDropdownQuery}
             showFavorites={showFavorites}
