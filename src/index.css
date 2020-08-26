@@ -30,3 +30,14 @@ pre {
 .MuiToolbar-root {
   padding-left: 18px !important;
 }
+
+/* Keep the accordeon still when open and closing*/
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: 0 !important;
+}
+
+/* Keep the accordeon still when open and closing*/
+.MuiAccordionSummary-content.Mui-expanded {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}

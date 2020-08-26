@@ -7,6 +7,7 @@ import { resources } from "../data/pages";
 import FirebaseLogo from "../images/icons/firebase.png";
 import Design from "../images/icons/design.svg";
 import ReactLogo from "../images/icons/react-logo.svg";
+import Hero from "./../components/home/Hero";
 
 const Home = () => {
   const firebaseItems = resources.filter(
@@ -21,6 +22,9 @@ const Home = () => {
   return (
     <Container>
       <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Hero />
+        </Grid>
         <Grid item xs={12}>
           <Paper03 title="React" icon={ReactLogo}>
             <Grid container spacing={2}>

@@ -7,7 +7,7 @@ import Box from "@material-ui/core/Box";
 
 const Paper03 = (props) => {
   return (
-    <Paper>
+    <Paper style={{ paddingBottom: 24 }}>
       <Box style={{ display: "flex", alignItems: "center" }}>
         <Avatar
           alt={props.title}
