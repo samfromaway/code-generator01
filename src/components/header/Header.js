@@ -15,16 +15,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import CallMissedIcon from "@material-ui/icons/CallMissed";
-import PeopleIcon from "@material-ui/icons/People";
-import PageviewIcon from "@material-ui/icons/Pageview";
-import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "../../util/router";
+import { resources, info } from "./../../data/pages";
 
-const drawerWidth = 240;
-
+const drawerWidth = 220;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -45,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 25,
   },
   hide: {
     display: "none",
@@ -61,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    overflowX: "hidden",
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
@@ -86,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   listItem: {
-    paddingLeft: "23px",
+    paddingLeft: "18px",
   },
 }));
 
@@ -125,7 +120,7 @@ export default function MiniDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            React Code Snippets Generator
+            Code Snippets Generator
           </Typography>
         </Toolbar>
       </AppBar>
@@ -153,68 +148,35 @@ export default function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
-          <ListItem button component={Link} to="/" className={classes.listItem}>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
-            to="/about"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="About" />
-          </ListItem>
+          {info.map((page, index) => (
+            <ListItem
+              key={index}
+              button
+              component={Link}
+              to={page.path}
+              className={classes.listItem}
+            >
+              <ListItemIcon>
+                <img src={page.icon} alt={page.title} />
+              </ListItemIcon>
+              <ListItemText primary={page.title} />
+            </ListItem>
+          ))}
           <Divider />
-          <ListItem
-            button
-            component={Link}
-            to="/context-api"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <SettingsInputComponentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Context API" />
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
-            to="/validation-react-firebase"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <VerifiedUserIcon />
-            </ListItemIcon>
-            <ListItemText primary="Validation Firebase" />
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
-            to="/react-state-hooks"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <CallMissedIcon />
-            </ListItemIcon>
-            <ListItemText primary="React State Hooks" />
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
-            to="/design-resources"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <PageviewIcon />
-            </ListItemIcon>
-            <ListItemText primary="Design Resources" />
-          </ListItem>
+          {resources.map((page, index) => (
+            <ListItem
+              button
+              component={Link}
+              to={page.path}
+              className={classes.listItem}
+              key={index}
+            >
+              <ListItemIcon>
+                <img src={page.icon} alt={page.title} />
+              </ListItemIcon>
+              <ListItemText primary={page.title} />
+            </ListItem>
+          ))}
         </List>
       </Drawer>
       <main className={classes.content}>

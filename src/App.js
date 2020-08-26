@@ -12,6 +12,7 @@ import DesignResources from "./pages/design-resources";
 import ContentContextProvider from "./context/ContentContext";
 import ContentFirebaseProvider from "./context/ContentFirebaseContext";
 import ContentHooksProvider from "./context/ContentHooksContext";
+import Home from "./pages/home";
 
 const App = () => {
   const theme = createMuiTheme({
@@ -30,10 +31,11 @@ const App = () => {
               <Header>
                 <Container>
                   <Switch>
+                    <Route exact path="/" component={Home} />
                     <Route exact path="/context-api" component={ContextAPI} />
                     <Route
                       exact
-                      path="/validation-react-firebase"
+                      path="/validation-firebase-web"
                       component={ValidationReactFirebase}
                     />
                     <Route
