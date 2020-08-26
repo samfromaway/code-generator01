@@ -8,7 +8,6 @@ const Paper02 = (props) => {
       <Typography style={{ padding: "10px 15px" }} variant="h5">
         {props.title}
       </Typography>
-
       {props.children}
     </Paper>
   );

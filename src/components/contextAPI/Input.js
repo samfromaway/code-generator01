@@ -36,7 +36,7 @@ const Input = (props) => {
           variant="outlined"
           size="small"
           id="namePlural"
-          label="Name Plural"
+          label="Name Plural*"
           onChange={(e) => props.setNamePlural(e.target.value)}
           value={props.namePlural}
           className={classes.formInput}
@@ -48,7 +48,7 @@ const Input = (props) => {
           variant="outlined"
           size="small"
           id="nameSingular"
-          label="Name Singular"
+          label="Name Singular*"
           onChange={(e) => props.setNameSingular(e.target.value)}
           value={props.nameSingular}
           className={classes.formInput}
@@ -60,7 +60,7 @@ const Input = (props) => {
           variant="outlined"
           size="small"
           id="uniqueSelector"
-          label="Unique Selector"
+          label="Unique Selector*"
           onChange={(e) => props.setUniqueSelector(e.target.value)}
           value={props.uniqueSelector}
           className={classes.formInput}

@@ -5,6 +5,8 @@ import Input from "../components/contextAPI/Input";
 import Result from "../components/contextAPI/Result";
 import Imports from "../components/contextAPI/Imports";
 import { ContentContext } from "../context/ContentContext";
+import Instruction from "./../components/Instruction";
+import ContextApiInstruction from "./../components/contextAPI/ContextApiInstruction";
 
 const ContextAPI = () => {
   const {
@@ -21,6 +23,12 @@ const ContextAPI = () => {
   return (
     <Container>
       <Grid container spacing={4}>
+        <Grid container item>
+          <Instruction>
+            <ContextApiInstruction />
+          </Instruction>
+        </Grid>
+
         <Grid item xs={12} lg={5}>
           <Input
             nameSingular={nameSingular}

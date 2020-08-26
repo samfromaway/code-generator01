@@ -20,6 +20,7 @@ import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import CallMissedIcon from "@material-ui/icons/CallMissed";
 import PeopleIcon from "@material-ui/icons/People";
 import PageviewIcon from "@material-ui/icons/Pageview";
+import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "../../util/router";
 
 const drawerWidth = 240;
@@ -152,6 +153,24 @@ export default function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
+          <ListItem button component={Link} to="/" className={classes.listItem}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem
+            button
+            component={Link}
+            to="/about"
+            className={classes.listItem}
+          >
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="About" />
+          </ListItem>
+          <Divider />
           <ListItem
             button
             component={Link}
@@ -195,17 +214,6 @@ export default function MiniDrawer(props) {
               <PageviewIcon />
             </ListItemIcon>
             <ListItemText primary="Design Resources" />
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
-            to="/about"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="About" />
           </ListItem>
         </List>
       </Drawer>
