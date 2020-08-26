@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Paper01 from "./../Paper01";
+import Typography from "@material-ui/core/Typography";
 
 const ValidationReactFirebaseInputList = (props) => {
   const secondaryText = (item) => {
@@ -22,6 +23,9 @@ const ValidationReactFirebaseInputList = (props) => {
   return (
     <Paper01 title="Items">
       <List>
+        {props.items.length === 0 && (
+          <Typography gutterBottom>Add Keys...</Typography>
+        )}
         {props.items.map((item) => (
           <ListItem
             dense
