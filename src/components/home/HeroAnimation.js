@@ -8,11 +8,11 @@ import ReactLogo from "../../images/icons/react-logo.svg";
 
 const HeroAnimation = () => {
   const smileys = [
-    { marginLeft: -23, marginTop: 15, delay: "7.4s", id: 1 },
-    { marginLeft: 35, marginTop: 25, delay: "3.8s", id: 2 },
-    { marginLeft: 0, marginTop: 35, delay: "2.5s", id: 3 },
-    { marginLeft: -45, marginTop: 60, delay: "5.5s", id: 4 },
-    { marginLeft: 25, marginTop: 44, delay: "6.2s", id: 5 },
+    { marginLeft: 5, marginTop: 20, delay: "1.8s", id: 1 },
+    { marginLeft: 25, marginTop: 25, delay: "3.8s", id: 2 },
+    { marginLeft: 15, marginTop: 48, delay: "2.5s", id: 3 },
+    { marginLeft: -35, marginTop: 50, delay: "4.5s", id: 4 },
+    { marginLeft: -35, marginTop: 5, delay: "1.2s", id: 5 },
   ];
   const reactIcons = [
     { margin: 10, delay: "1.3s", id: 1 },
