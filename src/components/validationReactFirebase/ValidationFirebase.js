@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Paper02 from "./../Paper02";
 import CodeBlock from "./../CodeBlock";
+import { capitalize } from "./../../functions/textTransform";
 
 const ValidationFirebase = (props) => {
   const [items, setItems] = useState("");
-  const prefixFirebase = "request.resource.data.";
-  const capitalizedVariable =
-    props.variable.charAt(0).toUpperCase() + props.variable.slice(1);
-  const variable = props.variable ? props.variable : "NO_VARIABLE_SELECTED";
+  const prefixFirebase = "request.resource.data";
+  const variable = props.variable ? props.variable : "NO-VARIABLE-SELECTED";
+  const capitalizedVariable = capitalize(variable);
+  const space = "    ";
+  const andBrk = " &&\n";
+  const brk = "\n";
 
   const setContent = () => {
     setItems("");
     props.items.forEach((e) => {
-      setItems((prev) => prev + generateContent(e));
+      setItems((prev) => prev + generateItems(e));
     });
   };
 
@@ -32,100 +35,116 @@ const ValidationFirebase = (props) => {
       } else return input.type;
     };
 
-    return `${prefixFirebase}${input.myKey} is ${inputType()}`;
+    return `${variable}.${input.myKey} is ${inputType()}`;
   };
 
   const rangeType = (input) => {
-    if (input.rangeType) {
-      const inputRange =
-        input.type === "string" ? `"${input.range}"` : input.range;
+    const inputRange =
+      input.type === "string" ? `"${input.range}"` : input.range;
 
-      const rangeSymbol = () => {
-        switch (input.rangeType) {
-          case "equal":
-            return "==";
-          case "notEqual":
-            return "!=";
-          case "lessThan":
-            return "<";
-          case "lessThanOrEqualTo":
-            return "<=";
-          case "greaterThan":
-            return ">";
-          case "greaterThanOrEqualTo":
-            return ">=";
-          case "between":
-            return ">=";
-          default:
-            return "";
-        }
-      };
+    const rangeSymbol = () => {
+      switch (input.rangeType) {
+        case "equal":
+          return "==";
+        case "notEqual":
+          return "!=";
+        case "lessThan":
+          return "<";
+        case "lessThanOrEqualTo":
+          return "<=";
+        case "greaterThan":
+          return ">";
+        case "greaterThanOrEqualTo":
+          return ">=";
+        case "between":
+          return ">=";
+        default:
+          return "";
+      }
+    };
 
-      return `${prefixFirebase}${input.myKey} ${rangeSymbol()} ${inputRange}`;
-    } else return "";
+    return `${variable}.${input.myKey} ${rangeSymbol()} ${inputRange}`;
   };
 
   const range2 = (input) => {
-    if (input.range2) {
-      const inputRange =
-        input.type === "string" ? `"${input.range2}"` : input.range2;
-      return `${prefixFirebase}${input.myKey} <= ${inputRange}`;
-    } else return "";
+    const inputRange =
+      input.type === "string" ? `"${input.range2}"` : input.range2;
+    return `${variable}.${input.myKey} <= ${inputRange}`;
   };
 
   const isRequired = (input) => {
-    if (input.isRequired) {
-      return `${prefixFirebase}${input.myKey} != ""`;
-    }
+    return `${variable}.${input.myKey} != ""`;
   };
 
-  const ownerCreate = () => {
-    return props.onlyOwnerGetAccess
-      ? `&& \n    request.auth.uid == request.resource.data.${props.ownerSelector}`
-      : "";
-  };
-  const ownerEdit = () => {
-    return props.onlyOwnerGetAccess
-      ? `&& \n    request.auth.uid == resource.data.${props.ownerSelector}`
-      : "";
-  };
-  const ownerDelete = () => {
-    return props.onlyOwnerGetAccess
-      ? ` request.auth.uid == resource.data.${props.ownerSelector}`
-      : " //add validation or remove";
-  };
-
-  const generateContent = (item) => {
-    const brk = " &&\n";
-    const space = "    ";
+  const generateItems = (item) => {
     const comment = item.myKey ? `\n${space}// ${variable}.${item.myKey}` : "";
-    const curType = item.type ? "\n" + space + type(item) : "";
-    const curRangeType = item.rangeType ? brk + space + rangeType(item) : "";
-    const curRange2 = item.range2 ? brk + space + range2(item) : "";
-    const curRequired = item.isRequired ? brk + space + isRequired(item) : "";
+    const curType = item.type ? brk + space + type(item) : "";
+    const curRangeType = item.rangeType ? andBrk + space + rangeType(item) : "";
+    const curRange2 = item.range2 ? andBrk + space + range2(item) : "";
+    const curRequired = item.isRequired
+      ? andBrk + space + isRequired(item)
+      : "";
     const allContent =
       comment + curType + curRangeType + curRange2 + curRequired + " &&";
     return allContent;
   };
 
+  const isSignedInFunctionContent = `
+  function isSignedIn() {
+    return request.auth != null
+  }`;
+  const isSignedInCallContent = `&& isSignedIn()`;
+
+  const isOwnerFunctionContent = props.onlyOwnerGetAccess
+    ? `function isOwner(${variable}) {
+  return request.auth.uid == ${variable}.${props.ownerSelector}
+}
+  `
+    : "";
+
+  const isOwnerCallCreate = props.onlyOwnerGetAccess
+    ? `&& isOwner(request.resource.data)`
+    : "";
+  const isOwnerCallEdit = props.onlyOwnerGetAccess
+    ? `&& isOwner(resource.data)`
+    : "";
+  const isOwnerCallDelete = props.onlyOwnerGetAccess
+    ? `isOwner(resource.data)`
+    : "";
+
+  const allowCreate = `allow create: if isValid${capitalizedVariable}(${prefixFirebase}) ${isOwnerCallCreate}`;
+  const allowUpdate = `allow update: if isValid${capitalizedVariable}(${prefixFirebase}) ${isOwnerCallEdit}`;
+  const allowDelete = `allow delete: if ${isOwnerCallDelete}`;
+  const allowRead = `allow read: if //add validation or remove`;
+
   // slice used to delete last &&
-  const content = `function resourceIsValid${capitalizedVariable}() {
+  const isValidFunction = `function isValid${capitalizedVariable}(${variable}) {
   return (${items.slice(0, -2)}
   )
 }
 
-  allow create: if resourceIsValid${capitalizedVariable}() ${ownerCreate()}
+`;
+  const generateContent = () => {
+    const isOwnerFunction = props.onlyOwnerGetAccess
+      ? isOwnerFunctionContent + brk
+      : "";
 
-  allow update: if resourceIsValid${capitalizedVariable}() ${ownerEdit()}
-
-  allow delete: if${ownerDelete()}
-
-  allow read: if //add validation or remove
-  `;
+    const allContent =
+      isOwnerFunction +
+      isValidFunction +
+      allowCreate +
+      brk +
+      allowUpdate +
+      brk +
+      allowDelete +
+      brk +
+      allowRead;
+    return allContent;
+  };
 
   return (
     <Paper02 title="Firebase Validation">
-      <CodeBlock content={content} />
+      <CodeBlock content={generateContent()} />
     </Paper02>
   );
 };

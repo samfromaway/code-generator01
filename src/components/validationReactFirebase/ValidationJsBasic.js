@@ -7,7 +7,7 @@ const ValidationJsBasic = (props) => {
   const [items, setItems] = useState("");
   const capitalizedVariable = capitalize(props.variable);
 
-  const variable = props.variable ? props.variable : "NO_VARIABLE_SELECTED";
+  const variable = props.variable ? props.variable : "NO-VARIABLE-SELECTED";
   const setContent = () => {
     setItems("");
     props.items.forEach((e) => {
@@ -25,45 +25,39 @@ const ValidationJsBasic = (props) => {
   };
 
   const rangeType = (input) => {
-    if (input.rangeType) {
-      const inputRange =
-        input.type === "string" ? `"${input.range}"` : input.range;
-      const rangeSymbol = () => {
-        switch (input.rangeType) {
-          case "equal":
-            return "===";
-          case "notEqual":
-            return "!==";
-          case "lessThan":
-            return "<";
-          case "lessThanOrEqualTo":
-            return "<=";
-          case "greaterThan":
-            return ">";
-          case "greaterThanOrEqualTo":
-            return ">=";
-          case "between":
-            return ">=";
-          default:
-            return "";
-        }
-      };
-      return `${variable}.${input.myKey} ${rangeSymbol()} ${inputRange}`;
-    } else return "";
+    const inputRange =
+      input.type === "string" ? `"${input.range}"` : input.range;
+    const rangeSymbol = () => {
+      switch (input.rangeType) {
+        case "equal":
+          return "===";
+        case "notEqual":
+          return "!==";
+        case "lessThan":
+          return "<";
+        case "lessThanOrEqualTo":
+          return "<=";
+        case "greaterThan":
+          return ">";
+        case "greaterThanOrEqualTo":
+          return ">=";
+        case "between":
+          return ">=";
+        default:
+          return "";
+      }
+    };
+    return `${variable}.${input.myKey} ${rangeSymbol()} ${inputRange}`;
   };
 
   const range2 = (input) => {
-    if (input.range2) {
-      const inputRange =
-        input.type === "string" ? `"${input.range2}"` : input.range2;
-      return `${variable}.${input.myKey} <= ${inputRange}`;
-    } else return "";
+    const inputRange =
+      input.type === "string" ? `"${input.range2}"` : input.range2;
+    return `${variable}.${input.myKey} <= ${inputRange}`;
   };
 
   const isRequired = (input) => {
-    if (input.isRequired) {
-      return `${variable}.${input.myKey} !== ""`;
-    }
+    return `${variable}.${input.myKey} !== ""`;
   };
 
   const generateContent = (item) => {
