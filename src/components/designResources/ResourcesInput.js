@@ -54,7 +54,6 @@ const ResourcesInput = ({
           >
             <OutlinedInput
               placeholder="Search"
-              OutlinedInput
               id="outlined-adornment-password"
               value={searchTextQuery}
               onChange={(e) => setSearchTextQuery(e.target.value)}

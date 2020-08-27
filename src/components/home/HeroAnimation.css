@@ -1,0 +1,82 @@
+.heroAnimation__wrapper {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+  bottom: 20px;
+  z-index: 1;
+}
+
+.heroAnimation__imgMachine {
+  margin-left: auto;
+  margin-right: auto;
+  animation: shake 0.3s linear infinite;
+  z-index: 3;
+}
+
+.heroAnimation__imgSmile {
+  position: absolute;
+  animation: bubble 2s linear infinite;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  opacity: 0;
+}
+
+.heroAnimation__imgLogo {
+  animation: rain 3s ease-in-out infinite;
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  opacity: 0;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0.5deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(0.5deg);
+  }
+}
+
+@keyframes rain {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translate(0px, 100px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) translate(0px, 100px);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
