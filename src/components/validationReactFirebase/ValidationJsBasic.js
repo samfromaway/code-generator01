@@ -76,7 +76,7 @@ const ValidationJsBasic = (props) => {
   // slice used to delete last &&
   const content = `function isValid${capitalizedVariable}(${variable}) {
   return (${items.slice(0, -2)}
-  )   
+  );   
 }`;
 
   return (

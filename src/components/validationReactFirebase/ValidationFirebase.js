@@ -100,13 +100,13 @@ const ValidationFirebase = (props) => {
   };
 
   const isSignedInFunctionContent = `function isSignedIn() {
-  return request.auth != null
+  return request.auth != null;
   }
   `;
   const isSignedInCallContent = ` && isSignedIn()`;
 
   const isOwnerFunctionContent = `function isOwner(${variable}) {
-  return request.auth.uid == ${variable}.${props.ownerSelector}
+  return request.auth.uid == ${variable}.${props.ownerSelector};
 }
   `;
   const isOwnerCallCreate = props.onlyOwnerGetAccess
@@ -122,28 +122,26 @@ const ValidationFirebase = (props) => {
   const allowRead = () => {
     const content = isOwnerCallDelete + isSignedIn("read");
     if (isOwnerCallDelete || isSignedIn("read")) {
-      return `allow read: if ${content.slice(4)}`;
+      return `allow read: if ${content.slice(4)};`;
     } else return "allow read: if //add validation or remove";
   };
-
   const allowCreate = `allow create: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallCreate}${isSignedIn(
     "create"
-  )}`;
+  )};`;
   const allowUpdate = `allow update: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallEdit}${isSignedIn(
     "update"
-  )}`;
-
+  )};`;
   const allowDelete = () => {
     const content = isOwnerCallDelete + isSignedIn("delete");
     if (isOwnerCallDelete || isSignedIn("delete")) {
-      return `allow delete: if ${content.slice(4)}`;
+      return `allow delete: if ${content.slice(4)};`;
     } else return "allow delete: if //add validation or remove";
   };
 
   // slice used to delete last &&
   const isValidFunction = `function isValid${capitalizedVariable}(${variable}) {
   return (${items.slice(0, -2)}
-  )
+  );
 }
 
 `;

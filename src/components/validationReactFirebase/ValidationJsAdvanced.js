@@ -13,13 +13,6 @@ const ValidationJsAdvanced = (props) => {
       setItems((prev) => prev + generateContent(e));
     });
   };
-  const setContent2 = () => {
-    const items = [];
-    props.items.forEach((e) => {
-      items.push(generateContent(e));
-    });
-    return items;
-  };
 
   useEffect(() => {
     setContent();
@@ -84,7 +77,8 @@ const ValidationJsAdvanced = (props) => {
       curRangeType +
       curRange2 +
       curRequired +
-      ifCheckOutro;
+      ifCheckOutro +
+      ";";
 
     return allContent;
   };
@@ -92,7 +86,7 @@ const ValidationJsAdvanced = (props) => {
   // slice is to eliminate the first else... from content
   const content = `function isNotValid${capitalizedVariable}(${variable}) {
     ${items.slice(10)}
-  } else return false
+  } else return false;
 }`;
 
   return (
