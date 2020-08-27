@@ -70,7 +70,9 @@ const Input = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControl component="fieldset" style={{ marginBottom: 20 }}>
-          <FormLabel component="legend">Actions</FormLabel>
+          <FormLabel component="legend" style={{ paddingBottom: 8 }}>
+            Actions
+          </FormLabel>
           <FormGroup>
             {actionKeys.map((action) => (
               <FormControlLabel

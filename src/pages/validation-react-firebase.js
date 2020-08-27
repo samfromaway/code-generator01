@@ -31,6 +31,8 @@ const ValidationReactFirebase = () => {
     setOwnerSelector,
     onlyOwnerGetAccess,
     setOnlyOwnerGetAccess,
+    actions,
+    setActions,
   } = useContext(ContentFirebase);
 
   const handleAddItems = () => {
@@ -69,21 +71,37 @@ const ValidationReactFirebase = () => {
     setIsRequired(false);
   };
 
+  const handleActionsChange = (e) => {
+    const name = e.target.name;
+    const checked = e.target.checked;
+
+    setActions((prev) => {
+      return prev.map((action) => {
+        if (action.title !== name) {
+          return action;
+        }
+        return { title: name, checked };
+      });
+    });
+  };
+
   return (
     <Container>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={4}>
           <InputValidationGeneral
-            variable={variable}
-            setVariable={setVariable}
             ownerSelector={ownerSelector}
             setOwnerSelector={setOwnerSelector}
             onlyOwnerGetAccess={onlyOwnerGetAccess}
             setOnlyOwnerGetAccess={setOnlyOwnerGetAccess}
+            handleActionsChange={handleActionsChange}
+            actions={actions}
           />
         </Grid>
         <Grid item xs={12} lg={4}>
           <InputValidationKey
+            variable={variable}
+            setVariable={setVariable}
             myKey={myKey}
             setMyKey={setMyKey}
             type={type}
@@ -113,6 +131,7 @@ const ValidationReactFirebase = () => {
             variable={variable}
             ownerSelector={ownerSelector}
             onlyOwnerGetAccess={onlyOwnerGetAccess}
+            actions={actions}
           />
         </Grid>
         <Grid item xs={12}>

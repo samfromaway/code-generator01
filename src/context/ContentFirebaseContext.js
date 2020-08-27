@@ -13,6 +13,12 @@ export const ContentFirebaseContext = ({ children }) => {
   const [isRequired, setIsRequired] = useState(false);
   const [ownerSelector, setOwnerSelector] = useState("");
   const [onlyOwnerGetAccess, setOnlyOwnerGetAccess] = useState(false);
+  const [actions, setActions] = useState([
+    { title: "read", checked: false },
+    { title: "create", checked: false },
+    { title: "update", checked: false },
+    { title: "delete", checked: false },
+  ]);
 
   return (
     <ContentFirebase.Provider
@@ -37,6 +43,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setOwnerSelector,
         onlyOwnerGetAccess,
         setOnlyOwnerGetAccess,
+        actions,
+        setActions,
       }}
     >
       {children}

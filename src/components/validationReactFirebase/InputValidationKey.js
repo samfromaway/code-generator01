@@ -40,6 +40,16 @@ const InputValidationKey = (props) => {
         variant="outlined"
         size="small"
         className={classes.formInput}
+        label="Variable*"
+        onChange={(e) => props.setVariable(e.target.value)}
+        value={props.variable}
+        helperText="In camelCase 🐫"
+      />
+      <Divider style={{ margin: "0 0 25px 0" }} />
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
         label="Key*"
         onChange={(e) => props.setMyKey(e.target.value)}
         value={props.myKey}
@@ -70,6 +80,8 @@ const InputValidationKey = (props) => {
         size="small"
         className={classes.formInput}
       >
+        <Divider style={{ margin: "10px 0" }} />
+        <Typography variant="subtitle1">Optional</Typography>
         <FormControlLabel
           disabled={
             !props.type ||
@@ -88,13 +100,7 @@ const InputValidationKey = (props) => {
           label="Is Required"
         />
       </FormControl>
-
-      <Divider style={{ marginBottom: 10 }} />
-
       <>
-        <Typography style={{ marginBottom: 10 }} variant="subtitle1">
-          Optional
-        </Typography>
         <FormControl
           variant="outlined"
           size="small"
@@ -167,7 +173,6 @@ const InputValidationKey = (props) => {
           />
         )}
       </>
-
       <Grid
         item
         xs={12}
