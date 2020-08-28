@@ -110,26 +110,30 @@ const ValidationFirebase = (props) => {
   ${space2}return request.auth != null;
   ${space}}
   `;
-  const isSignedInCallContent = ` && isSignedIn()`;
+  const isSignedInCallContent = ` &&\n${space2}isSignedIn()`;
 
   const isOwnerFunctionContent = `${space2}function isOwner(${variable}) {
   ${space2}return request.auth.uid == ${variable}.${props.ownerSelector};
 ${space2}}
   `;
+
+  const isOwnerCallRead = props.onlyOwnerGetAccess
+    ? ` &&\n${space2}isOwner(resource.data)`
+    : '';
   const isOwnerCallCreate = props.onlyOwnerGetAccess
-    ? ` && isOwner(request.resource.data)`
+    ? ` &&\n${space2}isOwner(request.resource.data)`
     : '';
   const isOwnerCallEdit = props.onlyOwnerGetAccess
-    ? ` && isOwner(resource.data)`
+    ? ` &&\n${space2}isOwner(resource.data)`
     : '';
   const isOwnerCallDelete = props.onlyOwnerGetAccess
-    ? ` && isOwner(resource.data)`
+    ? ` &&\n${space2}isOwner(resource.data)`
     : '';
 
   const allowRead = () => {
-    const content = isOwnerCallDelete + isSignedIn('read');
-    if (isOwnerCallDelete || isSignedIn('read')) {
-      return `allow read: if ${content.slice(4)};`;
+    const content = isOwnerCallRead + isSignedIn('read');
+    if (isOwnerCallRead || isSignedIn('read')) {
+      return `allow read: if ${content.slice(10)};`;
     } else return 'allow read: if //add validation or remove';
   };
   const allowCreate = `allow create: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallCreate}${isSignedIn(
@@ -141,7 +145,7 @@ ${space2}}
   const allowDelete = () => {
     const content = isOwnerCallDelete + isSignedIn('delete');
     if (isOwnerCallDelete || isSignedIn('delete')) {
-      return `allow delete: if ${content.slice(4)};`;
+      return `allow delete: if ${content.slice(10)};`;
     } else return 'allow delete: if //add validation or remove';
   };
 
