@@ -21,10 +21,6 @@ pre {
 .MuiListItemIcon-root {
   min-width: 45px !important;
 }
-/* Make Drawer Size Smaller */
-.makeStyles-drawerClose-8 {
-  width: 60px !important;
-}
 
 /* Make Padding of Hamburger smaller */
 .MuiToolbar-root {
