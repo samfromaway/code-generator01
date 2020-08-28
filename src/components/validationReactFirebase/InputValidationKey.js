@@ -45,7 +45,10 @@ const InputValidationKey = (props) => {
         value={props.variable}
         helperText="In camelCase 🐫"
       />
-      <Divider style={{ margin: '0 0 25px 0' }} />
+      <Divider style={{ margin: '0 0 8px 0' }} />
+      <Typography style={{ marginBottom: 8 }} variant="subtitle1">
+        Add Keys
+      </Typography>
       <TextField
         variant="outlined"
         size="small"
@@ -80,8 +83,6 @@ const InputValidationKey = (props) => {
         size="small"
         className={classes.formInput}
       >
-        <Divider style={{ margin: '10px 0' }} />
-        <Typography variant="subtitle1">Optional</Typography>
         <FormControlLabel
           disabled={
             !props.type ||
