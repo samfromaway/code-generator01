@@ -23,35 +23,43 @@ const InputValidationGeneral = (props) => {
 
   return (
     <Paper01 title="Firestore Settings">
-      <Grid item xs={12} style={{ marginBottom: 10 }}>
-        <FormControl className={classes.formInput}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={props.onlyOwnerGetAccess}
-                onChange={(e) => props.setOnlyOwnerGetAccess(e.target.checked)}
-                name="isRequired"
-                color="primary"
-              />
-            }
-            label="Only Data Owner Has Access"
-          />
-        </FormControl>
-        <TextField
-          variant="outlined"
-          size="small"
-          className={classes.formInput}
-          label="Owner Selector"
-          onChange={(e) => props.setOwnerSelector(e.target.value)}
-          value={props.ownerSelector}
-          helperText="e.g. owner or createdBy"
-          disabled={!props.onlyOwnerGetAccess}
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+        label="Collection Name"
+        helperText="e.g. users or directory"
+        onChange={(e) => props.setCollectionName(e.target.value)}
+        value={props.collectionName}
+      />
+      <Divider style={{ margin: '8px 0' }} />
+      <FormControl className={classes.formInput}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={props.onlyOwnerGetAccess}
+              onChange={(e) => props.setOnlyOwnerGetAccess(e.target.checked)}
+              name="isRequired"
+              color="primary"
+            />
+          }
+          label="Only Data Owner Has Access"
         />
-      </Grid>
+      </FormControl>
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+        label="Owner Selector"
+        onChange={(e) => props.setOwnerSelector(e.target.value)}
+        value={props.ownerSelector}
+        helperText="e.g. owner or createdBy"
+        disabled={!props.onlyOwnerGetAccess}
+      />
       <Divider style={{ margin: '10px 0 25px 0' }} />
       <Grid item xs={12} style={{ paddingBottom: 20 }}>
         <FormControl component="fieldset">
-          <FormLabel component="legend" style={{ paddingBottom: 8 }}>
+          <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
             Only Signed In User Is Allowed To
           </FormLabel>
           <FormGroup>

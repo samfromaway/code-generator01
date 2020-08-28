@@ -1,12 +1,15 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext } from 'react';
 
 export const ContentContext = createContext();
 
 export const ResourcesProvider = ({ children }) => {
-  const [nameSingular, setNameSingular] = useState("");
-  const [namePlural, setNamePlural] = useState("");
-  const [uniqueSelector, setUniqueSelector] = useState("");
+  const [nameSingular, setNameSingular] = useState('');
+  const [namePlural, setNamePlural] = useState('');
+  const [uniqueSelector, setUniqueSelector] = useState('');
   const [actions, setActions] = useState({
+    loading: {
+      checked: true,
+    },
     get: {
       checked: false,
     },
@@ -17,9 +20,6 @@ export const ResourcesProvider = ({ children }) => {
       checked: false,
     },
     edit: {
-      checked: false,
-    },
-    loading: {
       checked: false,
     },
   });

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Paper02 from "./../Paper02";
-import CodeBlock from "./../CodeBlock";
-import { capitalize } from "./../../functions/textTransform";
+import React, { useState, useEffect } from 'react';
+import Paper02 from './../Paper02';
+import CodeBlock from './../CodeBlock';
+import { capitalize } from './../../functions/textTransform';
 
 const ValidationJsBasic = (props) => {
-  const [items, setItems] = useState("");
+  const [items, setItems] = useState('');
   const capitalizedVariable = capitalize(props.variable);
 
-  const variable = props.variable ? props.variable : "NO-VARIABLE-SELECTED";
+  const variable = props.variable || 'ADD-VARIABLE';
   const setContent = () => {
-    setItems("");
+    setItems('');
     props.items.forEach((e) => {
       setItems((prev) => prev + generateContent(e));
     });
@@ -26,25 +26,25 @@ const ValidationJsBasic = (props) => {
 
   const rangeType = (input) => {
     const inputRange =
-      input.type === "string" ? `"${input.range}"` : input.range;
+      input.type === 'string' ? `"${input.range}"` : input.range;
     const rangeSymbol = () => {
       switch (input.rangeType) {
-        case "equal":
-          return "===";
-        case "notEqual":
-          return "!==";
-        case "lessThan":
-          return "<";
-        case "lessThanOrEqualTo":
-          return "<=";
-        case "greaterThan":
-          return ">";
-        case "greaterThanOrEqualTo":
-          return ">=";
-        case "between":
-          return ">=";
+        case 'equal':
+          return '===';
+        case 'notEqual':
+          return '!==';
+        case 'lessThan':
+          return '<';
+        case 'lessThanOrEqualTo':
+          return '<=';
+        case 'greaterThan':
+          return '>';
+        case 'greaterThanOrEqualTo':
+          return '>=';
+        case 'between':
+          return '>=';
         default:
-          return "";
+          return '';
       }
     };
     return `${variable}.${input.myKey} ${rangeSymbol()} ${inputRange}`;
@@ -52,7 +52,7 @@ const ValidationJsBasic = (props) => {
 
   const range2 = (input) => {
     const inputRange =
-      input.type === "string" ? `"${input.range2}"` : input.range2;
+      input.type === 'string' ? `"${input.range2}"` : input.range2;
     return `${variable}.${input.myKey} <= ${inputRange}`;
   };
 
@@ -61,15 +61,15 @@ const ValidationJsBasic = (props) => {
   };
 
   const generateContent = (item) => {
-    const brk = " &&\n";
-    const space = "    ";
-    const comment = item.myKey ? `\n${space}// ${variable}.${item.myKey}` : "";
-    const curType = item.type ? "\n" + space + type(item) : "";
-    const curRangeType = item.rangeType ? brk + space + rangeType(item) : "";
-    const curRange2 = item.range2 ? brk + space + range2(item) : "";
-    const curRequired = item.isRequired ? brk + space + isRequired(item) : "";
+    const brk = ' &&\n';
+    const space = '    ';
+    const comment = item.myKey ? `\n${space}// ${variable}.${item.myKey}` : '';
+    const curType = item.type ? '\n' + space + type(item) : '';
+    const curRangeType = item.rangeType ? brk + space + rangeType(item) : '';
+    const curRange2 = item.range2 ? brk + space + range2(item) : '';
+    const curRequired = item.isRequired ? brk + space + isRequired(item) : '';
     const allContent =
-      comment + curType + curRangeType + curRange2 + curRequired + " &&";
+      comment + curType + curRangeType + curRange2 + curRequired + ' &&';
     return allContent;
   };
 

@@ -1,24 +1,26 @@
-import React from "react";
-import "./App.css";
-import { Switch, Route, Router } from "./util/router";
-import Header from "./components/header/Header";
-import Container from "@material-ui/core/Container";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import ContextAPI from "./pages/context-API";
-import ValidationReactFirebase from "./pages/validation-react-firebase";
-import ReactStateHooks from "./pages/react-state-hooks";
-import About from "./pages/about";
-import DesignResources from "./pages/design-resources";
-import ContentContextProvider from "./context/ContentContext";
-import ContentFirebaseProvider from "./context/ContentFirebaseContext";
-import ContentHooksProvider from "./context/ContentHooksContext";
-import Home from "./pages/home";
+import React from 'react';
+import './App.css';
+import { Switch, Route, Router } from './util/router';
+import Header from './components/header/Header';
+import Container from '@material-ui/core/Container';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import ContextAPI from './pages/context-API';
+import ValidationReactFirebase from './pages/validation-react-firebase';
+import ReactStateHooks from './pages/react-state-hooks';
+import About from './pages/about';
+import DesignResources from './pages/design-resources';
+import ContentContextProvider from './context/ContentContext';
+import ContentFirebaseProvider from './context/ContentFirebaseContext';
+import ContentHooksProvider from './context/ContentHooksContext';
+import Home from './pages/home';
+import { blue } from '@material-ui/core/colors';
 
 const App = () => {
   const theme = createMuiTheme({
     palette: {
-      type: "dark",
-      primary: { main: "#497ed5", light: "#729bdf", dark: "#2759aa" },
+      type: 'dark',
+      primary: blue,
+      secondary: blue,
     },
   });
 

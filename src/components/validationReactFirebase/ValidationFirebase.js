@@ -6,10 +6,13 @@ import { capitalize } from './../../functions/textTransform';
 const ValidationFirebase = (props) => {
   const [items, setItems] = useState('');
   const prefixFirebase = 'request.resource.data';
-  const variable = props.variable ? props.variable : 'NO-VARIABLE-SELECTED';
+  const collectionName = props.collectionName || 'ADD-COLLECTION-NAME';
+  const variable = props.variable || 'ADD-VARIABLE';
   const someActionChecked = props.actions.some((e) => e.checked);
   const capitalizedVariable = capitalize(variable);
   const space = '    ';
+  const space2 = '      ';
+  const space4 = '          ';
   const andBrk = ' &&\n';
   const brk = '\n';
 
@@ -25,6 +28,7 @@ const ValidationFirebase = (props) => {
     // eslint-disable-next-line
   }, [props.items, props.variable]);
 
+  //keys
   const type = (input) => {
     const inputType = () => {
       if (input.type === 'boolean') {
@@ -78,18 +82,21 @@ const ValidationFirebase = (props) => {
   };
 
   const generateItems = (item) => {
-    const comment = item.myKey ? `\n${space}// ${variable}.${item.myKey}` : '';
-    const curType = item.type ? brk + space + type(item) : '';
-    const curRangeType = item.rangeType ? andBrk + space + rangeType(item) : '';
-    const curRange2 = item.range2 ? andBrk + space + range2(item) : '';
+    const comment = item.myKey ? `\n${space4}// ${variable}.${item.myKey}` : '';
+    const curType = item.type ? brk + space4 + type(item) : '';
+    const curRangeType = item.rangeType
+      ? andBrk + space4 + rangeType(item)
+      : '';
+    const curRange2 = item.range2 ? andBrk + space4 + range2(item) : '';
     const curRequired = item.isRequired
-      ? andBrk + space + isRequired(item)
+      ? andBrk + space4 + isRequired(item)
       : '';
     const allContent =
       comment + curType + curRangeType + curRange2 + curRequired + ' &&';
     return allContent;
   };
 
+  //functions
   const isSignedIn = (name) => {
     if (name) {
       const item = props.actions.filter((e) => e.title === name);
@@ -99,15 +106,15 @@ const ValidationFirebase = (props) => {
     }
   };
 
-  const isSignedInFunctionContent = `function isSignedIn() {
-  return request.auth != null;
-  }
+  const isSignedInFunctionContent = `${space2}function isSignedIn() {
+  ${space2}return request.auth != null;
+  ${space}}
   `;
   const isSignedInCallContent = ` && isSignedIn()`;
 
-  const isOwnerFunctionContent = `function isOwner(${variable}) {
-  return request.auth.uid == ${variable}.${props.ownerSelector};
-}
+  const isOwnerFunctionContent = `${space2}function isOwner(${variable}) {
+  ${space2}return request.auth.uid == ${variable}.${props.ownerSelector};
+${space2}}
   `;
   const isOwnerCallCreate = props.onlyOwnerGetAccess
     ? ` && isOwner(request.resource.data)`
@@ -139,12 +146,13 @@ const ValidationFirebase = (props) => {
   };
 
   // slice used to delete last &&
-  const isValidFunction = `function isValid${capitalizedVariable}(${variable}) {
-  return (${items.slice(0, -2)}
-  );
-}
+  const isValidFunction = `${space2}function isValid${capitalizedVariable}(${variable}) {
+  ${space2}return (${items.slice(0, -2)}
+  ${space2});
+${space2}}
 
 `;
+
   const generateContent = () => {
     const isOwnerFunction = props.onlyOwnerGetAccess
       ? isOwnerFunctionContent + brk
@@ -154,19 +162,34 @@ const ValidationFirebase = (props) => {
       : '';
 
     const allContent =
-      isSignedInFunction +
-      isOwnerFunction +
-      isValidFunction +
+      `    match /${collectionName}/{itemId}{` +
+      brk +
+      brk +
+      space2 +
       allowRead() +
       brk +
       brk +
+      space2 +
       allowCreate +
       brk +
       brk +
+      space2 +
       allowUpdate +
       brk +
       brk +
-      allowDelete();
+      space2 +
+      allowDelete() +
+      brk +
+      brk +
+      space2 +
+      '// FUNCTIONS' +
+      brk +
+      isSignedInFunction +
+      isOwnerFunction +
+      isValidFunction +
+      '    }' +
+      brk +
+      brk;
     return allContent;
   };
 

@@ -1,18 +1,18 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import TextField from "@material-ui/core/TextField";
-import Paper01 from "./../Paper01";
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import TextField from '@material-ui/core/TextField';
+import Paper01 from './../Paper01';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
     marginBottom: 15,
-    width: "100%",
+    width: '100%',
   },
 }));
 
@@ -70,7 +70,7 @@ const Input = (props) => {
       </Grid>
       <Grid item xs={12}>
         <FormControl component="fieldset" style={{ marginBottom: 20 }}>
-          <FormLabel component="legend" style={{ paddingBottom: 8 }}>
+          <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
             Actions
           </FormLabel>
           <FormGroup>

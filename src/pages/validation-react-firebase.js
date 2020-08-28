@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import ValidationFirebase from "./../components/validationReactFirebase/ValidationFirebase";
-import ValidationJsBasic from "./../components/validationReactFirebase/ValidationJsBasic";
-import ValidationJsAdvanced from "./../components/validationReactFirebase/ValidationJsAdvanced";
-import InputValidationGeneral from "../components/validationReactFirebase/InputValidationGeneral";
-import ValidationReactFirebaseInputList from "./../components/validationReactFirebase/ValidationReactFirebaseList";
-import InputValidationKey from "./../components/validationReactFirebase/InputValidationKey";
-import { ContentFirebase } from "../context/ContentFirebaseContext";
+import React, { useContext } from 'react';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import ValidationFirebase from './../components/validationReactFirebase/ValidationFirebase';
+import ValidationJsBasic from './../components/validationReactFirebase/ValidationJsBasic';
+import ValidationJsAdvanced from './../components/validationReactFirebase/ValidationJsAdvanced';
+import InputValidationGeneral from '../components/validationReactFirebase/InputValidationGeneral';
+import ValidationReactFirebaseInputList from './../components/validationReactFirebase/ValidationReactFirebaseList';
+import InputValidationKey from './../components/validationReactFirebase/InputValidationKey';
+import { ContentFirebase } from '../context/ContentFirebaseContext';
 
 const ValidationReactFirebase = () => {
   const {
@@ -33,14 +33,16 @@ const ValidationReactFirebase = () => {
     setOnlyOwnerGetAccess,
     actions,
     setActions,
+    collectionName,
+    setCollectionName,
   } = useContext(ContentFirebase);
 
   const handleAddItems = () => {
     const isKeyAlreadyExisting = items.some((e) => e.myKey === myKey);
 
     if (!isKeyAlreadyExisting) {
-      if (myKey !== "") {
-        if (type !== "") {
+      if (myKey !== '') {
+        if (type !== '') {
           setItems((prev) => [
             ...prev,
             {
@@ -53,9 +55,9 @@ const ValidationReactFirebase = () => {
             },
           ]);
           clearInput();
-        } else alert("Please add a Type.");
-      } else alert("Please add a Key");
-    } else alert("This key already exists");
+        } else alert('Please add a Type.');
+      } else alert('Please add a Key');
+    } else alert('This key already exists');
   };
 
   const handleDelete = (item) => {
@@ -63,11 +65,11 @@ const ValidationReactFirebase = () => {
   };
 
   const clearInput = () => {
-    setMyKey("");
-    setType("");
-    setRangeType("");
-    setRange("");
-    setRange2("");
+    setMyKey('');
+    setType('');
+    setRangeType('');
+    setRange('');
+    setRange2('');
     setIsRequired(false);
   };
 
@@ -96,6 +98,8 @@ const ValidationReactFirebase = () => {
             setOnlyOwnerGetAccess={setOnlyOwnerGetAccess}
             handleActionsChange={handleActionsChange}
             actions={actions}
+            collectionName={collectionName}
+            setCollectionName={setCollectionName}
           />
         </Grid>
         <Grid item xs={12} lg={4}>
@@ -132,6 +136,7 @@ const ValidationReactFirebase = () => {
             ownerSelector={ownerSelector}
             onlyOwnerGetAccess={onlyOwnerGetAccess}
             actions={actions}
+            collectionName={collectionName}
           />
         </Grid>
         <Grid item xs={12}>

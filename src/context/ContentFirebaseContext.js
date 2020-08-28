@@ -1,23 +1,24 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext } from 'react';
 
 export const ContentFirebase = createContext();
 
 export const ContentFirebaseContext = ({ children }) => {
   const [items, setItems] = useState([]);
-  const [variable, setVariable] = useState("");
-  const [myKey, setMyKey] = useState("");
-  const [type, setType] = useState("");
-  const [rangeType, setRangeType] = useState("");
-  const [range, setRange] = useState("");
-  const [range2, setRange2] = useState("");
+  const [variable, setVariable] = useState('');
+  const [myKey, setMyKey] = useState('');
+  const [type, setType] = useState('');
+  const [rangeType, setRangeType] = useState('');
+  const [range, setRange] = useState('');
+  const [range2, setRange2] = useState('');
   const [isRequired, setIsRequired] = useState(false);
-  const [ownerSelector, setOwnerSelector] = useState("");
+  const [ownerSelector, setOwnerSelector] = useState('');
   const [onlyOwnerGetAccess, setOnlyOwnerGetAccess] = useState(false);
+  const [collectionName, setCollectionName] = useState('');
   const [actions, setActions] = useState([
-    { title: "read", checked: false },
-    { title: "create", checked: false },
-    { title: "update", checked: false },
-    { title: "delete", checked: false },
+    { title: 'read', checked: false },
+    { title: 'create', checked: false },
+    { title: 'update', checked: false },
+    { title: 'delete', checked: false },
   ]);
 
   return (
@@ -45,6 +46,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setOnlyOwnerGetAccess,
         actions,
         setActions,
+        collectionName,
+        setCollectionName,
       }}
     >
       {children}
