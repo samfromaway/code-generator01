@@ -8,6 +8,8 @@ const ValidationFirebase = (props) => {
   const prefixFirebase = 'request.resource.data';
   const collectionName = props.collectionName || 'ADD-COLLECTION-NAME';
   const variable = props.variable || 'ADD-VARIABLE';
+  const rateLimitTime = props.rateLimit || 'ADD-RATE-LIMIT';
+  const createdDateSelector = props.createdDateSelector || 'ADD-DATE-SELECTOR';
   const someActionChecked = props.actions.some((e) => e.checked);
   const capitalizedVariable = capitalize(variable);
   const space = '    ';
@@ -28,7 +30,7 @@ const ValidationFirebase = (props) => {
     // eslint-disable-next-line
   }, [props.items, props.variable]);
 
-  //keys
+  //KEYS//
   const type = (input) => {
     const inputType = () => {
       if (input.type === 'boolean') {
@@ -96,7 +98,7 @@ const ValidationFirebase = (props) => {
     return allContent;
   };
 
-  //functions
+  //FUNCTIIONS//
   const isSignedIn = (name) => {
     if (name) {
       const item = props.actions.filter((e) => e.title === name);
@@ -157,12 +159,29 @@ ${space2}}
 
 `;
 
+  //HAS ALL KEYS   // to finish
+  const hasAllKeysContent = `${space2}function ${variable}hasAllRequiredFields() {
+  ${space2}let requiredFields = []
+  ${space2}return ${prefixFirebase}.keys().hasAll(requiredFields)
+${space2}}
+`;
+
+  // RATE LIMIT
+  const rateLimitFunctionContent = `${space2}function isCalm() {
+  ${space2}return request.time > resource.data.${createdDateSelector} + duration.value(${rateLimitTime}, 's'); 
+${space2}}
+`;
+
   const generateContent = () => {
     const isOwnerFunction = props.onlyOwnerGetAccess
       ? isOwnerFunctionContent + brk
       : '';
     const isSignedInFunction = someActionChecked
       ? isSignedInFunctionContent + brk
+      : '';
+
+    const rateLimitFunction = props.hasRateLimit
+      ? rateLimitFunctionContent + brk
       : '';
 
     const allContent =
@@ -191,6 +210,7 @@ ${space2}}
       isSignedInFunction +
       isOwnerFunction +
       isValidFunction +
+      rateLimitFunction +
       '    }' +
       brk +
       brk;

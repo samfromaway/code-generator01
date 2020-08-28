@@ -35,6 +35,14 @@ const ValidationReactFirebase = () => {
     setActions,
     collectionName,
     setCollectionName,
+    hasRateLimit,
+    setHasRateLimit,
+    rateLimit,
+    setRateLimit,
+    hasAllKeys,
+    setHasAllKeys,
+    createdDateSelector,
+    setCreatedDateSelector,
   } = useContext(ContentFirebase);
 
   const handleAddItems = () => {
@@ -100,6 +108,14 @@ const ValidationReactFirebase = () => {
             actions={actions}
             collectionName={collectionName}
             setCollectionName={setCollectionName}
+            hasRateLimit={hasRateLimit}
+            setHasRateLimit={setHasRateLimit}
+            rateLimit={rateLimit}
+            setRateLimit={setRateLimit}
+            hasAllKeys={hasAllKeys}
+            setHasAllKeys={setHasAllKeys}
+            createdDateSelector={createdDateSelector}
+            setCreatedDateSelector={setCreatedDateSelector}
           />
         </Grid>
         <Grid item xs={12} lg={4}>
@@ -137,6 +153,10 @@ const ValidationReactFirebase = () => {
             onlyOwnerGetAccess={onlyOwnerGetAccess}
             actions={actions}
             collectionName={collectionName}
+            hasRateLimit={hasRateLimit}
+            rateLimit={rateLimit}
+            hasAllKeys={hasAllKeys}
+            createdDateSelector={createdDateSelector}
           />
         </Grid>
         <Grid item xs={12}>

@@ -17,8 +17,9 @@ import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
   formInput: {
     width: '100%',
-    marginBottom: 15,
+    marginBottom: 12,
   },
+  divider: { marginTop: 10, marginBottom: 10 },
 }));
 
 const InputValidationKey = (props) => {
@@ -45,8 +46,8 @@ const InputValidationKey = (props) => {
         value={props.variable}
         helperText="In camelCase 🐫"
       />
-      <Divider style={{ margin: '0 0 8px 0' }} />
-      <Typography style={{ marginBottom: 8 }} variant="subtitle1">
+      <Divider className={classes.divider} />
+      <Typography style={{ margin: '12px 0 8px 0' }} variant="subtitle1">
         Add Keys
       </Typography>
       <TextField

@@ -14,8 +14,9 @@ import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
   formInput: {
     width: '100%',
-    marginBottom: 10,
+    marginBottom: 12,
   },
+  divider: { marginTop: 10, marginBottom: 10 },
 }));
 
 const InputValidationGeneral = (props) => {
@@ -28,11 +29,11 @@ const InputValidationGeneral = (props) => {
         size="small"
         className={classes.formInput}
         label="Collection Name"
-        helperText="e.g. users or directory"
         onChange={(e) => props.setCollectionName(e.target.value)}
         value={props.collectionName}
+        helperText="e.g. users or directory"
       />
-      <Divider style={{ margin: '8px 0' }} />
+      <Divider className={classes.divider} />
       <FormControl className={classes.formInput}>
         <FormControlLabel
           control={
@@ -56,29 +57,75 @@ const InputValidationGeneral = (props) => {
         helperText="e.g. owner or createdBy"
         disabled={!props.onlyOwnerGetAccess}
       />
-      <Divider style={{ margin: '10px 0 25px 0' }} />
-      <Grid item xs={12} style={{ paddingBottom: 20 }}>
-        <FormControl component="fieldset">
-          <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
-            Only Signed In User Is Allowed To
-          </FormLabel>
-          <FormGroup>
-            {props.actions.map((action) => (
-              <FormControlLabel
-                key={action.title}
-                label={action.title}
-                control={
-                  <Switch
-                    checked={action.checked}
-                    onChange={props.handleActionsChange}
-                    name={action.title}
-                  />
-                }
-              />
-            ))}
-          </FormGroup>
-        </FormControl>
-      </Grid>
+      <Divider className={classes.divider} />
+      <FormControl component="fieldset" style={{ margin: '12px 0 20px 0' }}>
+        <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
+          Only Signed In User Is Allowed To
+        </FormLabel>
+        <FormGroup>
+          {props.actions.map((action) => (
+            <FormControlLabel
+              key={action.title}
+              label={action.title}
+              control={
+                <Switch
+                  checked={action.checked}
+                  onChange={props.handleActionsChange}
+                  name={action.title}
+                />
+              }
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+      <Divider className={classes.divider} />
+      <FormControl>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={props.hasAllKeys}
+              onChange={(e) => props.setHasAllKeys(e.target.checked)}
+              name="hasAllKeys"
+              color="primary"
+            />
+          }
+          label="Has All Keys"
+        />
+      </FormControl>
+      <Divider className={classes.divider} />
+      <FormControl className={classes.formInput}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={props.hasRateLimit}
+              onChange={(e) => props.setHasRateLimit(e.target.checked)}
+              name="isRequired"
+              color="primary"
+            />
+          }
+          label="Is Rate Limited"
+        />
+      </FormControl>
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+        label="Rate Limit In Seconds"
+        onChange={(e) => props.setRateLimit(e.target.value)}
+        value={props.rateLimit}
+        helperText="recommended 1-5 seconds"
+        disabled={!props.hasRateLimit}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+        label="Create Date Selector"
+        onChange={(e) => props.setCreatedDateSelector(e.target.value)}
+        value={props.createdDateSelector}
+        helperText="e.g. createdAt or timestamp"
+        disabled={!props.hasRateLimit}
+      />
     </Paper01>
   );
 };
