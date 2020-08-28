@@ -78,7 +78,7 @@ const ValidationFirebase = (props) => {
   };
 
   const isRequired = (input) => {
-    return `${variable}.${input.myKey} !=''`;
+    return `${variable}.${input.myKey} != ''`;
   };
 
   const generateItems = (item) => {
