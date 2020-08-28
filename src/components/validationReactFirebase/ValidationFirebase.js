@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import Paper02 from "./../Paper02";
-import CodeBlock from "./../CodeBlock";
-import { capitalize } from "./../../functions/textTransform";
+import React, { useState, useEffect } from 'react';
+import Paper02 from './../Paper02';
+import CodeBlock from './../CodeBlock';
+import { capitalize } from './../../functions/textTransform';
 
 const ValidationFirebase = (props) => {
-  const [items, setItems] = useState("");
-  const prefixFirebase = "request.resource.data";
-  const variable = props.variable ? props.variable : "NO-VARIABLE-SELECTED";
+  const [items, setItems] = useState('');
+  const prefixFirebase = 'request.resource.data';
+  const variable = props.variable ? props.variable : 'NO-VARIABLE-SELECTED';
   const someActionChecked = props.actions.some((e) => e.checked);
   const capitalizedVariable = capitalize(variable);
-  const space = "    ";
-  const andBrk = " &&\n";
-  const brk = "\n";
+  const space = '    ';
+  const andBrk = ' &&\n';
+  const brk = '\n';
 
   const setContent = () => {
-    setItems("");
+    setItems('');
     props.items.forEach((e) => {
       setItems((prev) => prev + generateItems(e));
     });
@@ -27,12 +27,12 @@ const ValidationFirebase = (props) => {
 
   const type = (input) => {
     const inputType = () => {
-      if (input.type === "boolean") {
-        return "bool";
-      } else if (input.type === "object") {
-        return "map";
-      } else if (input.type === "array") {
-        return "list";
+      if (input.type === 'boolean') {
+        return 'bool';
+      } else if (input.type === 'object') {
+        return 'map';
+      } else if (input.type === 'array') {
+        return 'list';
       } else return input.type;
     };
 
@@ -41,26 +41,26 @@ const ValidationFirebase = (props) => {
 
   const rangeType = (input) => {
     const inputRange =
-      input.type === "string" ? `"${input.range}"` : input.range;
+      input.type === 'string' ? `"${input.range}"` : input.range;
 
     const rangeSymbol = () => {
       switch (input.rangeType) {
-        case "equal":
-          return "==";
-        case "notEqual":
-          return "!=";
-        case "lessThan":
-          return "<";
-        case "lessThanOrEqualTo":
-          return "<=";
-        case "greaterThan":
-          return ">";
-        case "greaterThanOrEqualTo":
-          return ">=";
-        case "between":
-          return ">=";
+        case 'equal':
+          return '==';
+        case 'notEqual':
+          return '!=';
+        case 'lessThan':
+          return '<';
+        case 'lessThanOrEqualTo':
+          return '<=';
+        case 'greaterThan':
+          return '>';
+        case 'greaterThanOrEqualTo':
+          return '>=';
+        case 'between':
+          return '>=';
         default:
-          return "";
+          return '';
       }
     };
 
@@ -69,7 +69,7 @@ const ValidationFirebase = (props) => {
 
   const range2 = (input) => {
     const inputRange =
-      input.type === "string" ? `"${input.range2}"` : input.range2;
+      input.type === 'string' ? `"${input.range2}"` : input.range2;
     return `${variable}.${input.myKey} <= ${inputRange}`;
   };
 
@@ -78,15 +78,15 @@ const ValidationFirebase = (props) => {
   };
 
   const generateItems = (item) => {
-    const comment = item.myKey ? `\n${space}// ${variable}.${item.myKey}` : "";
-    const curType = item.type ? brk + space + type(item) : "";
-    const curRangeType = item.rangeType ? andBrk + space + rangeType(item) : "";
-    const curRange2 = item.range2 ? andBrk + space + range2(item) : "";
+    const comment = item.myKey ? `\n${space}// ${variable}.${item.myKey}` : '';
+    const curType = item.type ? brk + space + type(item) : '';
+    const curRangeType = item.rangeType ? andBrk + space + rangeType(item) : '';
+    const curRange2 = item.range2 ? andBrk + space + range2(item) : '';
     const curRequired = item.isRequired
       ? andBrk + space + isRequired(item)
-      : "";
+      : '';
     const allContent =
-      comment + curType + curRangeType + curRange2 + curRequired + " &&";
+      comment + curType + curRangeType + curRange2 + curRequired + ' &&';
     return allContent;
   };
 
@@ -95,7 +95,7 @@ const ValidationFirebase = (props) => {
       const item = props.actions.filter((e) => e.title === name);
       if (item[0].checked) {
         return isSignedInCallContent;
-      } else return "";
+      } else return '';
     }
   };
 
@@ -111,31 +111,31 @@ const ValidationFirebase = (props) => {
   `;
   const isOwnerCallCreate = props.onlyOwnerGetAccess
     ? ` && isOwner(request.resource.data)`
-    : "";
+    : '';
   const isOwnerCallEdit = props.onlyOwnerGetAccess
     ? ` && isOwner(resource.data)`
-    : "";
+    : '';
   const isOwnerCallDelete = props.onlyOwnerGetAccess
     ? ` && isOwner(resource.data)`
-    : "";
+    : '';
 
   const allowRead = () => {
-    const content = isOwnerCallDelete + isSignedIn("read");
-    if (isOwnerCallDelete || isSignedIn("read")) {
+    const content = isOwnerCallDelete + isSignedIn('read');
+    if (isOwnerCallDelete || isSignedIn('read')) {
       return `allow read: if ${content.slice(4)};`;
-    } else return "allow read: if //add validation or remove";
+    } else return 'allow read: if //add validation or remove';
   };
   const allowCreate = `allow create: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallCreate}${isSignedIn(
-    "create"
+    'create'
   )};`;
   const allowUpdate = `allow update: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallEdit}${isSignedIn(
-    "update"
+    'update'
   )};`;
   const allowDelete = () => {
-    const content = isOwnerCallDelete + isSignedIn("delete");
-    if (isOwnerCallDelete || isSignedIn("delete")) {
+    const content = isOwnerCallDelete + isSignedIn('delete');
+    if (isOwnerCallDelete || isSignedIn('delete')) {
       return `allow delete: if ${content.slice(4)};`;
-    } else return "allow delete: if //add validation or remove";
+    } else return 'allow delete: if //add validation or remove';
   };
 
   // slice used to delete last &&
@@ -148,10 +148,10 @@ const ValidationFirebase = (props) => {
   const generateContent = () => {
     const isOwnerFunction = props.onlyOwnerGetAccess
       ? isOwnerFunctionContent + brk
-      : "";
+      : '';
     const isSignedInFunction = someActionChecked
       ? isSignedInFunctionContent + brk
-      : "";
+      : '';
 
     const allContent =
       isSignedInFunction +
@@ -159,9 +159,12 @@ const ValidationFirebase = (props) => {
       isValidFunction +
       allowRead() +
       brk +
+      brk +
       allowCreate +
       brk +
+      brk +
       allowUpdate +
+      brk +
       brk +
       allowDelete();
     return allContent;

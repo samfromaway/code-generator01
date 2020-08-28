@@ -1,19 +1,19 @@
-import React from "react";
-import Paper01 from "./../Paper01";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import Switch from "@material-ui/core/Switch";
-import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Divider from "@material-ui/core/Divider";
+import React from 'react';
+import Paper01 from './../Paper01';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import Switch from '@material-ui/core/Switch';
+import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
-    width: "100%",
+    width: '100%',
     marginBottom: 10,
   },
 }));
@@ -48,7 +48,7 @@ const InputValidationGeneral = (props) => {
           disabled={!props.onlyOwnerGetAccess}
         />
       </Grid>
-      <Divider style={{ margin: "10px 0 25px 0" }} />
+      <Divider style={{ margin: '10px 0 25px 0' }} />
       <Grid item xs={12} style={{ paddingBottom: 20 }}>
         <FormControl component="fieldset">
           <FormLabel component="legend" style={{ paddingBottom: 8 }}>
