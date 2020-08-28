@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const ReactStateHooksList = (props) => {
   return (
-    <List style={{ width: '100%' }}>
+    <List style={{ width: '100%', marginTop: 10 }}>
       {props.items.map((item) => (
         <ListItem
           key={item}

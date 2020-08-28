@@ -1,20 +1,23 @@
-import React, { useContext } from "react";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import ReactStateInput from "./../components/reactStateHooks/ReactStateHooksInput";
-import ReactStateHooksProps from "../components/reactStateHooks/ReactStateHooksProps";
-import ReactStateHooksResult from "./../components/reactStateHooks/ReactStateHooksResult";
-import Box from "@material-ui/core/Box";
-import { ContentHooks } from "../context/ContentHooksContext";
+import React, { useContext } from 'react';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import ReactStateInput from './../components/reactStateHooks/ReactStateHooksInput';
+import ReactStateHooksProps from '../components/reactStateHooks/ReactStateHooksProps';
+import ReactStateHooksResult from './../components/reactStateHooks/ReactStateHooksResult';
+import Box from '@material-ui/core/Box';
+import { ContentHooks } from '../context/ContentHooksContext';
 
 const ReactStateHooks = () => {
   const { items, setItems, input, setInput } = useContext(ContentHooks);
 
   const handleAddItems = () => {
-    if (input) {
-      setItems((prev) => [...prev, input]);
-      setInput("");
-    }
+    const isAlreadyExisting = items.some((e) => e === input);
+    if (!isAlreadyExisting) {
+      if (input) {
+        setItems((prev) => [...prev, input]);
+        setInput('');
+      }
+    } else alert('This key already exists');
   };
 
   const handleDelete = (item) => {
@@ -23,7 +26,7 @@ const ReactStateHooks = () => {
 
   const handleClear = () => {
     setItems([]);
-    setInput("");
+    setInput('');
   };
 
   return (
