@@ -45,7 +45,7 @@ const ValidationFirebase = (props) => {
 
   const rangeType = (input) => {
     const inputRange =
-      input.type === 'string' ? `"${input.range}"` : input.range;
+      input.type === 'string' ? `'${input.range}'` : input.range;
 
     const rangeSymbol = () => {
       switch (input.rangeType) {
@@ -73,12 +73,12 @@ const ValidationFirebase = (props) => {
 
   const range2 = (input) => {
     const inputRange =
-      input.type === 'string' ? `"${input.range2}"` : input.range2;
+      input.type === 'string' ? `'${input.range2}'` : input.range2;
     return `${variable}.${input.myKey} <= ${inputRange}`;
   };
 
   const isRequired = (input) => {
-    return `${variable}.${input.myKey} != ""`;
+    return `${variable}.${input.myKey} !=''`;
   };
 
   const generateItems = (item) => {

@@ -1,22 +1,22 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import { TYPES, RANGE_TYPES, REDUCED_RANGE_TYPES } from "./../../constants";
-import Paper01 from "./../Paper01";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import { TYPES, RANGE_TYPES, REDUCED_RANGE_TYPES } from './../../constants';
+import Paper01 from './../Paper01';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
-    width: "100%",
+    width: '100%',
     marginBottom: 15,
   },
 }));
@@ -26,9 +26,9 @@ const InputValidationKey = (props) => {
 
   const typesWithOptions = () => {
     if (
-      props.type === "string" ||
-      props.type === "number" ||
-      props.type === "boolean"
+      props.type === 'string' ||
+      props.type === 'number' ||
+      props.type === 'boolean'
     ) {
       return true;
     }
@@ -40,12 +40,12 @@ const InputValidationKey = (props) => {
         variant="outlined"
         size="small"
         className={classes.formInput}
-        label="Variable*"
+        label="Variable"
         onChange={(e) => props.setVariable(e.target.value)}
         value={props.variable}
         helperText="In camelCase 🐫"
       />
-      <Divider style={{ margin: "0 0 25px 0" }} />
+      <Divider style={{ margin: '0 0 25px 0' }} />
       <TextField
         variant="outlined"
         size="small"
@@ -80,14 +80,14 @@ const InputValidationKey = (props) => {
         size="small"
         className={classes.formInput}
       >
-        <Divider style={{ margin: "10px 0" }} />
+        <Divider style={{ margin: '10px 0' }} />
         <Typography variant="subtitle1">Optional</Typography>
         <FormControlLabel
           disabled={
             !props.type ||
-            props.type === "boolean" ||
-            props.type === "object" ||
-            props.type === "array"
+            props.type === 'boolean' ||
+            props.type === 'object' ||
+            props.type === 'array'
           }
           control={
             <Checkbox
@@ -115,13 +115,13 @@ const InputValidationKey = (props) => {
             disabled={!typesWithOptions()}
           >
             <MenuItem value="">No Condition</MenuItem>
-            {props.type === "number" &&
+            {props.type === 'number' &&
               RANGE_TYPES.map((e) => (
                 <MenuItem key={e.value} value={e.value}>
                   {e.label}
                 </MenuItem>
               ))}
-            {props.type !== "number" &&
+            {props.type !== 'number' &&
               REDUCED_RANGE_TYPES.map((e) => (
                 <MenuItem key={e.value} value={e.value}>
                   {e.label}
@@ -129,7 +129,7 @@ const InputValidationKey = (props) => {
               ))}
           </Select>
         </FormControl>
-        {props.type === "boolean" && (
+        {props.type === 'boolean' && (
           <FormControl
             variant="outlined"
             size="small"
@@ -148,26 +148,26 @@ const InputValidationKey = (props) => {
             </Select>
           </FormControl>
         )}
-        {props.type !== "boolean" && (
+        {props.type !== 'boolean' && (
           <>
             <TextField
               variant="outlined"
               size="small"
               className={classes.formInput}
               disabled={!props.rangeType || !typesWithOptions()}
-              label={props.rangeType === "between" ? "From" : "Input"}
+              label={props.rangeType === 'between' ? 'From' : 'Input'}
               onChange={(e) => props.setRange(e.target.value)}
               value={props.range}
             />
           </>
         )}
 
-        {props.rangeType === "between" && typesWithOptions() && (
+        {props.rangeType === 'between' && typesWithOptions() && (
           <TextField
             variant="outlined"
             size="small"
             className={classes.formInput}
-            label={props.rangeType === "between" ? "To" : "Input"}
+            label={props.rangeType === 'between' ? 'To' : 'Input'}
             onChange={(e) => props.setRange2(e.target.value)}
             value={props.range2}
           />
@@ -177,9 +177,9 @@ const InputValidationKey = (props) => {
         item
         xs={12}
         style={{
-          display: "flex",
+          display: 'flex',
           paddingBottom: 10,
-          justifyContent: "center",
+          justifyContent: 'center',
         }}
       >
         <Button

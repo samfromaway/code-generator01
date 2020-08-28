@@ -1,20 +1,20 @@
-import React from "react";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import StarIcon from "@material-ui/icons/Star";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
-import Paper01 from "./../Paper01";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import SearchIcon from "@material-ui/icons/Search";
-import YellowStarCheckbox from "./../YellowStarCheckbox";
-import Typography from "@material-ui/core/Typography";
-import OpenInNewTab from "../../images/icons/open_in_new-24px.svg";
-import CancelIcon from "@material-ui/icons/Cancel";
-import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
+import React from 'react';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import Paper01 from './../Paper01';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import SearchIcon from '@material-ui/icons/Search';
+import YellowStarCheckbox from './../YellowStarCheckbox';
+import Typography from '@material-ui/core/Typography';
+import OpenInNewTab from '../../images/icons/open_in_new-24px.svg';
+import CancelIcon from '@material-ui/icons/Cancel';
+import IconButton from '@material-ui/core/IconButton';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const ResourcesInput = ({
   items,
@@ -29,14 +29,14 @@ const ResourcesInput = ({
 }) => {
   const resourceCategories = () => {
     const allCategories = items.map((resource) => resource.category);
-    return ["All Categories", ...new Set(allCategories)];
+    return ['All Categories', ...new Set(allCategories)];
   };
 
   return (
     <Paper01 title="Design Resources">
-      <Grid item style={{ display: "flex", marginBottom: 10 }}>
+      <Grid item style={{ display: 'flex', marginBottom: 10 }}>
         <a
-          style={{ color: "white", display: "flex" }}
+          style={{ color: 'white', display: 'flex' }}
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/bradtraversy/design-resources-for-developers"
@@ -50,7 +50,7 @@ const ResourcesInput = ({
           <FormControl
             variant="outlined"
             size="small"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
           >
             <OutlinedInput
               placeholder="Search"
@@ -81,7 +81,7 @@ const ResourcesInput = ({
           <FormControl
             size="small"
             variant="outlined"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
           >
             <Select
               id="category"

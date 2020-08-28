@@ -1,21 +1,21 @@
-import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Paper01 from "./../Paper01";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Paper01 from './../Paper01';
+import Typography from '@material-ui/core/Typography';
 
 const ValidationReactFirebaseInputList = (props) => {
   const secondaryText = (item) => {
-    const typeText = item.type ? `Type: ${item.type}` : "";
-    const requiredText = item.isRequired ? " | isRequired" : "";
+    const typeText = item.type ? `Type: ${item.type}` : '';
+    const requiredText = item.isRequired ? ' | isRequired' : '';
     const rangeText = item.rangeType
       ? ` | ${item.rangeType} ${item.range}`
-      : "";
-    const range2Text = item.range2 ? ` and ${item.range2}` : "";
+      : '';
+    const range2Text = item.range2 ? ` and ${item.range2}` : '';
 
     return typeText + requiredText + rangeText + range2Text;
   };
@@ -31,10 +31,10 @@ const ValidationReactFirebaseInputList = (props) => {
             dense
             key={item.myKey}
             style={{
-              background: "#303030",
+              background: '#303030',
               borderRadius: 5,
               marginBottom: 5,
-              width: "100%",
+              width: '100%',
             }}
           >
             <ListItemText

@@ -1,9 +1,9 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import CodeBlock from "../CodeBlock";
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import CodeBlock from '../CodeBlock';
 
 const useStyles = makeStyles((theme) => ({
   subtitle: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   paragraph: {
     marginBottom: 8,
   },
-  divider: { margin: "8px 0" },
+  divider: { margin: '8px 0' },
 }));
 
 const ContextApiInstruction = () => {

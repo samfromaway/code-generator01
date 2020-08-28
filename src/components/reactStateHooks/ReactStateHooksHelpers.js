@@ -1,11 +1,11 @@
-import React from "react";
-import Paper02 from "./../Paper02";
-import CodeBlock from "./../CodeBlock";
+import React from 'react';
+import Paper02 from './../Paper02';
+import CodeBlock from './../CodeBlock';
 
 const ReactStateHooksHelpers = () => {
   return (
     <Paper02 title="Helpers">
-      <CodeBlock content={content || "No Content Yet"} />
+      <CodeBlock content={content || 'No Content Yet'} />
     </Paper02>
   );
 };

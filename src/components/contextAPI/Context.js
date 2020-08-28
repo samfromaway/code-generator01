@@ -1,5 +1,5 @@
-import React from "react";
-import CodeBlock from "./../CodeBlock";
+import React from 'react';
+import CodeBlock from './../CodeBlock';
 
 const Context = ({ namePlural }) => {
   const context = `
@@ -12,7 +12,7 @@ export default ${namePlural}Context;
 
   const contextContent = namePlural
     ? context
-    : "Fill out the required form fields to see the code.";
+    : 'Fill out the required form fields to see the code.';
 
   return <CodeBlock content={contextContent} />;
 };

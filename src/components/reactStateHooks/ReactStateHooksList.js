@@ -1,18 +1,18 @@
-import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import React from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const ReactStateHooksList = (props) => {
   return (
-    <List style={{ width: "100%" }}>
+    <List style={{ width: '100%' }}>
       {props.items.map((item) => (
         <ListItem
           key={item}
-          style={{ background: "#303030", borderRadius: 5, marginBottom: 5 }}
+          style={{ background: '#303030', borderRadius: 5, marginBottom: 5 }}
         >
           <ListItemText primary={item} />
           <ListItemSecondaryAction>

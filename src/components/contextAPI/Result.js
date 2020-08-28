@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
-import Grid from "@material-ui/core/Grid";
-import State from "./State";
-import Reducer from "./Reducer";
-import Context from "./Context";
-import { capitalize, makeConstantText } from "./../../functions/textTransform";
-import Paper02Copy from "./../Paper02Copy";
+import React, { Fragment } from 'react';
+import Grid from '@material-ui/core/Grid';
+import State from './State';
+import Reducer from './Reducer';
+import Context from './Context';
+import { capitalize, makeConstantText } from './../../functions/textTransform';
+import Paper02Copy from './../Paper02Copy';
 
 const Result = ({ namePlural, nameSingular, uniqueSelector, actions }) => {
   const actionNameSingular = makeConstantText(nameSingular);

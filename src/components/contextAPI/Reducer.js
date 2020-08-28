@@ -1,5 +1,5 @@
-import React from "react";
-import CodeBlock from "./../CodeBlock";
+import React from 'react';
+import CodeBlock from './../CodeBlock';
 
 const Reducer = ({
   actionNameSingular,
@@ -19,7 +19,7 @@ const Reducer = ({
       return {
         ...state,
         ${namePlural}: action.payload,
-        ${actions.loading.checked ? "loading: false," : ""} 
+        ${actions.loading.checked ? 'loading: false,' : ''} 
       };`;
 
   //add
@@ -28,7 +28,7 @@ const Reducer = ({
       return {
         ...state,
         ${namePlural}: [action.payload, ...state.${namePlural}],
-        ${actions.loading.checked ? "loading: false," : ""} 
+        ${actions.loading.checked ? 'loading: false,' : ''} 
       }; `;
 
   // delete
@@ -39,7 +39,7 @@ const Reducer = ({
         ${namePlural}: state.${namePlural}.filter(
           (element) => element.${uniqueSelector} !== action.payload
         ),
-        ${actions.loading.checked ? "loading: false," : ""} 
+        ${actions.loading.checked ? 'loading: false,' : ''} 
       };`;
 
   //edit
@@ -55,7 +55,7 @@ const Reducer = ({
             ...action.payload.'YOUR_API_RESPONSE_UPDATED ITEM,',
           };
         }),
-        ${actions.loading.checked ? "loading: false," : ""} 
+        ${actions.loading.checked ? 'loading: false,' : ''} 
       };`;
 
   // error
@@ -64,7 +64,7 @@ const Reducer = ({
       return {
         ...state,
         error: action.payload,
-        ${actions.loading.checked ? "loading: false," : ""} 
+        ${actions.loading.checked ? 'loading: false,' : ''} 
       };`;
 
   // set-loading
@@ -83,11 +83,11 @@ const Reducer = ({
 };
     `;
 
-  const getContent = actions.get.checked ? reducerGet : "";
-  const addContent = actions.add.checked ? reducerAdd : "";
-  const deleteContent = actions.delete.checked ? reducerDel : "";
-  const editContent = actions.edit.checked ? reducerEdit : "";
-  const setLoadingContent = actions.loading.checked ? reducerSetLoading : "";
+  const getContent = actions.get.checked ? reducerGet : '';
+  const addContent = actions.add.checked ? reducerAdd : '';
+  const deleteContent = actions.delete.checked ? reducerDel : '';
+  const editContent = actions.edit.checked ? reducerEdit : '';
+  const setLoadingContent = actions.loading.checked ? reducerSetLoading : '';
 
   const reducer =
     intro +
@@ -102,7 +102,7 @@ const Reducer = ({
   const reducerContent =
     actionNameSingular && actionNamePlural && uniqueSelector
       ? reducer
-      : "Fill out the required form fields to see the code.";
+      : 'Fill out the required form fields to see the code.';
 
   return <CodeBlock content={reducerContent} />;
 };

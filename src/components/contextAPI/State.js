@@ -1,5 +1,5 @@
-import React from "react";
-import CodeBlock from "./../CodeBlock";
+import React from 'react';
+import CodeBlock from './../CodeBlock';
 
 const State = ({
   namePlural,
@@ -14,16 +14,16 @@ const State = ({
 }) => {
   const getProviderValue = actions.get.checked
     ? `get${capitalizedNamePlural},`
-    : "";
+    : '';
   const addProviderValue = actions.add.checked
     ? `add${capitalizedNameSingular},`
-    : "";
+    : '';
   const deleteProviderValue = actions.delete.checked
     ? `delete${capitalizedNameSingular},`
-    : "";
+    : '';
   const editProviderValue = actions.edit.checked
     ? `edit${capitalizedNameSingular},`
-    : "";
+    : '';
 
   const intro = `
 import React, { useReducer } from 'react';
@@ -34,7 +34,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   const initialState = {
     ${namePlural}: [],
     error: null,
-    ${actions.loading.checked ? "loading: false," : ""} 
+    ${actions.loading.checked ? 'loading: false,' : ''} 
   };
 
   const [state, dispatch] = useReducer(${capitalizedNamePlural}Reducer, initialState);
@@ -47,7 +47,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //get
   const get = `
   async function get${capitalizedNamePlural} () {
-    ${actions.loading.checked ? "setLoading();" : ""} 
+    ${actions.loading.checked ? 'setLoading();' : ''} 
     try {
     const res = await fetch('YOUR_API')
     const data = await res.json();
@@ -68,7 +68,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //add
   const add = `
   async function add${capitalizedNameSingular} (${newItem}) {
-    ${actions.loading.checked ? "setLoading();" : ""} 
+    ${actions.loading.checked ? 'setLoading();' : ''} 
     try {
     const res = await fetch('YOUR_API')
 
@@ -88,7 +88,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //delete
   const del = `
   async function delete${capitalizedNameSingular} (${uniqueSelector}) {
-    ${actions.loading.checked ? "setLoading();" : ""} 
+    ${actions.loading.checked ? 'setLoading();' : ''} 
     try {
       fetch('YOUR_API')
 
@@ -108,7 +108,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
   //edit
   const edit = `
   async function edit${capitalizedNameSingular} (${uniqueSelector}, ${updatedItem}) {
-    ${actions.loading.checked ? "setLoading();" : ""} 
+    ${actions.loading.checked ? 'setLoading();' : ''} 
     try {
     const res = await fetch('YOUR_API')
     
@@ -136,7 +136,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
       ${addProviderValue}
       ${deleteProviderValue}
       ${editProviderValue}      
-      ${actions.loading.checked ? namePlural + "Loading: state.loading," : ""} 
+      ${actions.loading.checked ? namePlural + 'Loading: state.loading,' : ''} 
     }}>
       {children}
     </${capitalizedNamePlural}Context.Provider>
@@ -145,11 +145,11 @@ const ${capitalizedNamePlural}State = ({children}) => {
 
 export default ${capitalizedNamePlural}State;`;
 
-  const getContent = actions.get.checked ? get : "";
-  const addContent = actions.add.checked ? add : "";
-  const deleteContent = actions.delete.checked ? del : "";
-  const editContent = actions.edit.checked ? edit : "";
-  const setLoadingContent = actions.loading.checked ? setLoading : "";
+  const getContent = actions.get.checked ? get : '';
+  const addContent = actions.add.checked ? add : '';
+  const deleteContent = actions.delete.checked ? del : '';
+  const editContent = actions.edit.checked ? edit : '';
+  const setLoadingContent = actions.loading.checked ? setLoading : '';
 
   const state =
     intro +
@@ -163,7 +163,7 @@ export default ${capitalizedNamePlural}State;`;
   const stateContent =
     namePlural && capitalizedNameSingular && uniqueSelector
       ? state
-      : "Fill out the required form fields to see the code.";
+      : 'Fill out the required form fields to see the code.';
 
   return <CodeBlock content={stateContent} />;
 };

@@ -1,16 +1,16 @@
-import React from "react";
-import CodeBlock from "./../CodeBlock";
-import Paper02 from "../Paper02";
-import { capitalize } from "../../functions/textTransform";
-import Box from "@material-ui/core/Box";
+import React from 'react';
+import CodeBlock from './../CodeBlock';
+import Paper02 from '../Paper02';
+import { capitalize } from '../../functions/textTransform';
+import Box from '@material-ui/core/Box';
 
 const Imports = (props) => {
   const capitalizedNamePlural = capitalize(props.namePlural);
-  const check = "Fill out the required form fields to see the code.";
+  const check = 'Fill out the required form fields to see the code.';
 
-  const appImport = `import ${capitalizedNamePlural}State from "./context/${props.namePlural}/${capitalizedNamePlural}State"`;
+  const appImport = `import ${capitalizedNamePlural}State from './context/${props.namePlural}/${capitalizedNamePlural}State'`;
   const appImportJSX = `<${capitalizedNamePlural}State></${capitalizedNamePlural}State>`;
-  const hocImport = `import ${capitalizedNamePlural}Context from "./../../context/${props.namePlural}/${props.namePlural}Context"`;
+  const hocImport = `import ${capitalizedNamePlural}Context from './../../context/${props.namePlural}/${props.namePlural}Context'`;
   const hocImportApp = `const {get${capitalizedNamePlural}} = useContext(${capitalizedNamePlural}Context)`;
 
   const appImportContent = props.namePlural ? appImport : check;
