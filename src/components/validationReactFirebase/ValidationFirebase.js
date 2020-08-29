@@ -144,11 +144,11 @@ ${space2}}
 `;
 
   //HAS ALL KEYS   // to finish
-  const hasAllKeysContent = `${space2}function ${variable}hasAllRequiredFields() {
-  ${space2}let requiredFields = []
-  ${space2}return ${prefixFirebase}.keys().hasAll(requiredFields)
-${space2}}
-`;
+  //   const hasAllKeysContent = `${space2}function ${variable}hasAllRequiredFields() {
+  //   ${space2}let requiredFields = []
+  //   ${space2}return ${prefixFirebase}.keys().hasAll(requiredFields)
+  // ${space2}}
+  // `;
 
   // RATE LIMIT
   const rateLimitFunctionContent = `${space2}function isCalm() {
