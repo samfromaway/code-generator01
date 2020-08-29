@@ -9,13 +9,22 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Divider from '@material-ui/core/Divider';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Accordion01 from '../Accordion01';
+import InputValidationRateLimit from './InputValidationRateLimit';
+import InputValidationSignedIn from './InputValidationSignedIn';
+import InputValidationHasKeys from './InputValidationHasKeys';
+import InputValidationOwnerAccess from './InputValidationOwnerAccess';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
     width: '100%',
     marginBottom: 12,
   },
-  divider: { marginTop: 10, marginBottom: 10 },
 }));
 
 const InputValidationGeneral = (props) => {
@@ -27,103 +36,36 @@ const InputValidationGeneral = (props) => {
         variant="outlined"
         size="small"
         className={classes.formInput}
-        label="Collection Name"
+        label="Collection Name*"
         onChange={(e) => props.setCollectionName(e.target.value)}
         value={props.collectionName}
         helperText="e.g. users or directory"
       />
       <Divider className={classes.divider} />
-      <FormControl className={classes.formInput}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={props.onlyOwnerGetAccess}
-              onChange={(e) => props.setOnlyOwnerGetAccess(e.target.checked)}
-              name="isRequired"
-              color="primary"
-            />
-          }
-          label="Only Data Owner Has Access"
-        />
-      </FormControl>
-      <TextField
-        variant="outlined"
-        size="small"
-        className={classes.formInput}
-        label="Owner Selector"
-        onChange={(e) => props.setOwnerSelector(e.target.value)}
-        value={props.ownerSelector}
-        helperText="e.g. owner or createdBy"
-        disabled={!props.onlyOwnerGetAccess}
+      <InputValidationOwnerAccess
+        onlyOwnerGetAccess={props.onlyOwnerGetAccess}
+        setOnlyOwnerGetAccess={props.setOnlyOwnerGetAccess}
+        setOwnerSelector={props.setOwnerSelector}
+        onlyOwnerGetAccess={props.onlyOwnerGetAccess}
       />
       <Divider className={classes.divider} />
-      <FormControl component="fieldset" style={{ margin: '12px 0 20px 0' }}>
-        <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
-          Only Signed In User Is Allowed To
-        </FormLabel>
-        <FormGroup>
-          {props.actions.map((action) => (
-            <FormControlLabel
-              key={action.title}
-              label={action.title}
-              control={
-                <Switch
-                  checked={action.checked}
-                  onChange={props.handleActionsChange}
-                  name={action.title}
-                />
-              }
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-      <Divider className={classes.divider} />
-      <FormControl>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={props.hasAllKeys}
-              onChange={(e) => props.setHasAllKeys(e.target.checked)}
-              name="hasAllKeys"
-              color="primary"
-            />
-          }
-          label="Has All Keys"
-        />
-      </FormControl>
-      <Divider className={classes.divider} />
-      <FormControl className={classes.formInput}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={props.hasRateLimit}
-              onChange={(e) => props.setHasRateLimit(e.target.checked)}
-              name="isRequired"
-              color="primary"
-            />
-          }
-          label="Is Rate Limited"
-        />
-      </FormControl>
-      <TextField
-        variant="outlined"
-        size="small"
-        className={classes.formInput}
-        label="Rate Limit In Seconds"
-        onChange={(e) => props.setRateLimit(e.target.value)}
-        value={props.rateLimit}
-        helperText="recommended 1-5 seconds"
-        disabled={!props.hasRateLimit}
+      <InputValidationSignedIn
+        actions={props.actions}
+        handleActionsChange={props.handleActionsChange}
       />
-      <TextField
-        variant="outlined"
-        size="small"
-        className={classes.formInput}
-        label="Create Date Selector"
-        onChange={(e) => props.setCreatedDateSelector(e.target.value)}
-        value={props.createdDateSelector}
-        helperText="e.g. createdAt or timestamp"
-        disabled={!props.hasRateLimit}
+      <Divider className={classes.divider} />
+      <InputValidationHasKeys
+        hasAllKeys={props.hasAllKeys}
+        setHasAllKeys={props.setHasAllKeys}
+      />
+      <Divider className={classes.divider} />
+      <InputValidationRateLimit
+        hasRateLimit={props.hasRateLimit}
+        setHasRateLimit={props.setHasRateLimit}
+        rateLimit={props.rateLimit}
+        setRateLimit={props.setRateLimit}
+        setCreatedDateSelector={props.setCreatedDateSelector}
+        createdDateSelector={props.createdDateSelector}
       />
     </Paper01>
   );

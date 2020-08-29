@@ -37,3 +37,13 @@ pre {
   margin-top: 12px !important;
   margin-bottom: 12px !important;
 }
+
+/*Prevents jumping of the accordion when opening*/
+.MuiAccordion-root.Mui-expanded {
+  margin: 0 !important;
+}
+
+/*Remove Top Border */
+.MuiAccordion-root:before {
+  display: none;
+}
