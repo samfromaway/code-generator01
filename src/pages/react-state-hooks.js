@@ -6,6 +6,7 @@ import ReactStateHooksProps from '../components/reactStateHooks/ReactStateHooksP
 import ReactStateHooksResult from './../components/reactStateHooks/ReactStateHooksResult';
 import Box from '@material-ui/core/Box';
 import { ContentHooks } from '../context/ContentHooksContext';
+import ReactStateHooksExports from './../components/reactStateHooks/ReactStateHooksExports';
 
 const ReactStateHooks = () => {
   const { items, setItems, input, setInput } = useContext(ContentHooks);
@@ -43,9 +44,11 @@ const ReactStateHooks = () => {
           />
         </Grid>
         <Grid item xs={12} lg={7}>
-          <ReactStateHooksProps items={items} />
-          <Box m={4} />
           <ReactStateHooksResult items={items} />
+          <Box m={4} />
+          <ReactStateHooksExports items={items} />
+          <Box m={4} />
+          <ReactStateHooksProps items={items} />
         </Grid>
         <Grid item xs={12}></Grid>
       </Grid>
