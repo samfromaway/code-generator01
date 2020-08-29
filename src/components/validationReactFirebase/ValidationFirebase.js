@@ -14,9 +14,11 @@ const ValidationFirebase = (props) => {
   const capitalizedVariable = capitalize(variable);
   const space = '    ';
   const space2 = '      ';
+  const space3 = '        ';
   const space4 = '          ';
   const andBrk = ' &&\n';
   const brk = '\n';
+  const brkSpace = brk + brk + space2;
 
   const setContent = () => {
     setItems('');
@@ -98,7 +100,7 @@ const ValidationFirebase = (props) => {
     return allContent;
   };
 
-  //FUNCTIIONS//
+  // IS SIGNED IN
   const isSignedIn = (name) => {
     if (name) {
       const item = props.actions.filter((e) => e.title === name);
@@ -114,6 +116,7 @@ const ValidationFirebase = (props) => {
   `;
   const isSignedInCallContent = ` &&\n${space2}isSignedIn()`;
 
+  // ONLY OWNER ACCESS
   const isOwnerFunctionContent = `${space2}function isOwner(${variable}) {
   ${space2}return request.auth.uid == ${variable}.${props.ownerSelector};
 ${space2}}
@@ -132,25 +135,6 @@ ${space2}}
     ? ` &&\n${space2}isOwner(resource.data)`
     : '';
 
-  const allowRead = () => {
-    const content = isOwnerCallRead + isSignedIn('read');
-    if (isOwnerCallRead || isSignedIn('read')) {
-      return `allow read: if ${content.slice(10)};`;
-    } else return 'allow read: if //add validation or remove';
-  };
-  const allowCreate = `allow create: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallCreate}${isSignedIn(
-    'create'
-  )};`;
-  const allowUpdate = `allow update: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallEdit}${isSignedIn(
-    'update'
-  )};`;
-  const allowDelete = () => {
-    const content = isOwnerCallDelete + isSignedIn('delete');
-    if (isOwnerCallDelete || isSignedIn('delete')) {
-      return `allow delete: if ${content.slice(10)};`;
-    } else return 'allow delete: if //add validation or remove';
-  };
-
   // slice used to delete last &&
   const isValidFunction = `${space2}function isValid${capitalizedVariable}(${variable}) {
   ${space2}return (${items.slice(0, -2)}
@@ -168,10 +152,49 @@ ${space2}}
 
   // RATE LIMIT
   const rateLimitFunctionContent = `${space2}function isCalm() {
-  ${space2}return request.time > resource.data.${createdDateSelector} + duration.value(${rateLimitTime}, 's'); 
+  ${space2}return ( 
+  ${space3}request.time > resource.data.${createdDateSelector} +
+  ${space3}duration.value(${rateLimitTime}, 's')
+  ${space2}); 
 ${space2}}
 `;
 
+  const rateLimitCallContent = ` &&\n${space2}isCalm()`;
+  const rateLimitCall = (name) => {
+    if (name) {
+      const item = props.rateLimitActions.filter((e) => e.title === name);
+      if (item[0].checked) {
+        return rateLimitCallContent;
+      } else return '';
+    }
+  };
+
+  // ALLOW CALLS FOR FIREBASE
+  const allowRead = () => {
+    const content =
+      isOwnerCallRead + isSignedIn('read') + rateLimitCall('read');
+    if (isOwnerCallRead || isSignedIn('read') || rateLimitCall('delete')) {
+      return `allow read: if ${content.slice(10)};`;
+    } else return 'allow read: if //add validation or remove';
+  };
+
+  const allowCreate = `allow create: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallCreate}${isSignedIn(
+    'create'
+  )}${rateLimitCall('create')};`;
+
+  const allowUpdate = `allow update: if isValid${capitalizedVariable}(${prefixFirebase})${isOwnerCallEdit}${isSignedIn(
+    'update'
+  )}${rateLimitCall('update')};`;
+
+  const allowDelete = () => {
+    const content =
+      isOwnerCallDelete + isSignedIn('delete') + rateLimitCall('delete');
+    if (isOwnerCallDelete || isSignedIn('delete') || rateLimitCall('delete')) {
+      return `allow delete: if ${content.slice(10)};`;
+    } else return 'allow delete: if //add validation or remove';
+  };
+
+  // GENERATE CONTENT
   const generateContent = () => {
     const isOwnerFunction = props.onlyOwnerGetAccess
       ? isOwnerFunctionContent + brk
@@ -186,25 +209,15 @@ ${space2}}
 
     const allContent =
       `    match /${collectionName}/{itemId}{` +
-      brk +
-      brk +
-      space2 +
+      brkSpace +
       allowRead() +
-      brk +
-      brk +
-      space2 +
+      brkSpace +
       allowCreate +
-      brk +
-      brk +
-      space2 +
+      brkSpace +
       allowUpdate +
-      brk +
-      brk +
-      space2 +
+      brkSpace +
       allowDelete() +
-      brk +
-      brk +
-      space2 +
+      brkSpace +
       '// FUNCTIONS' +
       brk +
       isSignedInFunction +

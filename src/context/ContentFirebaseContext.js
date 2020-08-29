@@ -24,7 +24,12 @@ export const ContentFirebaseContext = ({ children }) => {
   const [rateLimit, setRateLimit] = useState('');
   const [hasAllKeys, setHasAllKeys] = useState(false);
   const [createdDateSelector, setCreatedDateSelector] = useState('');
-
+  const [rateLimitActions, setRateLimitActions] = useState([
+    { title: 'read', checked: false },
+    { title: 'create', checked: false },
+    { title: 'update', checked: false },
+    { title: 'delete', checked: false },
+  ]);
   return (
     <ContentFirebase.Provider
       value={{
@@ -60,6 +65,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setHasAllKeys,
         createdDateSelector,
         setCreatedDateSelector,
+        rateLimitActions,
+        setRateLimitActions,
       }}
     >
       {children}

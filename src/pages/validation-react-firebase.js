@@ -43,6 +43,8 @@ const ValidationReactFirebase = () => {
     setHasAllKeys,
     createdDateSelector,
     setCreatedDateSelector,
+    rateLimitActions,
+    setRateLimitActions,
   } = useContext(ContentFirebase);
 
   const handleAddItems = () => {
@@ -95,6 +97,20 @@ const ValidationReactFirebase = () => {
     });
   };
 
+  const handleRateLimitActionsChange = (e) => {
+    const name = e.target.name;
+    const checked = e.target.checked;
+
+    setRateLimitActions((prev) => {
+      return prev.map((action) => {
+        if (action.title !== name) {
+          return action;
+        }
+        return { title: name, checked };
+      });
+    });
+  };
+
   return (
     <Container>
       <Grid container spacing={4}>
@@ -116,6 +132,8 @@ const ValidationReactFirebase = () => {
             setHasAllKeys={setHasAllKeys}
             createdDateSelector={createdDateSelector}
             setCreatedDateSelector={setCreatedDateSelector}
+            rateLimitActions={rateLimitActions}
+            handleRateLimitActionsChange={handleRateLimitActionsChange}
           />
         </Grid>
         <Grid item xs={12} lg={4}>
@@ -155,6 +173,7 @@ const ValidationReactFirebase = () => {
             collectionName={collectionName}
             hasRateLimit={hasRateLimit}
             rateLimit={rateLimit}
+            rateLimitActions={rateLimitActions}
             hasAllKeys={hasAllKeys}
             createdDateSelector={createdDateSelector}
           />

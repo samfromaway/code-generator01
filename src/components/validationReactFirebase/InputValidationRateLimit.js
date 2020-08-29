@@ -5,6 +5,9 @@ import Accordion01 from '../Accordion01';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
@@ -12,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 12,
   },
   divider: { marginTop: 10, marginBottom: 10 },
+  specialFocusedClass: { color: 'inherit !important' },
 }));
 
 const InputValidationRateLimit = (props) => {
@@ -39,7 +43,7 @@ const InputValidationRateLimit = (props) => {
         label="Rate Limit In Seconds"
         onChange={(e) => props.setRateLimit(e.target.value)}
         value={props.rateLimit}
-        helperText="recommended 1-5 seconds"
+        helperText="Firestore limits writes to 1/s by default"
         disabled={!props.hasRateLimit}
       />
       <TextField
@@ -52,6 +56,30 @@ const InputValidationRateLimit = (props) => {
         helperText="e.g. createdAt or timestamp"
         disabled={!props.hasRateLimit}
       />
+      <FormControl disabled={!props.hasRateLimit}>
+        <FormLabel
+          focused
+          style={{ paddingBottom: 8 }}
+          className={props.hasRateLimit ? classes.specialFocusedClass : null}
+        >
+          Limit The Rate On
+        </FormLabel>
+        <FormGroup>
+          {props.rateLimitActions.map((action) => (
+            <FormControlLabel
+              key={action.title}
+              label={action.title}
+              control={
+                <Switch
+                  checked={action.checked}
+                  onChange={props.handleRateLimitActionsChange}
+                  name={action.title}
+                />
+              }
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
     </Accordion01>
   );
 };
