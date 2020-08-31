@@ -143,7 +143,7 @@ ${space2}}
 
 `;
 
-  //HAS ALL KEYS   // to finish
+  //   //HAS ALL KEYS   // to finish
   //   const hasAllKeysContent = `${space2}function ${variable}hasAllRequiredFields() {
   //   ${space2}let requiredFields = []
   //   ${space2}return ${prefixFirebase}.keys().hasAll(requiredFields)

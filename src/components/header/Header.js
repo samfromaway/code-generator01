@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   listItem: {
-    paddingLeft: '18px',
+    paddingLeft: 16,
   },
 }));
 
