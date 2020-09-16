@@ -59,7 +59,7 @@ const InputValidationRateLimit = (props) => {
         label="Create Date Selector"
         onChange={(e) => props.setCreatedDateSelector(e.target.value)}
         value={props.createdDateSelector}
-        helperText="e.g. createdAt or timestamp"
+        helperText="e.g. lastUpdate or timestamp"
         disabled={!someActionChecked}
       />
     </Accordion01>

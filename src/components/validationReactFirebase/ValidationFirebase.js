@@ -120,7 +120,6 @@ const ValidationFirebase = (props) => {
   ${space2}return (${items.slice(0, -2)}
   ${space2});
 ${space2}}
-
 `;
 
   // IS SIGNED IN
@@ -173,7 +172,7 @@ ${space2}}
 `;
   const rateLimitCallContent = ` &&\n${space3}isCalm()`;
   const rateLimitCall = (name) => {
-    if (name === 'create' || name === 'update') {
+    if (name === 'update') {
       const item = props.rateLimitActions.filter((e) => e.title === name);
       if (item[0].checked) {
         return rateLimitCallContent;
