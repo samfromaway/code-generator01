@@ -109,6 +109,13 @@ const ValidationFirebase = (props) => {
     } else return '';
   };
   const isValidCallContent = ` &&\n${space3}isValid${capitalizedVariable}(${prefixFirebase})`;
+  // slice used to delete last &&
+  const isValidFunctionContent = `${space2}function isValid${capitalizedVariable}(${variable}) {
+  ${space2}return (${items.slice(0, -2)}
+  ${space2});
+${space2}}
+
+`;
 
   // IS SIGNED IN
   const isSignedInCall = (name) => {
@@ -119,7 +126,6 @@ const ValidationFirebase = (props) => {
       } else return '';
     }
   };
-
   const isSignedInFunctionContent = `${space2}function isSignedIn() {
   ${space2}return request.auth != null;
   ${space}}
@@ -144,14 +150,6 @@ const ValidationFirebase = (props) => {
 ${space2}}
   `;
 
-  // slice used to delete last &&
-  const isValidFunctionContent = `${space2}function isValid${capitalizedVariable}(${variable}) {
-  ${space2}return (${items.slice(0, -2)}
-  ${space2});
-${space2}}
-
-`;
-
   //   //HAS ALL KEYS   // to finish
   //   const hasAllKeysContent = `${space2}function ${variable}hasAllRequiredFields() {
   //   ${space2}let requiredFields = []
@@ -167,7 +165,6 @@ ${space2}}
   ${space2}); 
 ${space2}}
 `;
-
   const rateLimitCallContent = ` &&\n${space3}isCalm()`;
   const rateLimitCall = (name) => {
     if (name) {
