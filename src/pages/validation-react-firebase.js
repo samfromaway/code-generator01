@@ -31,6 +31,8 @@ const ValidationReactFirebase = () => {
     setOwnerSelector,
     onlyOwnerGetAccess,
     setOnlyOwnerGetAccess,
+    onlyOwnerGetAccessActions,
+    setOnlyOwnerGetAccessActions,
     actions,
     setActions,
     collectionName,
@@ -111,6 +113,20 @@ const ValidationReactFirebase = () => {
     });
   };
 
+  const handleOnlyOwnerGetAccessActionsChange = (e) => {
+    const name = e.target.name;
+    const checked = e.target.checked;
+
+    setOnlyOwnerGetAccessActions((prev) => {
+      return prev.map((action) => {
+        if (action.title !== name) {
+          return action;
+        }
+        return { title: name, checked };
+      });
+    });
+  };
+
   return (
     <Container>
       <Grid container spacing={4}>
@@ -120,6 +136,10 @@ const ValidationReactFirebase = () => {
             setOwnerSelector={setOwnerSelector}
             onlyOwnerGetAccess={onlyOwnerGetAccess}
             setOnlyOwnerGetAccess={setOnlyOwnerGetAccess}
+            onlyOwnerGetAccessActions={onlyOwnerGetAccessActions}
+            handleOnlyOwnerGetAccessActionsChange={
+              handleOnlyOwnerGetAccessActionsChange
+            }
             handleActionsChange={handleActionsChange}
             actions={actions}
             collectionName={collectionName}
@@ -169,6 +189,7 @@ const ValidationReactFirebase = () => {
             variable={variable}
             ownerSelector={ownerSelector}
             onlyOwnerGetAccess={onlyOwnerGetAccess}
+            onlyOwnerGetAccessActions={onlyOwnerGetAccessActions}
             actions={actions}
             collectionName={collectionName}
             hasRateLimit={hasRateLimit}

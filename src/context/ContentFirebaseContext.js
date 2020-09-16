@@ -13,6 +13,12 @@ export const ContentFirebaseContext = ({ children }) => {
   const [isRequired, setIsRequired] = useState(false);
   const [ownerSelector, setOwnerSelector] = useState('');
   const [onlyOwnerGetAccess, setOnlyOwnerGetAccess] = useState(false);
+  const [onlyOwnerGetAccessActions, setOnlyOwnerGetAccessActions] = useState([
+    { title: 'read', checked: false },
+    { title: 'create', checked: false },
+    { title: 'update', checked: false },
+    { title: 'delete', checked: false },
+  ]);
   const [collectionName, setCollectionName] = useState('');
   const [actions, setActions] = useState([
     { title: 'read', checked: false },
@@ -20,6 +26,7 @@ export const ContentFirebaseContext = ({ children }) => {
     { title: 'update', checked: false },
     { title: 'delete', checked: false },
   ]);
+
   const [hasRateLimit, setHasRateLimit] = useState(false);
   const [rateLimit, setRateLimit] = useState('');
   const [hasAllKeys, setHasAllKeys] = useState(false);
@@ -53,6 +60,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setOwnerSelector,
         onlyOwnerGetAccess,
         setOnlyOwnerGetAccess,
+        onlyOwnerGetAccessActions,
+        setOnlyOwnerGetAccessActions,
         actions,
         setActions,
         collectionName,

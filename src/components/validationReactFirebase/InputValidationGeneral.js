@@ -34,6 +34,10 @@ const InputValidationGeneral = (props) => {
         onlyOwnerGetAccess={props.onlyOwnerGetAccess}
         setOnlyOwnerGetAccess={props.setOnlyOwnerGetAccess}
         setOwnerSelector={props.setOwnerSelector}
+        onlyOwnerGetAccessActions={props.onlyOwnerGetAccessActions}
+        handleOnlyOwnerGetAccessActionsChange={
+          props.handleOnlyOwnerGetAccessActionsChange
+        }
       />
       <Divider className={classes.divider} />
       <InputValidationSignedIn

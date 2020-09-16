@@ -5,6 +5,9 @@ import Accordion01 from '../Accordion01';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
@@ -45,6 +48,26 @@ const InputValidationOwnerAccess = (props) => {
         helperText="e.g. owner or createdBy"
         disabled={!props.onlyOwnerGetAccess}
       />
+      <FormControl disabled={!props.onlyOwnerGetAccess}>
+        <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
+          Only Signed In User Is Allowed To
+        </FormLabel>
+        <FormGroup>
+          {props.onlyOwnerGetAccessActions.map((action) => (
+            <FormControlLabel
+              key={action.title}
+              label={action.title}
+              control={
+                <Switch
+                  checked={action.checked}
+                  onChange={props.handleOnlyOwnerGetAccessActionsChange}
+                  name={action.title}
+                />
+              }
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
     </Accordion01>
   );
 };
