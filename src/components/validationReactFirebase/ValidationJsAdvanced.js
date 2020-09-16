@@ -26,7 +26,7 @@ const ValidationJsAdvanced = (props) => {
       } else return input.type;
     };
 
-    return `typeof ${variable}.${input.myKey} === '${inputType()}'`;
+    return `typeof ${variable}.${input.myKey} !== '${inputType()}'`;
   };
 
   const rangeType = (input) => {
@@ -77,8 +77,8 @@ const ValidationJsAdvanced = (props) => {
     const curRange2 = item.range2 ? brk + space + range2(item) : '';
     const curRequired = item.isRequired ? brk + space + isRequired(item) : '';
     const allContent =
-      elseIf +
       comment +
+      elseIf +
       curType +
       curRangeType +
       curRange2 +
