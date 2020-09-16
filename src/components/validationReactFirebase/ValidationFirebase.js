@@ -10,7 +10,13 @@ const ValidationFirebase = (props) => {
   const variable = props.variable || 'ADD-VARIABLE';
   const rateLimitTime = props.rateLimit || 'ADD-RATE-LIMIT';
   const createdDateSelector = props.createdDateSelector || 'ADD-DATE-SELECTOR';
-  const someActionChecked = props.actions.some((e) => e.checked);
+  const someSignedInActionChecked = props.signedInActions.some(
+    (e) => e.checked
+  );
+  const someOnlyOwnerGetAccessActionChecked = props.onlyOwnerGetAccessActions.some(
+    (e) => e.checked
+  );
+  const someRateLimitChecked = props.rateLimitActions.some((e) => e.checked);
   const capitalizedVariable = capitalize(variable);
   const space = '    ';
   const space2 = '      ';
@@ -120,7 +126,7 @@ ${space2}}
   // IS SIGNED IN
   const isSignedInCall = (name) => {
     if (name) {
-      const item = props.actions.filter((e) => e.title === name);
+      const item = props.signedInActions.filter((e) => e.title === name);
       if (item[0].checked) {
         return isSignedInCallContent;
       } else return '';
@@ -172,7 +178,7 @@ ${space2}}
       if (item[0].checked) {
         return rateLimitCallContent;
       } else return '';
-    }
+    } else return '';
   };
 
   // CALLS FOR FIREBASE
@@ -196,14 +202,14 @@ ${space2}}
   const generateContent = () => {
     const isValidFunction =
       props.items.length > 0 ? isValidFunctionContent + brk : '';
-    const isOwnerFunction = props.onlyOwnerGetAccess
+    const isOwnerFunction = someOnlyOwnerGetAccessActionChecked
       ? isOwnerFunctionContent + brk
       : '';
-    const isSignedInFunction = someActionChecked
+    const isSignedInFunction = someSignedInActionChecked
       ? isSignedInFunctionContent + brk
       : '';
 
-    const rateLimitFunction = props.hasRateLimit
+    const rateLimitFunction = someRateLimitChecked
       ? rateLimitFunctionContent + brk
       : '';
 

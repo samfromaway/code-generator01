@@ -39,7 +39,7 @@ const InputValidationGeneral = (props) => {
       />
       <Divider className={classes.divider} />
       <InputValidationSignedIn
-        actions={props.actions}
+        signedInActions={props.signedInActions}
         handleActionsChange={props.handleActionsChange}
       />
       <Divider className={classes.divider} />

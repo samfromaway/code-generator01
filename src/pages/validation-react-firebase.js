@@ -31,8 +31,8 @@ const ValidationReactFirebase = () => {
     setOwnerSelector,
     onlyOwnerGetAccessActions,
     setOnlyOwnerGetAccessActions,
-    actions,
-    setActions,
+    signedInActions,
+    setSignedInActions,
     collectionName,
     setCollectionName,
     rateLimit,
@@ -85,7 +85,7 @@ const ValidationReactFirebase = () => {
     const name = e.target.name;
     const checked = e.target.checked;
 
-    setActions((prev) => {
+    setSignedInActions((prev) => {
       return prev.map((action) => {
         if (action.title !== name) {
           return action;
@@ -135,7 +135,7 @@ const ValidationReactFirebase = () => {
               handleOnlyOwnerGetAccessActionsChange
             }
             handleActionsChange={handleActionsChange}
-            actions={actions}
+            signedInActions={signedInActions}
             collectionName={collectionName}
             setCollectionName={setCollectionName}
             rateLimit={rateLimit}
@@ -181,7 +181,7 @@ const ValidationReactFirebase = () => {
             variable={variable}
             ownerSelector={ownerSelector}
             onlyOwnerGetAccessActions={onlyOwnerGetAccessActions}
-            actions={actions}
+            signedInActions={signedInActions}
             collectionName={collectionName}
             rateLimit={rateLimit}
             rateLimitActions={rateLimitActions}

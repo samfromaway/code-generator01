@@ -19,7 +19,7 @@ export const ContentFirebaseContext = ({ children }) => {
     { title: 'delete', checked: false },
   ]);
   const [collectionName, setCollectionName] = useState('');
-  const [actions, setActions] = useState([
+  const [signedInActions, setSignedInActions] = useState([
     { title: 'read', checked: false },
     { title: 'create', checked: false },
     { title: 'update', checked: false },
@@ -56,8 +56,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setOwnerSelector,
         onlyOwnerGetAccessActions,
         setOnlyOwnerGetAccessActions,
-        actions,
-        setActions,
+        signedInActions,
+        setSignedInActions,
         collectionName,
         setCollectionName,
         rateLimit,

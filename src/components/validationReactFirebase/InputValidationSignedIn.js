@@ -7,7 +7,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const InputValidationSignedIn = (props) => {
-  const someActionChecked = props.actions.some((e) => e.checked);
+  const someActionChecked = props.signedInActions.some((e) => e.checked);
 
   return (
     <Accordion01 title="Signed In User" active={someActionChecked}>
@@ -16,7 +16,7 @@ const InputValidationSignedIn = (props) => {
           Only Signed In User Is Allowed To
         </FormLabel>
         <FormGroup>
-          {props.actions.map((action) => (
+          {props.signedInActions.map((action) => (
             <FormControlLabel
               key={action.title}
               label={action.title}
