@@ -167,7 +167,7 @@ ${space2}}
 `;
   const rateLimitCallContent = ` &&\n${space3}isCalm()`;
   const rateLimitCall = (name) => {
-    if (name) {
+    if (name === 'create' || name === 'update') {
       const item = props.rateLimitActions.filter((e) => e.title === name);
       if (item[0].checked) {
         return rateLimitCallContent;
