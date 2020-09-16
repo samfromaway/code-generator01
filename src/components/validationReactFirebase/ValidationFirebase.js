@@ -162,18 +162,27 @@ ${space2}}
   `;
 
   //HAS KEYS
+  const addQuotesToArrayElement = (array) => {
+    const arrayWithQuotes = [];
+    array.forEach((e) => {
+      arrayWithQuotes.push(`'${e}'`);
+    });
+    return arrayWithQuotes;
+  };
   const hasAllContent = ` &&\n${space3}request.resource.data.keys().hasAll(requiredFields)`;
   const hasOnlyContent = ` &&\n${space3}request.resource.data.keys().hasOnly(allFields)`;
   const hasAll = props.hasAllKeys ? hasAllContent : '';
   const hasOnly = props.onlyCurrentKeys ? hasOnlyContent : '';
   const hasKeysContent = hasAll + hasOnly;
   const hasKeysCallContent = ` &&\n${space3}checkKeys()`;
-  const optionalFieldsContent = `\n${space3}let optionalFields = [${optionalKeys}];`;
+  const optionalFieldsContent = `\n${space3}let optionalFields = [${addQuotesToArrayElement(
+    optionalKeys
+  )}];`;
   const allFieldsContent = `\n${space3}let allFields = requiredFields.concat(optionalFields);`;
   const optionalFields = props.onlyCurrentKeys ? optionalFieldsContent : '';
   const allFields = props.onlyCurrentKeys ? allFieldsContent : '';
   const hasKeysFunctionStart = `${space2}function checkKeys() {
-        let requiredFields = [${requiredKeys}];`;
+        let requiredFields = [${addQuotesToArrayElement(requiredKeys)}];`;
   const hasKeyFunctionsEnd = `\n${space3}return ${hasKeysContent.slice(12)}
       }`;
   const hasKeysFunctionContent =
