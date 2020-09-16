@@ -108,7 +108,7 @@ const ValidationFirebase = (props) => {
       } else return '';
     } else return '';
   };
-  const isValidCallContent = ` &&\n${space2}isValid${capitalizedVariable}(${prefixFirebase})`;
+  const isValidCallContent = ` &&\n${space3}isValid${capitalizedVariable}(${prefixFirebase})`;
 
   // IS SIGNED IN
   const isSignedInCall = (name) => {
@@ -124,7 +124,7 @@ const ValidationFirebase = (props) => {
   ${space2}return request.auth != null;
   ${space}}
   `;
-  const isSignedInCallContent = ` &&\n${space2}isSignedIn()`;
+  const isSignedInCallContent = ` &&\n${space3}isSignedIn()`;
 
   // ONLY OWNER ACCESS
   const isOwnerCall = (name) => {
@@ -134,8 +134,8 @@ const ValidationFirebase = (props) => {
       );
       if (item[0].checked) {
         if (name === 'create') {
-          return ` &&\n${space2}isOwner(request.resource.data)`;
-        } else return ` &&\n${space2}isOwner(resource.data)`;
+          return ` &&\n${space3}isOwner(request.resource.data)`;
+        } else return ` &&\n${space3}isOwner(resource.data)`;
       } else return '';
     }
   };
@@ -168,7 +168,7 @@ ${space2}}
 ${space2}}
 `;
 
-  const rateLimitCallContent = ` &&\n${space2}isCalm()`;
+  const rateLimitCallContent = ` &&\n${space3}isCalm()`;
   const rateLimitCall = (name) => {
     if (name) {
       const item = props.rateLimitActions.filter((e) => e.title === name);
@@ -191,7 +191,7 @@ ${space2}}
       isSignedInCall(name) ||
       rateLimitCall(name)
     ) {
-      return `allow ${name}: if ${content.slice(10)};`;
+      return `allow ${name}: if ${content.slice(12)};`;
     } else return `allow ${name}: if //add validation or remove`;
   };
 
