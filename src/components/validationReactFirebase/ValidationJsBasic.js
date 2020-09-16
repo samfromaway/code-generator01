@@ -21,7 +21,13 @@ const ValidationJsBasic = (props) => {
   }, [props.items, props.variable]);
 
   const type = (input) => {
-    return `typeof ${variable}.${input.myKey} === '${input.type}'`;
+    const inputType = () => {
+      if (input.type === 'timestamp') {
+        return 'object';
+      } else return input.type;
+    };
+
+    return `typeof ${variable}.${input.myKey} === '${inputType()}'`;
   };
 
   const rangeType = (input) => {
