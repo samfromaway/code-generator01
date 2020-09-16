@@ -29,8 +29,6 @@ const ValidationReactFirebase = () => {
     setIsRequired,
     ownerSelector,
     setOwnerSelector,
-    onlyOwnerGetAccess,
-    setOnlyOwnerGetAccess,
     onlyOwnerGetAccessActions,
     setOnlyOwnerGetAccessActions,
     actions,
@@ -134,8 +132,6 @@ const ValidationReactFirebase = () => {
           <InputValidationGeneral
             ownerSelector={ownerSelector}
             setOwnerSelector={setOwnerSelector}
-            onlyOwnerGetAccess={onlyOwnerGetAccess}
-            setOnlyOwnerGetAccess={setOnlyOwnerGetAccess}
             onlyOwnerGetAccessActions={onlyOwnerGetAccessActions}
             handleOnlyOwnerGetAccessActionsChange={
               handleOnlyOwnerGetAccessActionsChange
@@ -188,7 +184,6 @@ const ValidationReactFirebase = () => {
             items={items}
             variable={variable}
             ownerSelector={ownerSelector}
-            onlyOwnerGetAccess={onlyOwnerGetAccess}
             onlyOwnerGetAccessActions={onlyOwnerGetAccessActions}
             actions={actions}
             collectionName={collectionName}

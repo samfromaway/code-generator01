@@ -12,7 +12,6 @@ export const ContentFirebaseContext = ({ children }) => {
   const [range2, setRange2] = useState('');
   const [isRequired, setIsRequired] = useState(false);
   const [ownerSelector, setOwnerSelector] = useState('');
-  const [onlyOwnerGetAccess, setOnlyOwnerGetAccess] = useState(false);
   const [onlyOwnerGetAccessActions, setOnlyOwnerGetAccessActions] = useState([
     { title: 'read', checked: false },
     { title: 'create', checked: false },
@@ -58,8 +57,6 @@ export const ContentFirebaseContext = ({ children }) => {
         setIsRequired,
         ownerSelector,
         setOwnerSelector,
-        onlyOwnerGetAccess,
-        setOnlyOwnerGetAccess,
         onlyOwnerGetAccessActions,
         setOnlyOwnerGetAccessActions,
         actions,
