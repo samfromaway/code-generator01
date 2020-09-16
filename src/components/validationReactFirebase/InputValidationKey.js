@@ -93,13 +93,30 @@ const InputValidationKey = (props) => {
           }
           control={
             <Checkbox
+              checked={props.notEmpty}
+              onChange={(e) => props.setNotEmpty(e.target.checked)}
+              name="isRequired"
+              color="primary"
+            />
+          }
+          label="Not Empty"
+        />
+      </FormControl>
+      <FormControl
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+      >
+        <FormControlLabel
+          control={
+            <Checkbox
               checked={props.isRequired}
               onChange={(e) => props.setIsRequired(e.target.checked)}
               name="isRequired"
               color="primary"
             />
           }
-          label="Is Required"
+          label="Required Key"
         />
       </FormControl>
       <>

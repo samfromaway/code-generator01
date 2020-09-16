@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import InputValidationRateLimit from './InputValidationRateLimit';
 import InputValidationSignedIn from './InputValidationSignedIn';
-//import InputValidationHasKeys from './InputValidationHasKeys';
+import InputValidationHasKeys from './InputValidationHasKeys';
 import InputValidationOwnerAccess from './InputValidationOwnerAccess';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,10 +43,12 @@ const InputValidationGeneral = (props) => {
         handleActionsChange={props.handleActionsChange}
       />
       <Divider className={classes.divider} />
-      {/* <InputValidationHasKeys
+      <InputValidationHasKeys
         hasAllKeys={props.hasAllKeys}
         setHasAllKeys={props.setHasAllKeys}
-      /> */}
+        onlyCurrentKeys={props.onlyCurrentKeys}
+        setOnlyCurrentKeys={props.setOnlyCurrentKeys}
+      />
       <Divider className={classes.divider} />
       <InputValidationRateLimit
         hasRateLimit={props.hasRateLimit}

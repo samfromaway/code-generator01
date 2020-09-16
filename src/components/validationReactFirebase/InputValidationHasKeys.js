@@ -6,7 +6,10 @@ import FormControl from '@material-ui/core/FormControl';
 
 const InputValidationHasKeys = (props) => {
   return (
-    <Accordion01 title="Has Keys" active={props.hasAllKeys}>
+    <Accordion01
+      title="Has Keys"
+      active={props.hasAllKeys || props.onlyCurrentKeys}
+    >
       <FormControl>
         <FormControlLabel
           control={
@@ -17,7 +20,20 @@ const InputValidationHasKeys = (props) => {
               color="primary"
             />
           }
-          label="Has All Keys"
+          label="Must Have Required Keys"
+        />
+      </FormControl>
+      <FormControl>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={props.onlyCurrentKeys}
+              onChange={(e) => props.setOnlyCurrentKeys(e.target.checked)}
+              name="hasAllKeys"
+              color="primary"
+            />
+          }
+          label="Only Current Keys Allowed"
         />
       </FormControl>
     </Accordion01>

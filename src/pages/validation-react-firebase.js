@@ -27,6 +27,8 @@ const ValidationReactFirebase = () => {
     setRange2,
     isRequired,
     setIsRequired,
+    notEmpty,
+    setNotEmpty,
     ownerSelector,
     setOwnerSelector,
     onlyOwnerGetAccessActions,
@@ -39,6 +41,8 @@ const ValidationReactFirebase = () => {
     setRateLimit,
     hasAllKeys,
     setHasAllKeys,
+    onlyCurrentKeys,
+    setOnlyCurrentKeys,
     createdDateSelector,
     setCreatedDateSelector,
     rateLimitActions,
@@ -60,6 +64,7 @@ const ValidationReactFirebase = () => {
               range,
               range2,
               isRequired,
+              notEmpty,
             },
           ]);
           clearInput();
@@ -79,6 +84,7 @@ const ValidationReactFirebase = () => {
     setRange('');
     setRange2('');
     setIsRequired(false);
+    setNotEmpty(false);
   };
 
   const handleActionsChange = (e) => {
@@ -142,6 +148,8 @@ const ValidationReactFirebase = () => {
             setRateLimit={setRateLimit}
             hasAllKeys={hasAllKeys}
             setHasAllKeys={setHasAllKeys}
+            onlyCurrentKeys={onlyCurrentKeys}
+            setOnlyCurrentKeys={setOnlyCurrentKeys}
             createdDateSelector={createdDateSelector}
             setCreatedDateSelector={setCreatedDateSelector}
             rateLimitActions={rateLimitActions}
@@ -164,6 +172,8 @@ const ValidationReactFirebase = () => {
             setRange2={setRange2}
             isRequired={isRequired}
             setIsRequired={setIsRequired}
+            notEmpty={notEmpty}
+            setNotEmpty={setNotEmpty}
             handleAddItems={handleAddItems}
             clearInput={clearInput}
           />
@@ -186,6 +196,7 @@ const ValidationReactFirebase = () => {
             rateLimit={rateLimit}
             rateLimitActions={rateLimitActions}
             hasAllKeys={hasAllKeys}
+            onlyCurrentKeys={onlyCurrentKeys}
             createdDateSelector={createdDateSelector}
           />
         </Grid>

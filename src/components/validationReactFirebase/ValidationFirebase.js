@@ -5,6 +5,12 @@ import { capitalize } from './../../functions/textTransform';
 
 const ValidationFirebase = (props) => {
   const [items, setItems] = useState('');
+  const requiredKeys = props.items
+    .filter((e) => e.isRequired)
+    .map((e) => e.myKey);
+  const optionalKeys = props.items
+    .filter((e) => e.isRequired === false)
+    .map((e) => e.myKey);
   const prefixFirebase = 'request.resource.data';
   const collectionName = props.collectionName || 'ADD-COLLECTION-NAME';
   const variable = props.variable || 'ADD-VARIABLE';
@@ -155,12 +161,30 @@ ${space2}}
 ${space2}}
   `;
 
-  //   //HAS ALL KEYS   // to finish
-  //   const hasAllKeysContent = `${space2}function ${variable}hasAllRequiredFields() {
-  //   ${space2}let requiredFields = []
-  //   ${space2}return ${prefixFirebase}.keys().hasAll(requiredFields)
-  // ${space2}}
-  // `;
+  //HAS KEYS
+  const hasAllContent = ` &&\n${space3}request.resource.data.keys().hasAll(requiredFields)`;
+  const hasOnlyContent = ` &&\n${space3}request.resource.data.keys().hasOnly(allFields)`;
+  const hasAll = props.hasAllKeys ? hasAllContent : '';
+  const hasOnly = props.onlyCurrentKeys ? hasOnlyContent : '';
+  const hasKeysContent = hasAll + hasOnly;
+  const hasKeysCallContent = ` &&\n${space3}checkKeys()`;
+  const optionalFieldsContent = `\n${space3}let optionalFields = [${optionalKeys}];`;
+  const allFieldsContent = `\n${space3}let allFields = requiredFields.concat(optionalFields);`;
+  const optionalFields = props.onlyCurrentKeys ? optionalFieldsContent : '';
+  const allFields = props.onlyCurrentKeys ? allFieldsContent : '';
+  const hasKeysFunctionStart = `${space2}function checkKeys() {
+        let requiredFields = [${requiredKeys}];`;
+  const hasKeyFunctionsEnd = `\n${space3}return ${hasKeysContent.slice(12)}`;
+  const hasKeysFunctionContent =
+    hasKeysFunctionStart + optionalFields + allFields + hasKeyFunctionsEnd;
+
+  const hasKeysCall = (name) => {
+    if (name === 'create' || name === 'update') {
+      if (props.onlyCurrentKeys || props.hasAllKeys) {
+        return hasKeysCallContent;
+      } else return '';
+    } else return '';
+  };
 
   // RATE LIMIT
   const rateLimitFunctionContent = `${space2}function isCalm() {
@@ -186,12 +210,14 @@ ${space2}}
       isValidCall(name) +
       isOwnerCall(name) +
       isSignedInCall(name) +
-      rateLimitCall(name);
+      rateLimitCall(name) +
+      hasKeysCall(name);
     if (
       isValidCall(name) ||
       isOwnerCall(name) ||
       isSignedInCall(name) ||
-      rateLimitCall(name)
+      rateLimitCall(name) ||
+      hasKeysCall(name)
     ) {
       return `allow ${name}: if ${content.slice(12)};`;
     } else return `allow ${name}: if //add validation or remove`;
@@ -212,6 +238,11 @@ ${space2}}
       ? rateLimitFunctionContent + brk
       : '';
 
+    const hasKeysFunction =
+      props.hasAllKeys || props.onlyCurrentKeys
+        ? hasKeysFunctionContent + brk
+        : '';
+
     const allContent =
       `    match /${collectionName}/{itemId}{` +
       brkSpace +
@@ -229,6 +260,7 @@ ${space2}}
       isOwnerFunction +
       isValidFunction +
       rateLimitFunction +
+      hasKeysFunction +
       '    }' +
       brk +
       brk;

@@ -10,6 +10,7 @@ export const ContentFirebaseContext = ({ children }) => {
   const [rangeType, setRangeType] = useState('');
   const [range, setRange] = useState('');
   const [range2, setRange2] = useState('');
+  const [notEmpty, setNotEmpty] = useState(false);
   const [isRequired, setIsRequired] = useState(false);
   const [ownerSelector, setOwnerSelector] = useState('');
   const [onlyOwnerGetAccessActions, setOnlyOwnerGetAccessActions] = useState([
@@ -28,6 +29,7 @@ export const ContentFirebaseContext = ({ children }) => {
 
   const [rateLimit, setRateLimit] = useState('');
   const [hasAllKeys, setHasAllKeys] = useState(false);
+  const [onlyCurrentKeys, setOnlyCurrentKeys] = useState(false);
   const [createdDateSelector, setCreatedDateSelector] = useState('');
   const [rateLimitActions, setRateLimitActions] = useState([
     { title: 'update', checked: false },
@@ -51,6 +53,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setRange2,
         isRequired,
         setIsRequired,
+        notEmpty,
+        setNotEmpty,
         ownerSelector,
         setOwnerSelector,
         onlyOwnerGetAccessActions,
@@ -63,6 +67,8 @@ export const ContentFirebaseContext = ({ children }) => {
         setRateLimit,
         hasAllKeys,
         setHasAllKeys,
+        onlyCurrentKeys,
+        setOnlyCurrentKeys,
         createdDateSelector,
         setCreatedDateSelector,
         rateLimitActions,

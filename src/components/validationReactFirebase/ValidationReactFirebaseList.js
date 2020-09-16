@@ -12,19 +12,20 @@ const ValidationReactFirebaseInputList = (props) => {
   const secondaryText = (item) => {
     const typeText = item.type ? `Type: ${item.type}` : '';
     const requiredText = item.isRequired ? ' | isRequired' : '';
+    const notEmptyText = item.notEmpty ? ' | notEmpty' : '';
     const rangeText = item.rangeType
       ? ` | ${item.rangeType} ${item.range}`
       : '';
     const range2Text = item.range2 ? ` and ${item.range2}` : '';
 
-    return typeText + requiredText + rangeText + range2Text;
+    return typeText + notEmptyText + requiredText + rangeText + range2Text;
   };
 
   return (
     <Paper01 title="Items">
       <List>
         {props.items.length === 0 && (
-          <Typography gutterBottom>Add Keys...</Typography>
+          <Typography gutterBottom>Add Keys</Typography>
         )}
         {props.items.map((item) => (
           <ListItem
