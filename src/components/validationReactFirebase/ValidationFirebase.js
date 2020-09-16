@@ -174,7 +174,8 @@ ${space2}}
   const allFields = props.onlyCurrentKeys ? allFieldsContent : '';
   const hasKeysFunctionStart = `${space2}function checkKeys() {
         let requiredFields = [${requiredKeys}];`;
-  const hasKeyFunctionsEnd = `\n${space3}return ${hasKeysContent.slice(12)}`;
+  const hasKeyFunctionsEnd = `\n${space3}return ${hasKeysContent.slice(12)}
+      }`;
   const hasKeysFunctionContent =
     hasKeysFunctionStart + optionalFields + allFields + hasKeyFunctionsEnd;
 
