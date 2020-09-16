@@ -35,8 +35,6 @@ const ValidationReactFirebase = () => {
     setActions,
     collectionName,
     setCollectionName,
-    hasRateLimit,
-    setHasRateLimit,
     rateLimit,
     setRateLimit,
     hasAllKeys,
@@ -140,8 +138,6 @@ const ValidationReactFirebase = () => {
             actions={actions}
             collectionName={collectionName}
             setCollectionName={setCollectionName}
-            hasRateLimit={hasRateLimit}
-            setHasRateLimit={setHasRateLimit}
             rateLimit={rateLimit}
             setRateLimit={setRateLimit}
             hasAllKeys={hasAllKeys}
@@ -187,7 +183,6 @@ const ValidationReactFirebase = () => {
             onlyOwnerGetAccessActions={onlyOwnerGetAccessActions}
             actions={actions}
             collectionName={collectionName}
-            hasRateLimit={hasRateLimit}
             rateLimit={rateLimit}
             rateLimitActions={rateLimitActions}
             hasAllKeys={hasAllKeys}

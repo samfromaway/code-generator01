@@ -2,7 +2,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion01 from '../Accordion01';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Switch from '@material-ui/core/Switch';
@@ -20,48 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 const InputValidationRateLimit = (props) => {
   const classes = useStyles();
-
+  const someActionChecked = props.rateLimitActions.some((e) => e.checked);
   return (
-    <Accordion01 title="Rate Limit" active={props.hasRateLimit}>
+    <Accordion01 title="Rate Limit" active={someActionChecked}>
       <FormControl className={classes.formInput}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={props.hasRateLimit}
-              onChange={(e) => props.setHasRateLimit(e.target.checked)}
-              name="isRequired"
-              color="primary"
-            />
-          }
-          label="Is Rate Limited"
-        />
-      </FormControl>
-      <TextField
-        variant="outlined"
-        size="small"
-        className={classes.formInput}
-        label="Rate Limit In Seconds"
-        onChange={(e) => props.setRateLimit(e.target.value)}
-        value={props.rateLimit}
-        helperText="Firestore limits writes to 1/s by default"
-        disabled={!props.hasRateLimit}
-      />
-      <TextField
-        variant="outlined"
-        size="small"
-        className={classes.formInput}
-        label="Create Date Selector"
-        onChange={(e) => props.setCreatedDateSelector(e.target.value)}
-        value={props.createdDateSelector}
-        helperText="e.g. createdAt or timestamp"
-        disabled={!props.hasRateLimit}
-      />
-      <FormControl disabled={!props.hasRateLimit}>
-        <FormLabel
-          focused
-          style={{ paddingBottom: 8 }}
-          className={props.hasRateLimit ? classes.specialFocusedClass : null}
-        >
+        <FormLabel focused style={{ paddingBottom: 8, color: 'inherit' }}>
           Limit The Rate On
         </FormLabel>
         <FormGroup>
@@ -80,6 +42,26 @@ const InputValidationRateLimit = (props) => {
           ))}
         </FormGroup>
       </FormControl>
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+        label="Rate Limit In Seconds"
+        onChange={(e) => props.setRateLimit(e.target.value)}
+        value={props.rateLimit}
+        helperText="Firestore limits writes to 1/s by default"
+        disabled={!someActionChecked}
+      />
+      <TextField
+        variant="outlined"
+        size="small"
+        className={classes.formInput}
+        label="Create Date Selector"
+        onChange={(e) => props.setCreatedDateSelector(e.target.value)}
+        value={props.createdDateSelector}
+        helperText="e.g. createdAt or timestamp"
+        disabled={!someActionChecked}
+      />
     </Accordion01>
   );
 };

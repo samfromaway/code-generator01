@@ -26,7 +26,6 @@ export const ContentFirebaseContext = ({ children }) => {
     { title: 'delete', checked: false },
   ]);
 
-  const [hasRateLimit, setHasRateLimit] = useState(false);
   const [rateLimit, setRateLimit] = useState('');
   const [hasAllKeys, setHasAllKeys] = useState(false);
   const [createdDateSelector, setCreatedDateSelector] = useState('');
@@ -61,8 +60,6 @@ export const ContentFirebaseContext = ({ children }) => {
         setActions,
         collectionName,
         setCollectionName,
-        hasRateLimit,
-        setHasRateLimit,
         rateLimit,
         setRateLimit,
         hasAllKeys,
