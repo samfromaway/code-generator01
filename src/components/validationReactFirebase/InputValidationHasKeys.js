@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 const InputValidationHasKeys = (props) => {
   return (
     <Accordion01
-      title="Has Keys"
+      title="Keys Checking"
       active={props.hasAllKeys || props.onlyCurrentKeys}
     >
       <FormControl>
@@ -29,7 +29,7 @@ const InputValidationHasKeys = (props) => {
             <Checkbox
               checked={props.onlyCurrentKeys}
               onChange={(e) => props.setOnlyCurrentKeys(e.target.checked)}
-              name="hasAllKeys"
+              name="onlyCurrentKeys"
               color="primary"
             />
           }
