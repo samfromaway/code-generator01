@@ -77,8 +77,8 @@ const ValidationJsAdvanced = (props) => {
     const curRange2 = item.range2 ? brk + space + range2(item) : '';
     const curRequired = item.isRequired ? brk + space + isRequired(item) : '';
     const allContent =
-      comment +
       elseIf +
+      comment +
       curType +
       curRangeType +
       curRange2 +
@@ -91,7 +91,7 @@ const ValidationJsAdvanced = (props) => {
 
   // slice is to eliminate the first else... from content
   const content = `function isNotValid${capitalizedVariable}(${variable}) {
-    ${items.slice(10)}
+  ${items.slice(10)}
   } else return false;
 }`;
 
