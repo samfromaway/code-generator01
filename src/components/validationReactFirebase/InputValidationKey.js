@@ -41,7 +41,7 @@ const InputValidationKey = (props) => {
         variant="outlined"
         size="small"
         className={classes.formInput}
-        label="Variable"
+        label="Variable*"
         onChange={(e) => props.setVariable(e.target.value)}
         value={props.variable}
         helperText="In camelCase 🐫"
