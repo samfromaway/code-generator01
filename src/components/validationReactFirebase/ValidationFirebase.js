@@ -152,6 +152,8 @@ ${space2}}
       if (item[0].checked) {
         if (name === 'create') {
           return ` &&\n${space3}isOwner(request.resource.data)`;
+        } else if (name === 'update') {
+          return ` &&\n${space3}isOwner(request.resource.data) &&\n${space3}isOwner(resource.data)`;
         } else return ` &&\n${space3}isOwner(resource.data)`;
       } else return '';
     }
