@@ -83,12 +83,7 @@ const InputValidationKey = (props) => {
         className={classes.formInput}
       >
         <FormControlLabel
-          disabled={
-            !props.type ||
-            props.type === 'boolean' ||
-            props.type === 'object' ||
-            props.type === 'array'
-          }
+          disabled={props.type !== 'string'}
           control={
             <Checkbox
               checked={props.notEmpty}
