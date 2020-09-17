@@ -26,13 +26,11 @@ const InputValidationKey = (props) => {
   const classes = useStyles();
 
   const typesWithOptions = () => {
-    if (
+    return (
       props.type === 'string' ||
       props.type === 'number' ||
       props.type === 'boolean'
-    ) {
-      return true;
-    }
+    );
   };
 
   return (
@@ -134,13 +132,19 @@ const InputValidationKey = (props) => {
             disabled={!typesWithOptions()}
           >
             <MenuItem value="">No Condition</MenuItem>
+            {props.type === 'string' &&
+              RANGE_TYPES.map((e) => (
+                <MenuItem key={e.value} value={e.value}>
+                  {e.label}
+                </MenuItem>
+              ))}
             {props.type === 'number' &&
               RANGE_TYPES.map((e) => (
                 <MenuItem key={e.value} value={e.value}>
                   {e.label}
                 </MenuItem>
               ))}
-            {props.type !== 'number' &&
+            {props.type === 'boolean' &&
               REDUCED_RANGE_TYPES.map((e) => (
                 <MenuItem key={e.value} value={e.value}>
                   {e.label}
@@ -168,17 +172,15 @@ const InputValidationKey = (props) => {
           </FormControl>
         )}
         {props.type !== 'boolean' && (
-          <>
-            <TextField
-              variant="outlined"
-              size="small"
-              className={classes.formInput}
-              disabled={!props.rangeType || !typesWithOptions()}
-              label={props.rangeType === 'between' ? 'From' : 'Input'}
-              onChange={(e) => props.setRange(e.target.value)}
-              value={props.range}
-            />
-          </>
+          <TextField
+            variant="outlined"
+            size="small"
+            className={classes.formInput}
+            disabled={!typesWithOptions()}
+            label={props.rangeType === 'between' ? 'From' : 'Input'}
+            onChange={(e) => props.setRange(e.target.value)}
+            value={props.range}
+          />
         )}
 
         {props.rangeType === 'between' && typesWithOptions() && (
