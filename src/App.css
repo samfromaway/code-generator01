@@ -27,3 +27,18 @@ body {
     animation: octocat-wave 560ms ease-in-out;
   }
 }
+
+/*Keep Aspect Ratio*/
+.instructionVideo__wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 57%;
+}
+.instructionVideo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}

@@ -8,6 +8,8 @@ import InputValidationGeneral from '../components/validationReactFirebase/InputV
 import ValidationReactFirebaseInputList from './../components/validationReactFirebase/ValidationReactFirebaseList';
 import InputValidationKey from './../components/validationReactFirebase/InputValidationKey';
 import { ContentFirebase } from '../context/ContentFirebaseContext';
+import Instruction from './../components/Instruction';
+import FirebaseValidationInstruction from './../components/validationReactFirebase/FirebaseValidationInstruction';
 
 const ValidationReactFirebase = () => {
   const {
@@ -132,6 +134,11 @@ const ValidationReactFirebase = () => {
   return (
     <Container>
       <Grid container spacing={4}>
+        <Grid container item>
+          <Instruction>
+            <FirebaseValidationInstruction />
+          </Instruction>
+        </Grid>
         <Grid item xs={12} lg={4}>
           <InputValidationGeneral
             ownerSelector={ownerSelector}
@@ -184,7 +191,6 @@ const ValidationReactFirebase = () => {
             handleDelete={handleDelete}
           />
         </Grid>
-
         <Grid item xs={12}>
           <ValidationFirebase
             items={items}
