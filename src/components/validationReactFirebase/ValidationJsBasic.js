@@ -10,8 +10,9 @@ const ValidationJsBasic = (props) => {
   const variable = props.variable || '<ADD-VARIABLE>';
 
   const setContent = () => {
+    setItems('');
     props.items.forEach((e) => {
-      setItems(generateContent(e));
+      setItems((prev) => prev + generateContent(e));
     });
   };
 

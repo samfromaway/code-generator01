@@ -29,8 +29,9 @@ const ValidationFirebase = (props) => {
   const capitalizedVariable = capitalize(variable);
 
   const setContent = () => {
+    setItems('');
     props.items.forEach((e) => {
-      setItems(generateItems(e));
+      setItems((prev) => prev + generateItems(e));
     });
   };
 

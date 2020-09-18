@@ -91,7 +91,6 @@ const CondFormControl = (props) => {
 
 const ConditionalValidationKeyInput = (props) => {
   const classes = useStyles();
-  console.log(props.rangeType);
   const typesWithOptions = () => {
     return (
       props.type === 'string' ||
