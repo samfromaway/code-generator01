@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from '../../util/router';
 import { resources, info } from './../../data/pages';
+import GithubCorner from './../GithubCorner';
 
 const drawerWidth = 220;
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +99,7 @@ export default function MiniDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <GithubCorner />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
