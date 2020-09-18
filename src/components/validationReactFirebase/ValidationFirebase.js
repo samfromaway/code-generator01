@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Paper02 from './../Paper02';
 import CodeBlock from './../CodeBlock';
 import { capitalize } from './../../functions/textTransform';
+import { isValidElements } from './validationFirebaseContent/isValidElements';
+import {
+  space4,
+  andBrk,
+  brk,
+  brkSpace,
+} from './validationFirebaseContent/sharedContent';
+import { signedInUser } from './validationFirebaseContent/signedInUser';
+import { ownerAccess } from './validationFirebaseContent/ownerAccess';
+import { rateLimit } from './validationFirebaseContent/rateLimit';
+import { keysChecking } from './validationFirebaseContent/keysChecking';
 
 const ValidationFirebase = (props) => {
   const [items, setItems] = useState('');
-  const requiredKeys = props.items
-    .filter((e) => e.isRequired)
-    .map((e) => e.myKey);
-  const optionalKeys = props.items
-    .filter((e) => e.isRequired === false)
-    .map((e) => e.myKey);
   const prefixFirebase = 'request.resource.data';
-  const collectionName = props.collectionName || 'ADD-COLLECTION-NAME';
-  const variable = props.variable || 'ADD-VARIABLE';
-  const rateLimitTime = props.rateLimit || 'ADD-RATE-LIMIT';
-  const createdDateSelector = props.createdDateSelector || 'ADD-DATE-SELECTOR';
+  const collectionName = props.collectionName || '<ADD-COLLECTION-NAME>';
+  const variable = props.variable || '<ADD-VARIABLE>';
   const someSignedInActionChecked = props.signedInActions.some(
     (e) => e.checked
   );
@@ -24,13 +27,6 @@ const ValidationFirebase = (props) => {
   );
   const someRateLimitChecked = props.rateLimitActions.some((e) => e.checked);
   const capitalizedVariable = capitalize(variable);
-  const space = '    ';
-  const space2 = '      ';
-  const space3 = '        ';
-  const space4 = '          ';
-  const andBrk = ' &&\n';
-  const brk = '\n';
-  const brkSpace = brk + brk + space2;
 
   const setContent = () => {
     setItems('');
@@ -113,108 +109,35 @@ const ValidationFirebase = (props) => {
   };
 
   // IS VALID FUNCTION
-  const isValidCall = (name) => {
-    if (name === 'create' || name === 'update') {
-      if (props.items.length > 0) {
-        return isValidCallContent;
-      } else return '';
-    } else return '';
-  };
-  const isValidCallContent = ` &&\n${space3}isValid${capitalizedVariable}(${prefixFirebase})`;
-  // slice used to delete last &&
-  const isValidFunctionContent = `${space2}function isValid${capitalizedVariable}(${variable}) {
-  ${space2}return (${items.slice(0, -2)}
-  ${space2});
-${space2}}
-`;
+  const { isValidCall, isValidFunctionContent } = isValidElements(
+    capitalizedVariable,
+    prefixFirebase,
+    items,
+    props.items,
+    variable
+  );
 
   // IS SIGNED IN
-  const isSignedInCall = (name) => {
-    if (name) {
-      const item = props.signedInActions.filter((e) => e.title === name);
-      if (item[0].checked) {
-        return isSignedInCallContent;
-      } else return '';
-    }
-  };
-  const isSignedInFunctionContent = `${space2}function isSignedIn() {
-  ${space2}return request.auth != null;
-  ${space}}
-  `;
-  const isSignedInCallContent = ` &&\n${space3}isSignedIn()`;
+  const { isSignedInCall, isSignedInFunctionContent } = signedInUser(
+    props.signedInActions
+  );
 
   // ONLY OWNER ACCESS
-  const isOwnerCall = (name) => {
-    if (name) {
-      const item = props.onlyOwnerGetAccessActions.filter(
-        (e) => e.title === name
-      );
-      if (item[0].checked) {
-        if (name === 'create') {
-          return ` &&\n${space3}isOwner(request.resource.data)`;
-        } else if (name === 'update') {
-          return ` &&\n${space3}isOwner(request.resource.data) &&\n${space3}isOwner(resource.data)`;
-        } else return ` &&\n${space3}isOwner(resource.data)`;
-      } else return '';
-    }
-  };
-  const isOwnerFunctionContent = `${space2}function isOwner(${variable}) {
-  ${space2}return request.auth.uid == ${variable}.${props.ownerSelector};
-${space2}}
-  `;
+  const { isOwnerCall, isOwnerFunctionContent } = ownerAccess(
+    props.onlyOwnerGetAccessActions,
+    variable,
+    props.ownerSelector
+  );
 
-  //HAS KEYS
-  const addQuotesToArrayElement = (array) => {
-    const arrayWithQuotes = [];
-    array.forEach((e) => {
-      arrayWithQuotes.push(`'${e}'`);
-    });
-    return arrayWithQuotes;
-  };
-  const hasAllContent = ` &&\n${space3}request.resource.data.keys().hasAll(requiredFields)`;
-  const hasOnlyContent = ` &&\n${space3}request.resource.data.keys().hasOnly(allFields)`;
-  const hasAll = props.hasAllKeys ? hasAllContent : '';
-  const hasOnly = props.onlyCurrentKeys ? hasOnlyContent : '';
-  const hasKeysContent = hasAll + hasOnly;
-  const hasKeysCallContent = ` &&\n${space3}checkKeys()`;
-  const optionalFieldsContent = `\n${space3}let optionalFields = [${addQuotesToArrayElement(
-    optionalKeys
-  )}];`;
-  const allFieldsContent = `\n${space3}let allFields = requiredFields.concat(optionalFields);`;
-  const optionalFields = props.onlyCurrentKeys ? optionalFieldsContent : '';
-  const allFields = props.onlyCurrentKeys ? allFieldsContent : '';
-  const hasKeysFunctionStart = `${space2}function checkKeys() {
-        let requiredFields = [${addQuotesToArrayElement(requiredKeys)}];`;
-  const hasKeyFunctionsEnd = `\n${space3}return ${hasKeysContent.slice(12)}
-      }`;
-  const hasKeysFunctionContent =
-    hasKeysFunctionStart + optionalFields + allFields + hasKeyFunctionsEnd;
-
-  const hasKeysCall = (name) => {
-    if (name === 'create' || name === 'update') {
-      if (props.onlyCurrentKeys || props.hasAllKeys) {
-        return hasKeysCallContent;
-      } else return '';
-    } else return '';
-  };
+  //KEYS CHECKING
+  const { hasKeysFunctionContent, hasKeysCall } = keysChecking(props);
 
   // RATE LIMIT
-  const rateLimitFunctionContent = `${space2}function isCalm() {
-  ${space2}return ( 
-  ${space3}request.time > resource.data.${createdDateSelector} +
-  ${space3}duration.value(${rateLimitTime}, 's')
-  ${space2}); 
-${space2}}
-`;
-  const rateLimitCallContent = ` &&\n${space3}isCalm()`;
-  const rateLimitCall = (name) => {
-    if (name === 'update') {
-      const item = props.rateLimitActions.filter((e) => e.title === name);
-      if (item[0].checked) {
-        return rateLimitCallContent;
-      } else return '';
-    } else return '';
-  };
+  const { rateLimitCall, rateLimitFunctionContent } = rateLimit(
+    props.rateLimit,
+    props.createdDateSelector,
+    props.rateLimitActions
+  );
 
   // CALLS FOR FIREBASE
   const calls = (name) => {

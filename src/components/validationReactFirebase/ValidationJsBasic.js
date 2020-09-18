@@ -7,7 +7,8 @@ const ValidationJsBasic = (props) => {
   const [items, setItems] = useState('');
   const capitalizedVariable = capitalize(props.variable);
 
-  const variable = props.variable || 'ADD-VARIABLE';
+  const variable = props.variable || '<ADD-VARIABLE>';
+
   const setContent = () => {
     setItems('');
     props.items.forEach((e) => {

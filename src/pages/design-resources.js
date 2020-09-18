@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
-import ResourcesInput from "./../components/designResources/ResourcesInput";
-import ResourcesList from "./../components/designResources/ResourcesList";
-import Pagination from "@material-ui/lab/Pagination";
-import UIGraphics from "../data/resources/UIGraphics";
-import Fonts from "../data/resources/Fonts";
-import Colors from "../data/resources/Colors";
-import Icons from "../data/resources/Icons";
-import Favicons from "../data/resources/Favicons";
-import IconFonts from "../data/resources/IconFonts";
-import StockPhoto from "../data/resources/StockPhoto";
-import StockVideo from "../data/resources/StockVideo";
-import StockMusicSFX from "../data/resources/StockMusicSFX";
-import VectorClipart from "../data/resources/VectorClipart";
-import ProductImgMockups from "../data/resources/ProductImgMockups";
-import HtmlCssTemplates from "../data/resources/HtmlCssTemplates";
-import CssFrameworks from "../data/resources/CssFrameworks";
-import CssAnimations from "../data/resources/CssAnimations";
-import JsAnimations from "../data/resources/JsAnimations";
-import UIComponentKits from "../data/resources/UIComponentKits";
-import ReactUILibraries from "../data/resources/ReactUILibraries";
-import VueUILibraries from "../data/resources/VueUILibraries";
-import AngularUILibraries from "../data/resources/AngularUILibraries";
-import SvelteUILibraries from "../data/resources/SvelteUILibraries";
-import DesignSystems from "../data/resources/DesignSystems";
-import OnlineDesignTools from "../data/resources/OnlineDesignTools";
-import DesignSoftware from "../data/resources/DesignSoftware";
-import DesignInspiration from "../data/resources/DesignInspiration";
-import ImgCompression from "../data/resources/ImgCompression";
-import Others from "../data/resources/Others";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import useLocalStorage from "./../hooks/useLocalStorage";
+import React, { useEffect, useState } from 'react';
+import ResourcesInput from './../components/designResources/ResourcesInput';
+import ResourcesList from './../components/designResources/ResourcesList';
+import Pagination from '@material-ui/lab/Pagination';
+import UIGraphics from '../data/resources/UIGraphics';
+import Fonts from '../data/resources/Fonts';
+import Colors from '../data/resources/Colors';
+import Icons from '../data/resources/Icons';
+import Favicons from '../data/resources/Favicons';
+import IconFonts from '../data/resources/IconFonts';
+import StockPhoto from '../data/resources/StockPhoto';
+import StockVideo from '../data/resources/StockVideo';
+import StockMusicSFX from '../data/resources/StockMusicSFX';
+import VectorClipart from '../data/resources/VectorClipart';
+import ProductImgMockups from '../data/resources/ProductImgMockups';
+import HtmlCssTemplates from '../data/resources/HtmlCssTemplates';
+import CssFrameworks from '../data/resources/CssFrameworks';
+import CssAnimations from '../data/resources/CssAnimations';
+import JsAnimations from '../data/resources/JsAnimations';
+import UIComponentKits from '../data/resources/UIComponentKits';
+import ReactUILibraries from '../data/resources/ReactUILibraries';
+import VueUILibraries from '../data/resources/VueUILibraries';
+import AngularUILibraries from '../data/resources/AngularUILibraries';
+import SvelteUILibraries from '../data/resources/SvelteUILibraries';
+import DesignSystems from '../data/resources/DesignSystems';
+import OnlineDesignTools from '../data/resources/OnlineDesignTools';
+import DesignSoftware from '../data/resources/DesignSoftware';
+import DesignInspiration from '../data/resources/DesignInspiration';
+import ImgCompression from '../data/resources/ImgCompression';
+import Others from '../data/resources/Others';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import useLocalStorage from './../hooks/useLocalStorage';
 
 const DesignResources = () => {
   const resources = [
@@ -62,16 +62,16 @@ const DesignResources = () => {
     ...Others,
   ];
 
-  const [searchTextQuery, setSearchTextQuery] = useState("");
+  const [searchTextQuery, setSearchTextQuery] = useState('');
   const [searchDropdownQuery, setSearchDropdownQuery] = useState(
-    "All Categories"
+    'All Categories'
   );
   const [items, setItems] = useState(resources);
   const [showFavorites, setShowFavorites] = useState(false);
   const [listedResources, setListedResources] = useState([]);
   const [paginatedItems, setPaginatedItems] = useState([]);
   const [favoriteResourcesId, setFavoriteResourcesId] = useLocalStorage(
-    "favoriteDesignResource",
+    'favoriteDesignResource',
     []
   );
   const [page, setPage] = useState(1);
@@ -79,7 +79,7 @@ const DesignResources = () => {
   const totalPages = Math.ceil(listedResources.length / itemsPerPage);
   const resetPage = 1;
   const localStorageIsFavorite =
-    JSON.parse(localStorage.getItem("favoriteDesignResource")) || [];
+    JSON.parse(localStorage.getItem('favoriteDesignResource')) || [];
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -107,7 +107,7 @@ const DesignResources = () => {
   };
 
   const dropdownFilter = (items) => {
-    if (searchDropdownQuery === "All Categories") {
+    if (searchDropdownQuery === 'All Categories') {
       return items;
     } else {
       return items.filter(
@@ -153,11 +153,10 @@ const DesignResources = () => {
     });
 
     setItems(newItems);
-    // updatePaginetedItems(newItems, resetPage);
   };
 
   const handleResetInput = () => {
-    setSearchTextQuery("");
+    setSearchTextQuery('');
   };
 
   useEffect(() => {
@@ -198,7 +197,7 @@ const DesignResources = () => {
         <Grid
           container
           item
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: 'flex', justifyContent: 'center' }}
         >
           <Pagination
             count={totalPages}

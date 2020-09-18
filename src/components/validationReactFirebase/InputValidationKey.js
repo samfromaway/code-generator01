@@ -9,10 +9,11 @@ import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import { TYPES, RANGE_TYPES, REDUCED_RANGE_TYPES } from './../../constants';
+import { TYPES } from './../../constants';
 import Paper01 from './../Paper01';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import ConditionalValidationKeyInput from './ConditionalValidationKeyInput';
 
 const useStyles = makeStyles((theme) => ({
   formInput: {
@@ -24,14 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 const InputValidationKey = (props) => {
   const classes = useStyles();
-
-  const typesWithOptions = () => {
-    return (
-      props.type === 'string' ||
-      props.type === 'number' ||
-      props.type === 'boolean'
-    );
-  };
 
   return (
     <Paper01 title="Add Keys">
@@ -112,83 +105,7 @@ const InputValidationKey = (props) => {
           label="Required Key"
         />
       </FormControl>
-      <>
-        <FormControl
-          variant="outlined"
-          size="small"
-          className={classes.formInput}
-        >
-          <InputLabel disabled={!typesWithOptions()}>Condition</InputLabel>
-          <Select
-            label="Condition"
-            labelId="rangeType"
-            value={props.rangeType}
-            onChange={(e) => props.setRangeType(e.target.value)}
-            disabled={!typesWithOptions()}
-          >
-            <MenuItem value="">No Condition</MenuItem>
-            {props.type === 'string' &&
-              RANGE_TYPES.map((e) => (
-                <MenuItem key={e.value} value={e.value}>
-                  {e.label}
-                </MenuItem>
-              ))}
-            {props.type === 'number' &&
-              RANGE_TYPES.map((e) => (
-                <MenuItem key={e.value} value={e.value}>
-                  {e.label}
-                </MenuItem>
-              ))}
-            {props.type === 'boolean' &&
-              REDUCED_RANGE_TYPES.map((e) => (
-                <MenuItem key={e.value} value={e.value}>
-                  {e.label}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-        {props.type === 'boolean' && (
-          <FormControl
-            variant="outlined"
-            size="small"
-            className={classes.formInput}
-          >
-            <InputLabel>Input</InputLabel>
-            <Select
-              label="Input"
-              labelId="range02"
-              value={props.range}
-              onChange={(e) => props.setRange(e.target.value)}
-            >
-              <MenuItem value="">No Condition</MenuItem>
-              <MenuItem value="false">false</MenuItem>
-              <MenuItem value="true">true</MenuItem>
-            </Select>
-          </FormControl>
-        )}
-        {props.type !== 'boolean' && (
-          <TextField
-            variant="outlined"
-            size="small"
-            className={classes.formInput}
-            disabled={!typesWithOptions()}
-            label={props.rangeType === 'between' ? 'From' : 'Input'}
-            onChange={(e) => props.setRange(e.target.value)}
-            value={props.range}
-          />
-        )}
-
-        {props.rangeType === 'between' && typesWithOptions() && (
-          <TextField
-            variant="outlined"
-            size="small"
-            className={classes.formInput}
-            label={props.rangeType === 'between' ? 'To' : 'Input'}
-            onChange={(e) => props.setRange2(e.target.value)}
-            value={props.range2}
-          />
-        )}
-      </>
+      <ConditionalValidationKeyInput {...props} />
       <Grid
         item
         xs={12}
@@ -222,3 +139,4 @@ const InputValidationKey = (props) => {
 };
 
 export default InputValidationKey;
+// change
