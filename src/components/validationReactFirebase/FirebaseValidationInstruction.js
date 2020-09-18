@@ -54,7 +54,7 @@ const FirebaseValidationInstruction = () => {
           and returns an error-statement.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={6} style={{ padding: '0 30px' }}>
+      <Grid item xs={12} md={6} style={{ padding: '0 0 0 30px' }}>
         <Typography className={classes.subtitle} variant="h6">
           Video
         </Typography>
