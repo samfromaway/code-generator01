@@ -6,11 +6,10 @@ import { capitalize } from './../../functions/textTransform';
 const ValidationJsAdvanced = (props) => {
   const [items, setItems] = useState('');
   const capitalizedVariable = capitalize(props.variable);
-  const variable = props.variable || 'ADD-VARIABLE';
+  const variable = props.variable || '<ADD-VARIABLE>';
   const setContent = () => {
-    setItems('');
     props.items.forEach((e) => {
-      setItems((prev) => prev + generateContent(e));
+      setItems(generateContent(e));
     });
   };
 
