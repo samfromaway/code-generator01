@@ -12,43 +12,24 @@ const State = ({
   updatedItem,
   newItem,
 }) => {
-  const getProviderValue = actions.get.checked
-    ? `get${capitalizedNamePlural},`
-    : '';
-  const addProviderValue = actions.add.checked
-    ? `add${capitalizedNameSingular},`
-    : '';
-  const deleteProviderValue = actions.delete.checked
-    ? `delete${capitalizedNameSingular},`
-    : '';
-  const editProviderValue = actions.edit.checked
-    ? `edit${capitalizedNameSingular},`
-    : '';
-
   const intro = `
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import ${capitalizedNamePlural}Context from './${namePlural}Context';
 import ${capitalizedNamePlural}Reducer from './${namePlural}Reducer';
 
-const ${capitalizedNamePlural}State = ({children}) => {
-  const initialState = {
-    ${namePlural}: [],
-    error: null,
-    ${actions.loading.checked ? 'loading: false,' : ''} 
-  };
+`;
 
-  const [state, dispatch] = useReducer(${capitalizedNamePlural}Reducer, initialState);
-  `;
+  const customHook = `export const use${capitalizedNamePlural} = () => {
+  const { state, dispatch } = useContext(${capitalizedNamePlural}Context);
+  return [state, dispatch];
+};
 
-  const setLoading = `
-  const setLoading = () => dispatch({ type: 'SET_LOADING' });
-  `;
+`;
 
   //get
-  const get = `
-  async function get${capitalizedNamePlural} () {
-    ${actions.loading.checked ? 'setLoading();' : ''} 
-    try {
+  const get = `export async function get${capitalizedNamePlural} (dispatch) {
+  ${actions.loading.checked ? 'setLoading(dispatch);' : ''} 
+  try {
     const res = await fetch('YOUR_API')
     const data = await res.json();
 
@@ -56,6 +37,7 @@ const ${capitalizedNamePlural}State = ({children}) => {
       type: 'GET_${actionNamePlural}',
       payload: data,
     }); 
+  // catch won't work with fetch, use axios... or delete the catch block  
   } catch (err) {
     console.error(err);
     dispatch({
@@ -63,19 +45,21 @@ const ${capitalizedNamePlural}State = ({children}) => {
       payload: err,
     }); 
   }
-  };`;
+  };
+  
+`;
 
   //add
-  const add = `
-  async function add${capitalizedNameSingular} (${newItem}) {
-    ${actions.loading.checked ? 'setLoading();' : ''} 
-    try {
+  const add = `export async function add${capitalizedNameSingular} (dispatch, ${newItem}) {
+  ${actions.loading.checked ? 'setLoading(dispatch);' : ''} 
+  try {
     const res = await fetch('YOUR_API')
 
     dispatch({
       type: 'ADD_${actionNameSingular}',
       payload: 'YOUR_API_RESPONSE',
     }); 
+  // catch won't work with fetch, use axios... or delete the catch block  
   } catch (err) {
     console.error(err);
     dispatch({
@@ -83,19 +67,21 @@ const ${capitalizedNamePlural}State = ({children}) => {
       payload: err,
     }); 
   }
-  };`;
+  };
+
+`;
 
   //delete
-  const del = `
-  async function delete${capitalizedNameSingular} (${uniqueSelector}) {
-    ${actions.loading.checked ? 'setLoading();' : ''} 
-    try {
-      fetch('YOUR_API')
+  const del = `export async function delete${capitalizedNameSingular} (dispatch, ${uniqueSelector}) {
+  ${actions.loading.checked ? 'setLoading(dispatch);' : ''} 
+  try {
+    fetch('YOUR_API')
 
     dispatch({
       type: 'DELETE_${actionNameSingular}',
       payload: ${uniqueSelector},
     });
+  // catch won't work with fetch, use axios... or delete the catch block  
   } catch (err) {
     console.error(err);
     dispatch({
@@ -103,22 +89,24 @@ const ${capitalizedNamePlural}State = ({children}) => {
       payload: err,
     }); 
   }
-  };`;
+  };
+  
+`;
 
   //edit
-  const edit = `
-  async function edit${capitalizedNameSingular} (${uniqueSelector}, ${updatedItem}) {
-    ${actions.loading.checked ? 'setLoading();' : ''} 
-    try {
-    const res = await fetch('YOUR_API')
+  const edit = `export async function edit${capitalizedNameSingular} (dispatch, ${updatedItem}) {
+  ${actions.loading.checked ? 'setLoading(dispatch);' : ''} 
+  try {
+  const res = await fetch('YOUR_API')
     
     dispatch({
       type: 'EDIT_${actionNameSingular}',
       payload: {
-      'YOUR_API_RESPONSE_ID,'
-      'YOUR_API_RESPONSE_UPDATED ITEM,'
+      id: RESPONSE-ID,
+      updatedItem: YOUR-UPDATED-ITEM-RESPONSE
     },
     });  
+  // catch won't work with fetch, use axios... or delete the catch block  
   } catch (err) {
     console.error(err);
     dispatch({
@@ -126,18 +114,25 @@ const ${capitalizedNamePlural}State = ({children}) => {
       payload: err,
     }); 
   }
-  };`;
+  };
+  
+`;
 
-  const outro = `
+  const setLoading = `export const setLoading = (dispatch) => dispatch({ type: 'SET_LOADING' });
+  
+`;
+
+  const outro = `const ${capitalizedNamePlural}State = ({children}) => {
+  const initialState = {
+    ${namePlural}: [],
+    error: null,
+    ${actions.loading.checked ? 'loading: false,' : ''} 
+  };
+
+  const [state, dispatch] = useReducer(${capitalizedNamePlural}Reducer, initialState);
+
   return (
-    <${capitalizedNamePlural}Context.Provider value={{
-      ${namePlural}: state.${namePlural},
-      ${getProviderValue}
-      ${addProviderValue}
-      ${deleteProviderValue}
-      ${editProviderValue}      
-      ${actions.loading.checked ? namePlural + 'Loading: state.loading,' : ''} 
-    }}>
+    <${capitalizedNamePlural}Context.Provider value={{state, dispatch}}>
       {children}
     </${capitalizedNamePlural}Context.Provider>
   );
@@ -153,11 +148,12 @@ export default ${capitalizedNamePlural}State;`;
 
   const state =
     intro +
-    setLoadingContent +
+    customHook +
     getContent +
     addContent +
     deleteContent +
     editContent +
+    setLoadingContent +
     outro;
 
   const stateContent =

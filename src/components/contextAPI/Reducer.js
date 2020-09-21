@@ -52,7 +52,7 @@ const Reducer = ({
             return element;
           }
           return {
-            ...action.payload.'YOUR_API_RESPONSE_UPDATED ITEM,',
+            ...action.payload.updatedItem,
           };
         }),
         ${actions.loading.checked ? 'loading: false,' : ''} 
@@ -78,7 +78,7 @@ const Reducer = ({
   // outro
   const outro = `    
     default:
-      return state;
+    throw new Error('Unsupported action type of ${namePlural}');
   }
 };
     `;

@@ -10,13 +10,13 @@ const Imports = (props) => {
 
   const appImport = `import ${capitalizedNamePlural}State from './context/${props.namePlural}/${capitalizedNamePlural}State'`;
   const appImportJSX = `<${capitalizedNamePlural}State></${capitalizedNamePlural}State>`;
-  const hocImport = `import ${capitalizedNamePlural}Context from './../../context/${props.namePlural}/${props.namePlural}Context'`;
-  const hocImportApp = `const {get${capitalizedNamePlural}} = useContext(${capitalizedNamePlural}Context)`;
+  const hocImport = `import {use${capitalizedNamePlural}, <Fn like get${capitalizedNamePlural}>} from '../../context/${props.namePlural}/${capitalizedNamePlural}State'`;
+  const hocHookCall = `const [${props.namePlural}State, ${props.namePlural}Dispatch] = use${capitalizedNamePlural}();`;
 
   const appImportContent = props.namePlural ? appImport : check;
   const appImportJSXContent = props.namePlural ? appImportJSX : check;
   const hocImportContent = props.namePlural ? hocImport : check;
-  const hocImportAppContent = props.namePlural ? hocImportApp : check;
+  const hocHookCallContent = props.namePlural ? hocHookCall : check;
 
   return (
     <Paper02 title="Imports">
@@ -26,7 +26,7 @@ const Imports = (props) => {
       <Box m={2} />
       <CodeBlock content={hocImportContent} />
       <Box m={2} />
-      <CodeBlock content={hocImportAppContent} />
+      <CodeBlock content={hocHookCallContent} />
     </Paper02>
   );
 };
