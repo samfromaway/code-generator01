@@ -47,14 +47,9 @@ const Reducer = ({
   case 'EDIT_${actionNameSingular}':
       return {
         ...state,
-        ${namePlural}: state.${namePlural}.map((element) => {
-          if (element.${uniqueSelector} !== action.payload.${uniqueSelector}) {
-            return element;
-          }
-          return {
-            ...action.payload.updatedItem,
-          };
-        }),
+        ${namePlural}: state.${namePlural}.map((element) => 
+          element.${uniqueSelector} === action.payload.${uniqueSelector} ? action.payload.updatedItem : element
+        ),
         ${actions.loading.checked ? 'loading: false,' : ''} 
       };`;
 
