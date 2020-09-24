@@ -6,7 +6,7 @@ import { capitalize } from './../../functions/textTransform';
 const ReactStateHooksExports = (props) => {
   const items = props.items.map((item) => {
     const capitalizedItem = capitalize(item);
-    return `${item},\nset${capitalizedItem}`;
+    return `${item},\nset${capitalizedItem},`;
   });
 
   const content = items.join('\n');
