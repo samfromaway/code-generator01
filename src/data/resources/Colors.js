@@ -26,6 +26,11 @@ const color1 = [
     desc: 'Official Google Material Color Palette Tool',
   },
   {
+    title: 'Branition Colors',
+    link: 'https://branition.com/colors',
+    desc: 'Hand-curated collection of color palettes best fitted for branding.',
+  },
+  {
     title: 'Material Palette',
     link: 'https://www.materialpalette.com/',
     desc: 'Free to pick palettes, icons and colors for Material Design',
